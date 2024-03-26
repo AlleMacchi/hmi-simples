@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMI Simple</title>
+    <!-- MY CSS  -->
+    <link rel="stylesheet" href="assets/css/main.css">   
+</head>
+
+<body>
+    <div id="body">
+        <div id="warning">
+            Please rotate your device to landscape mode for the best experience.
+        </div>
+
+        <div id="contents" >
+            <div id="navbar">
+                <button type="button" id="btn_section1">HOME</button>
+                <button type="button" id="btn_section2">MACHINE</button>
+                <button type="button" id="btn_section3">SETTING</button>
+                <button type="button" id="btn_section4">ALARMS</button>
+            </div>
+            <div id="container-section">
+                <section id="section1" class="page">HOME</section>
+                <section id="section2" class="page">
+                    <h1>MACHINE</h1>
+                    <div class="selection_container">
+                        <div id="machine_contest">
+                            <label for="standard-select">Select what you want to move manually:</label>
+                            <div class="select">
+                                <select id="standard-select">
+                                  <option value="Wheels">Wheels</option>
+                                  <option value="Lifter">Lifter</option>
+                                </select>
+                                <span class="focus"></span>
+                            </div>
+                        </div>
+                        <div id="command_container">
+                            <button type="button" >UP/FWD/ON</button>
+                            <button type="button" >DWN/BWD/OFF</button>
+                        </div>
+                    </div>
+                </section>
+                <section id="section3" class="page">SETTING</section>
+                <section id="section4" class="page">ALARMS</section>
+            </div>
+            <div id="footer">
+                <div class="status">
+                    Current Mode:&nbsp<label class="lbl" id="lbl_Mode"> MANUAL </label>
+                    Current State:&nbsp<label  class="lbl" id="lbl_State"> EXECUTIVE </label>     
+                </div>
+                <div class="selection">
+                    <button type="button" >MAN</button>
+                    <label class="lbl" id="lbl_Sel"> MANUAL </label>
+                    <button type="button" >AUTO</button>
+                </div>                   
+                <div class="command">
+                    <button type="button" > START</button>
+                    <button type="button" >STOP</button>
+                    <button type="button" >RESET</button>
+                </div>  
+            </div>
+    </div>
+
+
+
+<!-- GLOBAL VARIABLE -->
+<script type="text/javascript" src="assets/js/global.js"></script> 
+<!-- SCROLL -->
+<script type="text/javascript" src="assets/js/scroll.js"></script> 
+<!-- READ I/O -->
+<script type="text/javascript" src="assets/js/I0Read_Pure.js"></script>
+<!-- SELECTION -->
+<script type="text/javascript" src="assets/js/manual_selections.js"></script>
+</body>
+</html>

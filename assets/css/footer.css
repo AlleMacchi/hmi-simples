@@ -1,0 +1,67 @@
+#footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    justify-content: center;
+    background-color:aquamarine;
+  }
+
+  .status{
+    padding-top: 10px;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+
+  }
+
+  .lbl{
+    padding: 0 5% 0 0;
+    text-transform: uppercase;
+  }
+  .selection{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+  }
+  .selection>button{
+    width: 20%;
+    height: 60%;
+    cursor: pointer;
+  }
+  #lbl_Sel{
+    width: 30%;
+    text-align: center;
+    padding: 0;
+  }
+
+
+  .command{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+  }
+
+  .command>button{
+    width: 20%;
+    height: 60%;
+    cursor: pointer;
+  }
