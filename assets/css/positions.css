@@ -1,0 +1,25 @@
+#section5 {
+    padding: 20px;
+  }
+  
+  #searchInput {
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box; /* Make sure padding doesn't increase the width */
+  }
+  
+  #positionsTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  #positionsTable th, #positionsTable td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  #positionsTable th {
+    background-color: #f2f2f2;
+  }

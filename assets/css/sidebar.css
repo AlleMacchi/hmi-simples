@@ -1,0 +1,124 @@
+.sidebarMode {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  width: 20%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: var(--color-bg);
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s ease;
+  transform: translateX(100%); /* Start off-screen */
+  gap: 5%;
+  padding: 1%;
+}
+
+.sidebarMode.open {
+  transform: translateX(0); /* Move into view */
+}
+
+/* Additional CSS to style the switch and commands sections */
+.sidebarMode h3 {
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.switch {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+}
+
+.switch button {
+  cursor: pointer;
+  padding: 10%;
+  color: var(--black);
+  font-weight: 600;
+  border-radius: 10px;
+  background: var(--gradient-bg-btn);
+  box-shadow: var(--box-shadow);
+  border: 2px solid var(--black);
+  font-size: 18px;
+}
+
+.switch button:focus {
+  box-shadow: var(--box-shadow-selected);
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
+}
+
+/* Active state for "MANUAL" or "AUTO" mode buttons */
+.switch button.button-active {
+  box-shadow: var(--box-shadow-selected);
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
+}
+
+.commands {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.commands div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+}
+
+/* Initial styling for command buttons (visible as usable) */
+.commands button {
+  cursor: pointer;
+  padding: 10%;
+  color: var(--black);
+  font-weight: 600;
+  border-radius: 10px;
+  background: var(--gradient-bg-btn);
+  box-shadow: var(--box-shadow);
+  border: 2px solid var(--black);
+  font-size: 18px;
+}
+
+/* Style for command buttons when clicked */
+.commands button.clicked {
+  /* Example styles for clicked state */
+  transform: scale(0.95); /* Slightly scale down the button */
+  opacity: 0.8; /* Make button slightly transparent */
+  text-shadow: var(--text-shadow-blue); /* Add text shadow */
+  color: var(--light-blue); /* Change text color */
+  box-shadow: var(--box-shadow-selected); /* Add box shadow */
+}
+
+.commands button:hover {
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
+}
+
+/* Styling for disabled command buttons */
+.commands button.disabled {
+  opacity: 0.3; /* Dim the button to show it's inactive */
+  cursor: default; /* Change cursor to indicate non-interactive state */
+}
+
+.commands button.disabled:hover {
+  text-shadow: none; /* Remove hover effect */
+  color: var(--black); /* Keep text color the same */
+}
+
+.commands button.disabled:focus {
+  box-shadow: var(--box-shadow); /* Keep focus effect */
+  text-shadow: none; /* Remove focus effect */
+  color: var(--black); /* Keep text color the same */
+}

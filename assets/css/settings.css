@@ -1,0 +1,43 @@
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+
+.setting-item {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.info {
+  display: inline-block;
+  margin-left: 5px;
+  color: #000000;
+  cursor: help;
+}
+
+.info:hover + .description {
+  display: block;
+}
+
+.description {
+  display: none;
+  color: #666;
+  font-size: 0.9em;
+}
+
+#save-button {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+}
+
+#save-button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
