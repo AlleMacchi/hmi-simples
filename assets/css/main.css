@@ -27,6 +27,7 @@
   --filter-white: invert(100%) sepia(69%) saturate(2%) hue-rotate(205deg)
     brightness(105%) contrast(101%);
   --text-shadow-blue: 0px 0px 20px rgba(195, 242, 245, 1);
+  --text-shadow-red: 0px 0px 20px red;
   --gradient-bg: linear-gradient(145deg, #555353, #363535, #303030);
   --gradient-bg-btn: linear-gradient(#555353, #363535, #303030);
 }

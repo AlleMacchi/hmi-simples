@@ -10,6 +10,16 @@ document.addEventListener("DOMContentLoaded", function () {
   // Find the table's tbody
   const tableBody = document.querySelector("#alarmTable tbody");
 
+  let alarmsCounter = document.getElementById("alarmsCounter"); // Removed the "#" from "alarmsCounter"
+
+  if (alarms.length > 0) {
+    // Correct condition to check the length of the alarms array
+    alarmsCounter.textContent = alarms.length;
+    alarmsCounter.style.display = "flex"; // Ensure this matches your CSS for visibility
+  }else{
+    alarmsCounter.style.display = "none"; // Ensure this matches your CSS for visibility
+  }
+
   // Populate the table with alarms
   alarms.forEach((alarm) => {
     const row = document.createElement("tr");

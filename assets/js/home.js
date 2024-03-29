@@ -138,7 +138,6 @@ let controlsInputs = [layerSelect, positionSelect]; // Correctly include both se
 let btn_go = document.getElementById("btn_go");
 
 controlsInputs.forEach((controlInput) => {
-  
   controlInput.addEventListener("change", () => {
     btn_go.classList.remove("active");
     // Use controlInput, not input
@@ -161,32 +160,31 @@ physicalPositionInput.addEventListener("input", () => {
   }
 });
 
+// Adding "mousedown" event to simulate button press
+btn_go.addEventListener("mousedown", () => {
+  btn_go.classList.add("clicked");
+  btn_go.classList.remove("active");
+});
 
+// Removing "clicked" class shortly after "mouseup" to simulate the visual effect
+btn_go.addEventListener("mouseup", () => {
+  setTimeout(() => btn_go.classList.remove("clicked"), 150);
+});
 
-  // Adding "mousedown" event to simulate button press
-  btn_go.addEventListener("mousedown", () => {
-    btn_go.classList.add("clicked");
-    btn_go.classList.remove("active");
-  });
+// Also remove "clicked" class on "mouseleave" to ensure the effect is cleared if the mouse leaves the button before mouseup
+btn_go.addEventListener("mouseleave", () => {
+  setTimeout(() => btn_go.classList.remove("clicked"), 150);
+});
 
-  // Removing "clicked" class shortly after "mouseup" to simulate the visual effect
-  btn_go.addEventListener("mouseup", () => {
-    setTimeout(() => btn_go.classList.remove("clicked"), 150);
-  });
-
-  // Also remove "clicked" class on "mouseleave" to ensure the effect is cleared if the mouse leaves the button before mouseup
-  btn_go.addEventListener("mouseleave", () => {
-    setTimeout(() => btn_go.classList.remove("clicked"), 150);
-  });
-
-
-  btn_go.addEventListener("click", () => {
-    btn_go.classList.remove("active");
+btn_go.addEventListener("click", () => {
+  if (btn_go.classList.contains("active")) {
     // Show the message
     GoMessage.style.display = "flex";
+    btn_go.classList.remove("active");
+  }
 
-    // Hide the message after 10 seconds
-    setTimeout(() => {
-      GoMessage.style.display = "none";
-    }, 3000);
-  });
+  // Hide the message after 10 seconds
+  setTimeout(() => {
+    GoMessage.style.display = "none";
+  }, 3000);
+});

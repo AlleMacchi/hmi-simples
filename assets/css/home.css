@@ -77,8 +77,11 @@
   display: flex;
   justify-content: space-around;
   align-items: start;
-  padding: 1%;
+  padding: 3%;
   width: 80%;
+  /* box-shadow: var(--box-shadow);
+  border-radius: 10px;
+  \ */
 }
 
 .position-controls {
