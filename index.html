@@ -22,7 +22,7 @@
       <button type="button" id="btn_section1">HOME</button>
       <button type="button" id="btn_section2">MACHINE</button>
       <button type="button" id="btn_section3">POSITIONS</button>
-      <button type="button" id="btn_section4">SETTING</button>
+      <button type="button" id="btn_section4">SETTINGS</button>
       <button type="button" id="btn_section5">ALARMS</button>
     </div>
     <div class="sidebarMode">
@@ -37,7 +37,7 @@
           <button type="button">UP/FWD/ON</button>
           <button type="button">DWN/BWD/OFF</button>
         </div>
-        <div>
+        <div id="roundCommands">
           <button type="button">START</button>
           <button type="button">STOP</button>
           <button type="button">RESET</button>
@@ -51,114 +51,228 @@
             <h1>Home</h1>
             <div id="layer-title">Layer 1</div>
 
-            <div id="layer-container">
+            <div id="layer-container-squares">
               <!-- The 38 position squares -->
-              <div class="square" data-position="1">1</div>
-              <div class="square" data-position="2">2</div>
-              <div class="square" data-position="3">3</div>
-              <div class="square" data-position="4">4</div>
-              <div class="square" data-position="5">5</div>
-              <div class="square" data-position="6">6</div>
-              <div class="square" data-position="7">7</div>
-              <div class="square" data-position="8">8</div>
-              <div class="square" data-position="9">9</div>
-              <div class="square" data-position="10">10</div>
-              <div class="square" data-position="11">11</div>
-              <div class="square" data-position="12">12</div>
-              <div class="square" data-position="13">13</div>
-              <div class="square" data-position="14">14</div>
-              <div class="square" data-position="15">15</div>
-              <div class="square" data-position="16">16</div>
-              <div class="square" data-position="17">17</div>
-              <div class="square" data-position="18">18</div>
-              <div class="square" data-position="19">19</div>
-              <div class="square" data-position="20">20</div>
-              <div class="square" data-position="21">21</div>
-              <div class="square" data-position="22">22</div>
-              <div class="square" data-position="23">23</div>
-              <div class="square" data-position="24">24</div>
-              <div class="square" data-position="25">25</div>
-              <div class="square" data-position="26">26</div>
-              <div class="square" data-position="27">27</div>
-              <div class="square" data-position="28">28</div>
-              <div class="square" data-position="29">29</div>
-              <div class="square" data-position="30">30</div>
-              <div class="square" data-position="31">31</div>
-              <div class="square" data-position="32">32</div>
-              <div class="square" data-position="33">33</div>
-              <div class="square" data-position="34">34</div>
-              <div class="square" data-position="35">35</div>
-              <div class="square" data-position="36">36</div>
-              <div class="square" data-position="37">37</div>
-              <div class="square" data-position="38">38</div>
+              <div class="position-div">
+                <div class="Number" data-position="1">1</div>
+                <div class="square" data-position="1"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="2">2</div>
+                <div class="square" data-position="2"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="3">3</div>
+                <div class="square" data-position="3"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="4">4</div>
+                <div class="square" data-position="4"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="5">5</div>
+                <div class="square" data-position="5"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="6">6</div>
+                <div class="square" data-position="6"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="7">7</div>
+                <div class="square" data-position="7"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="8">8</div>
+                <div class="square" data-position="8"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="9">9</div>
+                <div class="square" data-position="9"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="10">10</div>
+                <div class="square" data-position="10"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="11">11</div>
+                <div class="square" data-position="11"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="12">12</div>
+                <div class="square" data-position="12"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="13">13</div>
+                <div class="square" data-position="13"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="14">14</div>
+                <div class="square" data-position="14"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="15">15</div>
+                <div class="square" data-position="15"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="16">16</div>
+                <div class="square" data-position="16"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="17">17</div>
+                <div class="square" data-position="17"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="18">18</div>
+                <div class="square" data-position="18"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="19">19</div>
+                <div class="square" data-position="19"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="20">20</div>
+                <div class="square" data-position="20"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="21">21</div>
+                <div class="square" data-position="21"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="22">22</div>
+                <div class="square" data-position="22"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="23">23</div>
+                <div class="square" data-position="23"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="24">24</div>
+                <div class="square" data-position="24"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="25">25</div>
+                <div class="square" data-position="25"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="26">26</div>
+                <div class="square" data-position="26"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="27">27</div>
+                <div class="square" data-position="27"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="28">28</div>
+                <div class="square" data-position="28"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="29">29</div>
+                <div class="square" data-position="29"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="30">30</div>
+                <div class="square" data-position="30"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="31">31</div>
+                <div class="square" data-position="31"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="32">32</div>
+                <div class="square" data-position="32"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="33">33</div>
+                <div class="square" data-position="33"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="34">34</div>
+                <div class="square" data-position="34"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="35">35</div>
+                <div class="square" data-position="35"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="36">36</div>
+                <div class="square" data-position="36"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="37">37</div>
+                <div class="square" data-position="37"></div>
+              </div>
+              <div class="position-div">
+                <div class="Number" data-position="38">38</div>
+                <div class="square" data-position="38"></div>
+              </div>
             </div>
 
-            <!-- Existing HTML above -->
-            <div class="positioning-controls">
-              <button id="btn_logical">Logical</button>
-              <div id="logical_controls" style="display: none">
-                <label for="layer_select">Layer:</label>
-                <select id="layer_select">
-                  <!-- Layers options -->
-                  <option value="1">Layer 1</option>
-                  <option value="2">Layer 2</option>
-                  <!-- Add more layers as needed -->
-                </select>
-
-                <label for="position_select">Position:</label>
-                <select id="position_select">
-                  <!-- Position options -->
-                  <option value="1">Position 1</option>
-                  <option value="2">Position 2</option>
-                  <!-- Add more positions as needed -->
-                </select>
+            <div class="position-controls-container">
+              <!-- Logical Section -->
+              <div class="position-controls" id="logical-section">
+                <button type="button" id="btn_logical">Logical</button>
+                <div id="logical-controls">
+                  <label id="logical-label"></label>
+                  <label id="logical-position-label"></label>
+                </div>
               </div>
-
-              <button id="btn_physical">Physical</button>
-              <div id="physical_controls" style="display: none">
-                <input
-                  type="number"
-                  id="physical_position"
-                  placeholder="Enter position number"
-                />
-                <button id="btn_confirm">Confirm</button>
+            
+              <!-- GO Button -->
+              <div class="position-controls" id="go-section">
+                <button type="button" id="btn_go" class="go-button">GO</button>
+                <h3 id="GoMessage">AGV is going...</h3>
               </div>
-
-              <button id="btn_go">GO</button>
+            
+              <!-- Physical Section -->
+              <div class="position-controls" id="physical-section">
+                <button type="button" id="btn_physical">Physical</button>
+                <div id="physical-controls">
+                  <input type="number" id="physical-position" placeholder="Enter position mm" disabled>
+                  <button type="button" id="confirm-position" disabled>Confirm</button>
+                  <label id="dimension-label">0 mm</label>
+                </div>
+              </div>
             </div>
-            <!-- Existing HTML continues -->
-          </div>
         </section>
 
         <section id="section2" class="page">
-          <h1>MACHINE</h1>
+          <h1 id="machine-title">MACHINE</h1>
+          <div id="machine-content">
+            
           <div class="selection_container">
-            <div id="machine_contest">
+          
               <label for="standard-select"
                 >Select what you want to move manually:</label
               >
-              <div class="select">
+              
                 <select id="standard-select">
+                  <option value="Select">None</option>
                   <option value="Wheels">Wheels</option>
                   <option value="Lifter">Lifter</option>
                 </select>
-                <span class="focus"></span>
+                <!-- <span class="focus"></span> -->
               </div>
-            </div>
+              
+              <div class="switchMode">
+                <button id="manualSwitchButton">Switch To Manual Mode</button>
+                <button>Switch To Auto Mode</button>
+              </div>
           </div>
+          
         </section>
+
         <section id="section3" class="page">
+          <h1 class="position-h1">POSITIONS</h1>
           <div class="positions">
-            <h1>Positions</h1>
             <input
               type="text"
               id="searchInput"
-              placeholder="Search positions..."
+              placeholder="Search position..."
             />
             <table id="positionsTable">
               <thead>
                 <tr>
-                  <th>Position Number</th>
+                  <th id="positionTableth">Position</th>
                   <th>Description</th>
                 </tr>
               </thead>
@@ -172,6 +286,10 @@
                   <td>2</td>
                   <td>Exit Conveyor</td>
                 </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Charging station</td>
+                </tr>
                 <!-- Add more positions here -->
               </tbody>
             </table>
@@ -179,73 +297,62 @@
         </section>
         <section id="section4" class="page">
           <div class="settings-container">
-            <h1>Settings</h1>
+            <h1>SETTINGS</h1>
             <form id="settings-form">
               <div class="setting-item">
-                <label for="setting1"
-                  >Email Notifications <span class="info">i</span></label
-                >
+                <div>
+                  <span class="info">i</span>
+                  <p class="description">
+                    this is an example of what the info box shoudl explain a
+                    specific setting
+                  </p>
+                  <label for="setting1">Setting 1 </label>
+                </div>
                 <input type="text" id="setting1" name="setting1" />
-                <p class="description">Enable email notifications.</p>
+              </div>
+              <div class="setting-item">
+                <div>
+                  <span class="info">i</span>
+                  <p class="description">
+                    this is an example of what the info box shoudl explain a
+                    specific setting
+                  </p>
+                  <label for="setting1">Setting 2 </label>
+                </div>
+                <input type="text" id="setting1" name="setting1" />
+              </div>
+              <div class="setting-item">
+                <div>
+                  <span class="info">i</span>
+                  <p class="description">
+                    this is an example of what the info box shoudl explain a
+                    specific setting
+                  </p>
+                  <label for="setting1">Setting 3 </label>
+                </div>
+                <input type="text" id="setting1" name="setting1" />
               </div>
 
               <div class="setting-item">
-                <label for="setting2"
-                  >Dark Mode <span class="info">i</span></label
-                >
+                <div>
+                  <span class="info">i</span>
+                  <p class="description">It's just a CheckBox.</p>
+                  <label for="setting2">CheckBox </label>
+                </div>
                 <input type="checkbox" id="setting2" name="setting2" />
-                <p class="description">Enable dark mode.</p>
               </div>
 
               <div class="setting-item">
-                <label
-                  >Communication Preferences <span class="info">i</span></label
-                >
                 <div>
-                  <input
-                    type="radio"
-                    id="comm1"
-                    name="communication"
-                    value="email"
-                  />
-                  <label for="comm1">Email</label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="comm2"
-                    name="communication"
-                    value="sms"
-                  />
-                  <label for="comm2">SMS</label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="comm3"
-                    name="communication"
-                    value="none"
-                  />
-                  <label for="comm3">None</label>
-                </div>
-                <p class="description">
-                  Select your preferred method of communication.
-                </p>
-              </div>
+                  <span class="info">i</span>
+                  <p class="description">Select your Box.</p>
 
-              <div class="setting-item">
-                <label for="setting3"
-                  >Newsletter Subscription <span class="info">i</span></label
-                >
-                <input type="checkbox" id="setting3" name="setting3" />
-                <p class="description">Subscribe to our monthly newsletter.</p>
-              </div>
+                  <label>Radio Box </label>
+                </div>
 
-              <div class="setting-item">
-                <label>User Role <span class="info">i</span></label>
                 <div>
                   <input type="radio" id="role1" name="userRole" value="user" />
-                  <label for="role1">User</label>
+                  <label for="role1">Box 1</label>
                 </div>
                 <div>
                   <input
@@ -254,23 +361,23 @@
                     name="userRole"
                     value="admin"
                   />
-                  <label for="role2">Admin</label>
+                  <label for="role2">Box 2</label>
                 </div>
-                <p class="description">Select your user role.</p>
               </div>
-
+              
               <button type="button" id="save-button">Save</button>
+              <h3 class="saved">Settings Saved</h3>
             </form>
           </div>
         </section>
         <section id="section5" class="page">
           <div class="Alarms">
-            <h2>PLC Alarm List</h2>
+            <h2>ALARMS</h2>
 
             <table id="alarmTable">
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th id="alarmIDth">ID</th>
                   <th>Description</th>
                 </tr>
               </thead>
@@ -294,14 +401,14 @@
     <!-- SELECTION -->
     <script
       type="text/javascript"
-      src="assets/js/manual_selections.js"
+      src="assets/js/machine.js"
     ></script>
     <!-- SETTINGS -->
     <script type="text/javascript" src="assets/js/settings.js"></script>
     <!-- ALARMS -->
     <script type="text/javascript" src="assets/js/alarms.js"></script>
     <!-- MODE -->
-    <script type="text/javascript" src="assets/js/mode.js"></script>
+    <script type="text/javascript" src="assets/js/sidebar.js"></script>
     <!--Positions-->
     <script type="text/javascript" src="assets/js/positions.js"></script>
   </body>

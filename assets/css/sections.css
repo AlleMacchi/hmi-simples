@@ -11,6 +11,7 @@
   box-shadow: var(--box-shadow);
   border: 2px solid var(--black);
   margin-top: 10vh;
+  color: white;
 }
 /* 
 .selection_container{

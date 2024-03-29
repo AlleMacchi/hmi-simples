@@ -35,3 +35,8 @@
   text-shadow: var(--text-shadow-blue);
   color: var(--light-blue);
 }
+
+#navbar > button:hover {
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
+}
