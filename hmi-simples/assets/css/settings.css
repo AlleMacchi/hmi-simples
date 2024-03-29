@@ -1,0 +1,164 @@
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+
+.settings-container h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+#settings-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 20px;
+  color: white;
+  font-weight: 600;
+}
+
+.setting-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.setting-item div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 10%;
+  gap: 3%;
+  position: relative;
+}
+
+.setting-item label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.setting-item input[type="text"] {
+  width: 30%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  /* box-shadow: var(--box-shadow);
+  color: white; */
+}
+
+.setting-item input[type="text"]:focus {
+  outline: none;
+  box-shadow: 0px 0px 10px 0px var(--light-blue);
+}
+
+.setting-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  background-color: var(--black);
+}
+
+.setting-item input[type="checkbox"]:checked {
+  background-color: var(--light-blue);
+  accent-color: var(--light-blue);
+}
+
+.setting-item input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  border-radius: 50px;
+  background-color: transparent;
+}
+
+.setting-item input[type="radio"]:checked {
+  background-color: var(--light-blue);
+  accent-color: var(--light-blue);
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--light-blue);
+  width: 20px;
+  height: 20px;
+  cursor: help;
+  background-color: var(--black);
+  border-radius: 50px;
+  text-shadow: var(--text-shadow);
+  font-size: 12px;
+}
+
+.info:hover + .description {
+  display: block;
+}
+
+.description {
+  display: none;
+  position: absolute;
+  top: -100px;
+  left: 20px;
+  background-color: var(--black);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px var(--light-blue);
+  font-size: 12px;
+  max-width: 200px;
+}
+
+#save-button {
+  cursor: pointer;
+  padding: 10px 20px;
+  color: var(--black);
+  font-weight: 600;
+  border-radius: 10px;
+  background: var(--gradient-bg-btn);
+  box-shadow: var(--box-shadow);
+  border: 2px solid var(--black);
+  font-size: 24px;
+}
+
+#save-button.active {
+  box-shadow: 0px 0px 20px 10px var(--light-blue);
+}
+
+#save-button.clicked {
+  /* Example styles for clicked state */
+  transform: scale(0.95); /* Slightly scale down the button */
+  opacity: 0.8; /* Make button slightly transparent */
+  text-shadow: var(--text-shadow-blue); /* Add text shadow */
+  color: var(--light-blue); /* Change text color */
+  box-shadow: var(--box-shadow-selected); /* Add box shadow */
+}
+
+#save-button:hover {
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
+}
+
+.saved {
+  /* Basic styling, replace or enhance as needed */
+  display: none;
+  color: var(--light-blue);
+  text-shadow: var(--text-shadow-blue);
+  text-align: center;
+  margin-top: 20px;
+}

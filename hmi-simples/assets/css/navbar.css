@@ -1,0 +1,42 @@
+#navbar {
+  position: fixed;
+  height: 100vh;
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 3%;
+  /* box-shadow: var(--box-shadow); */
+  color: var(--black);
+}
+
+#navbar > button {
+  width: 70%;
+  cursor: pointer;
+  padding: 10%;
+  color: var(--black);
+  font-weight: 600;
+  border-radius: 10px;
+  background: var(--gradient-bg-btn);
+  box-shadow: var(--box-shadow);
+  border: 2px solid var(--black);
+  font-size: 18px;
+}
+
+#navbar > button:focus {
+  box-shadow: var(--box-shadow-selected);
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
+}
+
+#navbar > button.active {
+  box-shadow: var(--box-shadow-selected);
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
+}
+
+#navbar > button:hover {
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
+}
