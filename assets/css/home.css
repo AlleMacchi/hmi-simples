@@ -1,0 +1,278 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 50px;
+}
+
+.home h1 {
+  color: white;
+}
+
+#layer-title {
+  color: var(--light-blue);
+  text-shadow: var(--text-shadow-blue);
+  box-shadow: var(--box-shadow);
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  width: 20%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+#layer-container-squares {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  gap: 0.5%; /* Adjust the space between squares as needed */
+  padding: 1%;
+  border-radius: 5px;
+  user-select: none; /* Prevent text selection on double-click */
+}
+
+.Number {
+  color: white;
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.Number.active {
+  color: var(--light-blue);
+  text-shadow: var(--text-shadow-blue);
+}
+
+.square {
+  width: 30px;
+  height: 30px;
+  /* border: 1px solid #ffffff; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  user-select: none;
+  background-color: none;
+  border-radius: 5px;
+  box-shadow: var(--box-shadow);
+
+  /* transition: box-shadow 0.5s ease;
+  transition: background-color 0.5s ease; */
+}
+
+.square.active {
+  box-shadow: 0 0 20px 0px var(--light-blue);
+  background-color: rgb(207, 0, 0);
+  /* transition: box-shadow background-color 0.5s ease; */
+}
+
+.position-controls-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+  padding: 3%;
+  width: 80%;
+  /* box-shadow: var(--box-shadow);
+  border-radius: 10px;
+  \ */
+}
+
+.position-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#logical-section,
+#physical-section {
+  flex-basis: 40%; /* Adjust the width as necessary */
+}
+
+#go-section {
+  flex-basis: 30%; /* Adjust the width as necessary */
+  display: flex;
+  justify-content: center;
+}
+
+#go-section .go-button {
+  min-width: 120px; /* Adjust as necessary */
+  padding: 10px 20px;
+  /* Additional styling for the GO button */
+}
+
+#logical-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 24px;
+  font-weight: 600;
+  width: 100%;
+  padding: 5%;
+}
+
+#layer-select {
+  border-radius: 5px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#position-select {
+  border-radius: 5px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#physical-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  width: 70%;
+  padding: 5%;
+}
+
+/* Input and button styling for physical controls */
+#physical-controls input {
+  width: 50%; /* Adjust as necessary */
+  font-size: 18px;
+  height: 30px;
+  border-radius: 10px;
+}
+
+#confirm-position {
+  cursor: pointer;
+  padding: 1%;
+  color: var(--black);
+  font-weight: 600;
+  border-radius: 10px;
+  background: var(--gradient-bg-btn);
+  box-shadow: var(--box-shadow);
+  border: 2px solid var(--black);
+  font-size: 18px;
+  width: 50%;
+}
+
+#confirm-position:focus {
+  box-shadow: var(--box-shadow-selected);
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
+}
+
+#confirm-position.active {
+  box-shadow: 0 0 20px 5px var(--light-blue);
+}
+
+#confirm-position:hover {
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
+}
+
+/* Assuming you already have the .active and .disabled styles from previous suggestions */
+
+/* Enabled state for inputs and buttons */
+input:enabled,
+select:enabled {
+  cursor: pointer;
+  opacity: 1; /* Fully visible for enabled elements */
+}
+
+/* Disabled state for inputs and buttons */
+input:disabled,
+button:disabled,
+select:disabled {
+  cursor: not-allowed;
+  opacity: 0.5; /* Faded appearance for disabled elements */
+}
+
+/* Regular button styling */
+#btn_logical,
+#btn_physical {
+  cursor: pointer;
+  padding: 1%;
+  color: var(--black);
+  font-weight: 600;
+  border-radius: 10px;
+  background: var(--gradient-bg-btn);
+  box-shadow: var(--box-shadow);
+  border: 2px solid var(--black);
+  font-size: 18px;
+  width: 50%;
+}
+
+/* Active button styling */
+#btn_logical.active,
+#btn_physical.active {
+  box-shadow: var(--box-shadow-selected);
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
+}
+
+/* Hover state for buttons */
+#btn_logical:hover,
+#btn_physical:hover {
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
+}
+
+/* Focus state for buttons */
+#btn_logical:focus,
+#btn_physical:focus {
+  box-shadow: var(--box-shadow-selected);
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
+}
+
+#btn_go {
+  cursor: pointer;
+  color: var(--black);
+  font-weight: 600;
+  border-radius: 100%;
+  background: var(--gradient-bg-btn);
+  box-shadow: var(--box-shadow);
+  border: 2px solid var(--black);
+  font-size: 18px;
+  width: 120px;
+  height: 120px;
+}
+
+#btn_go.active {
+  box-shadow: 0 0 20px 5px var(--light-blue);
+}
+
+#btn_go:hover {
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
+}
+
+#btn_go.clicked {
+  /* Example styles for clicked state */
+  transform: scale(0.95); /* Slightly scale down the button */
+  opacity: 0.8; /* Make button slightly transparent */
+  text-shadow: var(--text-shadow-blue); /* Add text shadow */
+  color: var(--light-blue); /* Change text color */
+  box-shadow: var(--box-shadow-selected); /* Add box shadow */
+}
+
+#GoMessage {
+  /* Basic styling, replace or enhance as needed */
+  display: none;
+  color: var(--light-blue);
+  text-shadow: var(--text-shadow-blue);
+  text-align: center;
+  margin-top: 20px;
+}

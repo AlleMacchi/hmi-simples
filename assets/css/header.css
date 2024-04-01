@@ -1,0 +1,80 @@
+#header {
+  position: fixed;
+  height: 50px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  padding: 1%;
+  gap: 10%;
+  /* background-color: #555353; */
+}
+
+#header h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  display: flex;
+  flex: row;
+  width: 20%;
+  gap: 10%;
+  align-items: center;
+}
+
+#header h3 span {
+  color: var(--light-blue);
+  text-shadow: var(--text-shadow-blue);
+  box-shadow: var(--box-shadow);
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  width: 50%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.labelMode {
+  padding-top: 10px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+#btn_Mode {
+  position: fixed;
+  top: 20px;
+  right: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 1%;
+  color: var(--black);
+  font-weight: 600;
+  border-radius: 10px;
+  background: var(--gradient-bg-btn);
+  box-shadow: var(--box-shadow);
+  border: 2px solid var(--black);
+  font-size: 18px;
+  z-index: 101;
+  height: 50px;
+}
+
+#btn_Mode:hover {
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
+}
+
+#btn_Mode.close {
+  color: var(--light-blue);
+}
