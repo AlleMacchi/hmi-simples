@@ -8,22 +8,27 @@
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/home.css" />
   </head>
-
   <body>
     <div id="warning">
-      Please rotate your device to landscape mode for the best experience.
+      Please rotate your device to landscape mode for the best experience or use a larger device.
     </div>
     <div id="header">
-      <h3 id="labelMode">Current Mode: <span> MANUAL </span></h3>
-      <h3 id="labelState">Current State: <span> EXECUTIVE </span></h3>
-      <button type="button" id="btn_Mode">Mode</button>
+      <div id="logo">Production Reality Group</div>
+      <div id="div_Status">
+        <h3 id="labelMode">Current Mode: <span> MANUAL </span></h3>
+        <h3 id="labelState">Current State: <span> EXECUTIVE </span></h3>
+      </div>
+      <div id="div_Mode">
+        <button type="button" id="btn_Mode">MODE</button>
+      </div>
     </div>
     <div id="navbar">
       <button type="button" id="btn_section1">HOME</button>
       <button type="button" id="btn_section2">MACHINE</button>
       <button type="button" id="btn_section3">POSITIONS</button>
-      <button type="button" id="btn_section4">SETTINGS</button>
-      <button type="button" id="btn_section5">ALARMS</button>
+      <button type="button" id="btn_section4">WMS</button>
+      <button type="button" id="btn_section5">SETTINGS</button>
+      <button type="button" id="btn_section6">ALARMS</button>
       <h3 id="alarmsCounter">3</h3>
     </div>
     <div class="sidebarMode">
@@ -31,17 +36,18 @@
       <div class="switch">
         <button type="button">MANUAL</button>
         <button type="button">AUTO</button>
+      </div>  
+      <div id="roundCommands">
+        <button type="button">START</button>
+        <button type="button">STOP</button>
+        <button type="button">RESET</button>
       </div>
-      <h3>Commands</h3>
+      <h3>Manual Commands</h3>
+      
       <div class="commands">
         <div>
           <button type="button">UP/FWD/ON</button>
           <button type="button">DWN/BWD/OFF</button>
-        </div>
-        <div id="roundCommands">
-          <button type="button">START</button>
-          <button type="button">STOP</button>
-          <button type="button">RESET</button>
         </div>
       </div>
     </div>
@@ -296,7 +302,29 @@
             </table>
           </div>
         </section>
+        <!-- SECTION 4 WMS -->
         <section id="section4" class="page">
+          <h1 id="WMS_title">WMS INFO</h1>
+          <div class="WMS-container">
+              <div id="WMS-to-PLC">
+                <h2>WMS-to-PLC</h2>
+                <p>Product ID: 123456</p>
+                <p>Product Name: Product 1</p>
+                <p>Product Type: Type 1</p>
+              </div>
+              <hr>
+              <div id="PLC-to-WMS">
+                <h2>PLC-to-WMS</h2>
+                <p>Location ID: 123456</p>
+                <p>Location Name: Location 1</p>
+                <p>Location Type: Type 1</p>
+              </div>
+            </div>
+
+        </section>
+
+      <!-- SECTION 5 SETTINGS -->
+        <section id="section5" class="page">
           <div class="settings-container">
             <h1>SETTINGS</h1>
             <form id="settings-form">
@@ -371,7 +399,7 @@
             </form>
           </div>
         </section>
-        <section id="section5" class="page">
+        <section id="section6" class="page">
           <div class="Alarms">
             <h2>ALARMS</h2>
 
@@ -404,6 +432,8 @@
       type="text/javascript"
       src="assets/js/machine.js"
     ></script>
+    <!-- WMS -->
+    <script type="text/javascript" src="assets/js/wms.js"></script>
     <!-- SETTINGS -->
     <script type="text/javascript" src="assets/js/settings.js"></script>
     <!-- ALARMS -->

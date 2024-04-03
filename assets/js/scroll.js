@@ -24,6 +24,11 @@ document.getElementById("btn_section5").addEventListener("click", function () {
   scrollToSection("section5");
 });
 
+document.getElementById("btn_section6").addEventListener("click", function () {
+  btn_section1.classList.remove("active");
+  scrollToSection("section6");
+});
+
 // Function to scroll to the specified section
 // Function to scroll to the specified section with a top margin
 function scrollToSection(sectionId) {

@@ -31,11 +31,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 90%;
   gap: 0.5%; /* Adjust the space between squares as needed */
   padding: 1%;
   border-radius: 5px;
   user-select: none; /* Prevent text selection on double-click */
+  flex-wrap: wrap;
 }
 
 .Number {
