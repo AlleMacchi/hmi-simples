@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
   //   btnMode.textContent = sidebarMode.classList.contains("open") ? "X" : "Mode";
   // });
 
-  btnMode.addEventListener("click", function() {
+  btnMode.addEventListener("click", function () {
     // Toggle sidebar on mode button click
     const isOpen = sidebarMode.classList.contains("open");
     toggleSidebar(!isOpen);
@@ -27,8 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //   btnMode.style.width = "5%";
     // }
     btnMode.textContent = isOpen ? "MODE" : "X";
-});
-
+  });
 
   const btnManual = document.querySelector(".switch button:first-child");
   const btnAuto = document.querySelector(".switch button:last-child");
@@ -72,8 +71,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Button click visual effect
   const commandButtons = document.querySelectorAll(".commands button");
+  const roundButtons = document.querySelectorAll("#roundCommands button");
 
   commandButtons.forEach((button) => {
+    button.addEventListener("mousedown", function () {
+      button.classList.add("clicked");
+    });
+
+    button.addEventListener("mouseup", function () {
+      setTimeout(() => button.classList.remove("clicked"), 150);
+    });
+
+    button.addEventListener("mouseleave", function () {
+      setTimeout(() => button.classList.remove("clicked"), 150);
+    });
+  });
+
+  // Adding "mousedown" event to simulate button press
+  roundButtons.forEach((button) => {
     button.addEventListener("mousedown", function () {
       button.classList.add("clicked");
     });

@@ -1,0 +1,39 @@
+#WMS_title {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  margin-bottom: 10px;
+}
+/* Style for the WMS-container class */
+.WMS-container {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+/* Style for the WMS-to-PLC ID */
+#WMS-to-PLC {
+  /* Add your styles here */
+}
+
+/* Style for the PLC-to-WMS ID */
+#PLC-to-WMS {
+  /* Add your styles here */
+}
+
+/* Style for the hr element */
+.WMS-container hr {
+  width: 3px; /* Width of the vertical line */
+  height: 100%; /* Height of the vertical line */
+  background-color: var(--light-blue); /* Color of the vertical line */
+  text-shadow: var(--text-shadow-blue); /* Text shadow for the vertical line */
+  border: none; /* Remove the default border */
+  transition: height 0.5s ease-in;
+}

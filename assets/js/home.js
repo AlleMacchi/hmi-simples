@@ -1,7 +1,7 @@
 // Function to update the layer title based on PLC data
 const updateLayerTitle = (layerNumber) => {
   const layerTitle = document.getElementById("layer-title");
-  layerTitle.textContent = `Layer ${layerNumber}`;
+  layerTitle.textContent = `Row ${layerNumber} Column ${newPosition}`;
 };
 
 // Function to update the position of the AGV and highlight the corresponding Number
@@ -59,8 +59,8 @@ const confirmPositionBtn = document.getElementById("confirm-position");
 const dimensionLabel = document.getElementById("dimension-label");
 
 // Arrays for dropdown options
-const layers = ["Layers", "Layer 1", "Layer 2"]; // Replace with actual layers
-const positions = ["Positions", "Position 1", "Position 2"]; // Replace with actual positions
+const layers = ["Row", "Row 1", "Row 2"]; // Replace with actual layers
+const positions = ["Column", "Column 1", "Column 2"]; // Replace with actual positions
 
 // Populate dropdowns for logical controls
 const layerSelect = createDropdown("layer-select", layers);
@@ -144,7 +144,7 @@ controlsInputs.forEach((controlInput) => {
     if (
       controlsInputs.every(
         (controlInput) =>
-          controlInput.value !== "Positions" && controlInput.value !== "Layers"
+          controlInput.value !== "Column" && controlInput.value !== "Row"
       )
     ) {
       btn_go.classList.add("active");
@@ -155,7 +155,11 @@ controlsInputs.forEach((controlInput) => {
 physicalPositionInput.addEventListener("input", () => {
   btn_go.classList.remove("active");
   confirmPositionBtn.classList.remove("active");
-  if (physicalPositionInput.value > 0 && physicalPositionInput.value !== "" && physicalPositionInput.value !== 0) {
+  if (
+    physicalPositionInput.value > 0 &&
+    physicalPositionInput.value !== "" &&
+    physicalPositionInput.value !== 0
+  ) {
     confirmPositionBtn.classList.add("active");
   }
 });

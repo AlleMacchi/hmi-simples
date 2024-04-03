@@ -64,6 +64,66 @@
   color: var(--light-blue);
 }
 
+#roundCommands {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3%;
+}
+
+/* Initial styling for command buttons (visible as usable) */
+#roundCommands button {
+  cursor: pointer;
+  width: 100px;
+  aspect-ratio: 1/1;
+  padding: 10%;
+  color: var(--black);
+  font-weight: 600;
+  border-radius: 50%;
+  background: var(--gradient-bg-btn);
+  box-shadow: var(--box-shadow);
+  border: 2px solid var(--black);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+/* Style for command buttons when clicked */
+
+#roundCommands button.clicked {
+  /* Example styles for clicked state */
+  transform: scale(0.95); /* Slightly scale down the button */
+  opacity: 0.8; /* Make button slightly transparent */
+  text-shadow: var(--text-shadow-blue); /* Add text shadow */
+  color: var(--light-blue); /* Change text color */
+  box-shadow: var(--box-shadow-selected); /* Add box shadow */
+}
+
+#roundCommands button:hover {
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
+}
+
+/* Styling for disabled command buttons */
+
+#roundCommands button.disabled {
+  opacity: 0.3; /* Dim the button to show it's inactive */
+  cursor: default; /* Change cursor to indicate non-interactive state */
+}
+
+#roundCommands button.disabled:hover {
+  text-shadow: none; /* Remove hover effect */
+  color: var(--black); /* Keep text color the same */
+}
+
+#roundCommands button.disabled:focus {
+  box-shadow: var(--box-shadow); /* Keep focus effect */
+  text-shadow: none; /* Remove focus effect */
+  color: var(--black); /* Keep text color the same */
+}
+
 .commands {
   display: flex;
   flex-direction: column;
@@ -137,8 +197,6 @@
     padding: 5%; /* Adjust padding for touch targets */
     font-size: 1.2rem; /* Adjust font size for readability */
   }
-
-
 }
 
 @media screen and (max-width: 1250px) {
@@ -162,7 +220,6 @@
   .sidebarMode {
     width: 30%; /* Adjust width for very small screens */
     font-size: 1.25rem; /* Adjust font size for very small screens */
- 
   }
 
   .switch button,

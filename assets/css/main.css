@@ -7,6 +7,7 @@
 @import url("alarms.css");
 @import url("sidebar.css");
 @import url("positions.css");
+@import url("wms.css");
 
 :root {
   --light-blue: #c3f2f5;
