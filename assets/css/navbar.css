@@ -9,12 +9,13 @@
   gap: 3%;
   /* box-shadow: var(--box-shadow); */
   color: var(--black);
+  margin-top: 7%;
 }
 
 #navbar > button {
   width: 70%;
   cursor: pointer;
-  padding: 10%;
+  padding: 5% 2%;
   color: var(--black);
   font-weight: 600;
   border-radius: 10px;
@@ -41,14 +42,13 @@
   color: var(--light-blue);
 }
 
-
-#alarmsCounter{
+#alarmsCounter {
   display: none;
   position: relative;
   justify-content: center;
   align-items: center;
-  top: -100px;
-  left: -60px;
+  top: -80px;
+  left: -70px;
   background: var(--black);
   color: red;
   text-shadow: var(--text-shadow-red);
@@ -59,4 +59,42 @@
   box-shadow: red 0px 0px 5px 2px;
   width: 25px;
   height: 25px;
+}
+@media screen and (max-width: 1650px) {
+  #navbar {
+    width: 12%; /* Adjust for medium screens */
+    margin-top: 7%; /* Keep the top margin consistent */
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  #navbar {
+    width: 15%; /* Adjust for smaller screens */
+  }
+  #navbar > button {
+    padding: 6% 2%; /* Adjust padding for smaller screens */
+    font-size: 16px; /* Adjust font size for readability */
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #navbar {
+    width: 18%; /* Adjust for very small screens */
+  }
+  #navbar > button {
+    font-size: 14px; /* Further reduce font size for very small screens */
+  }
+  #alarmsCounter {
+    width: 20px;
+    height: 20px;
+    font-size: 16px; /* Adjust font size for visibility */
+    top: -60px;
+    left: -50px; /* Adjust for visibility */
+  }
+}
+
+@media screen and (orientation: portrait) {
+  #navbar {
+    display: none;
+  }
 }

@@ -3,7 +3,7 @@
   top: 0px;
   right: 0px;
   width: 20%;
-  height: 100vh;
+  height: 150vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,6 +19,7 @@
 
 .sidebarMode.open {
   transform: translateX(0); /* Move into view */
+  height: 150vh;
 }
 
 /* Additional CSS to style the switch and commands sections */
@@ -82,7 +83,7 @@
 /* Initial styling for command buttons (visible as usable) */
 .commands button {
   cursor: pointer;
-  padding: 10%;
+  padding: 8%;
   color: var(--black);
   font-weight: 600;
   border-radius: 10px;
@@ -122,4 +123,62 @@
   box-shadow: var(--box-shadow); /* Keep focus effect */
   text-shadow: none; /* Remove focus effect */
   color: var(--black); /* Keep text color the same */
+}
+/* Base styles for .sidebarMode remain unchanged */
+/* Base styles for .sidebarMode remain unchanged */
+
+@media screen and (max-width: 1650px) {
+  .sidebarMode {
+    width: 27%; /* Adjust width for medium-sized screens */
+    font-size: 1.75rem; /* Adjust font size for readability */
+  }
+  .switch button,
+  .commands button {
+    padding: 5%; /* Adjust padding for touch targets */
+    font-size: 1.2rem; /* Adjust font size for readability */
+  }
+
+
+}
+
+@media screen and (max-width: 1250px) {
+  .sidebarMode {
+    width: 27%; /* Further adjust width for small screens */
+    font-size: 1.5rem; /* Further adjust font size */
+  }
+  .switch button,
+  .commands button {
+    padding: 7%; /* Adjust padding */
+    font-size: 1rem; /* Adjust font size */
+  }
+
+  .sidebarMode h3 {
+    justify-content: center;
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .sidebarMode {
+    width: 30%; /* Adjust width for very small screens */
+    font-size: 1.25rem; /* Adjust font size for very small screens */
+ 
+  }
+
+  .switch button,
+  .commands button {
+    padding: 5% 4%; /* Adjust padding for very small screens */
+    font-size: 1rem; /* Adjust font size for very small screens */
+  }
+
+  .sidebarMode h3 {
+    justify-content: center;
+    font-size: 1rem;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .sidebarMode {
+    display: none; /* Hide sidebar in portrait mode to optimize space */
+  }
 }

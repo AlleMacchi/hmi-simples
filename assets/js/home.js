@@ -79,7 +79,7 @@ btnLogical.addEventListener("click", function () {
   btnPhysical.classList.remove("active");
   btn_go.classList.remove("active");
   dimensionLabel.textContent = "0 mm";
-  physicalPositionInput.value = "";
+  physicalPositionInput.value = 0;
 });
 
 btnPhysical.addEventListener("click", function () {
@@ -155,7 +155,7 @@ controlsInputs.forEach((controlInput) => {
 physicalPositionInput.addEventListener("input", () => {
   btn_go.classList.remove("active");
   confirmPositionBtn.classList.remove("active");
-  if (physicalPositionInput.value) {
+  if (physicalPositionInput.value > 0 && physicalPositionInput.value !== "" && physicalPositionInput.value !== 0) {
     confirmPositionBtn.classList.add("active");
   }
 });

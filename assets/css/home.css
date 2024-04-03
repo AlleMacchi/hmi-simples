@@ -36,6 +36,7 @@
   padding: 1%;
   border-radius: 5px;
   user-select: none; /* Prevent text selection on double-click */
+  flex-wrap: wrap;
 }
 
 .Number {

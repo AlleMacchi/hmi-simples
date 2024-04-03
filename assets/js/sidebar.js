@@ -22,7 +22,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Toggle sidebar on mode button click
     const isOpen = sidebarMode.classList.contains("open");
     toggleSidebar(!isOpen);
-    btnMode.textContent = isOpen ? "Mode" : "X";
+    // if (!isOpen) {
+    //   // Update the current mode when opening the sidebar
+    //   btnMode.style.width = "5%";
+    // }
+    btnMode.textContent = isOpen ? "MODE" : "X";
 });
 
 
