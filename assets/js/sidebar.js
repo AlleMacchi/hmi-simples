@@ -13,6 +13,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnMode = document.getElementById("btn_Mode");
   const sidebarMode = document.querySelector(".sidebarMode");
 
+  function toggleSidebar(open) {
+    if (open) {
+      sidebarMode.classList.add("open");
+    } else {
+      sidebarMode.classList.remove("open");
+    }
+  }
+
   // btnMode.addEventListener("click", function () {
   //   sidebarMode.classList.toggle("open");
   //   btnMode.textContent = sidebarMode.classList.contains("open") ? "X" : "Mode";

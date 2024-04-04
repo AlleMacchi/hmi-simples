@@ -3,7 +3,7 @@
 @import url("sections.css");
 @import url("machine.css");
 @import url("home.css");
-@import url("settings.css");
+/* @import url("settings.css"); */
 @import url("alarms.css");
 @import url("sidebar.css");
 @import url("positions.css");
@@ -93,3 +93,7 @@ body {
     height: 100vh;
   }
 }
+
+
+/* Resolution */
+/* 1920 x 1080 */
