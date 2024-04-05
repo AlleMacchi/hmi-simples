@@ -3,15 +3,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Update mode display in the header
   function updateHeaderMode(mode) {
-    const labelMode = document
-      .getElementById("labelMode")
-      .querySelector("span"); // Correctly select the span within #labelMode
     labelMode.textContent = mode;
   }
 
   // Toggle sidebar and update mode
   const btnMode = document.getElementById("btn_Mode");
   const sidebarMode = document.querySelector(".sidebarMode");
+
+  function toggleSidebar(open) {
+    if (open) {
+      sidebarMode.classList.add("open");
+    } else {
+      sidebarMode.classList.remove("open");
+    }
+  }
 
   // btnMode.addEventListener("click", function () {
   //   sidebarMode.classList.toggle("open");
@@ -66,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleMode("AUTO");
   });
 
+  
   // Initialize the sidebar in MANUAL mode
   toggleMode(currentMode);
 

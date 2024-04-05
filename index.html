@@ -6,7 +6,6 @@
     <title>HMI Simple</title>
     <!-- MY CSS  -->
     <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="assets/css/home.css" />
   </head>
   <body>
     <div id="warning">
@@ -15,8 +14,8 @@
     <div id="header">
       <div id="logo">Production Reality Group</div>
       <div id="div_Status">
-        <h3 id="labelMode">Current Mode: <span> MANUAL </span></h3>
-        <h3 id="labelState">Current State: <span> EXECUTIVE </span></h3>
+        <h3 id="labelMode">Current Mode: <span>X</span></h3>
+        <h3 id="labelState">Current State: <span>X</span></h3>
       </div>
       <div id="div_Mode">
         <button type="button" id="btn_Mode">MODE</button>
@@ -27,7 +26,7 @@
       <button type="button" id="btn_section2">MACHINE</button>
       <button type="button" id="btn_section3">POSITIONS</button>
       <button type="button" id="btn_section4">WMS</button>
-      <button type="button" id="btn_section5">SETTINGS</button>
+      <!-- <button type="button" id="btn_section5">SETTINGS</button> -->
       <button type="button" id="btn_section6">ALARMS</button>
       <h3 id="alarmsCounter">3</h3>
     </div>
@@ -56,9 +55,9 @@
         <section id="section1" class="page">
           <div class="home">
             <h1>Home</h1>
-            <div id="layer-title">Layer 1</div>
+            <div id="row-title">row 1</div>
 
-            <div id="layer-container-squares">
+            <div id="row-container-squares">
               <!-- The 38 position squares -->
               <div class="position-div">
                 <div class="Number" data-position="1">1</div>
@@ -240,6 +239,13 @@
                 </div>
               </div>
             </div>
+            <div class="dropdown-container">
+              <label>Actual Step: 0</label>
+              <div id="stepSelect"></div>
+              <button id="stepChangeButton">Change</button>
+              <hr>
+              <button id="ChangeBatteryButton">Change Battery</button>
+            </div>
         </section>
 
         <section id="section2" class="page">
@@ -258,14 +264,62 @@
                   <option value="Lifter">Lifter</option>
                 </select>
                 <!-- <span class="focus"></span> -->
+            
+              
+          </div>
+
+          
+          <div class="agv-section">
+            <div class="a-wrapper">
+              A
+            </div>
+            <section class="agv-group">
+              <div class="rectangle-parent">
+                <div class="frame-child"></div>
+                <div class="rectangle-group">
+                  <div class="frame-item"></div>
+                  <div class="shape-set-wrapper">
+                    <div class="shape-set"></div>
+                  </div>
+                  <div class="frame-inner"></div>
+                </div>
+                <div class="frame-group">
+                  <div class="polygon-wrapper">
+                   
+                  </div>
+                  <button class="battery-label">
+                    <div class="battery-label-child"></div>
+                    <b class="battery">BATTERY</b>
+                  </button>
+                </div>
+                <div class="rectangle-container">
+                  <div class="rectangle-div"></div>
+                  <div class="ellipse-wrapper">
+                    <div class="ellipse-div"></div>
+                  </div>
+                  <div class="frame-child1"></div>
+                </div>
               </div>
               
-              <div class="switchMode">
-                <button id="manualSwitchButton">Switch To Manual Mode</button>
-                <button>Switch To Auto Mode</button>
-              </div>
+                
+                  <div class="arrows">
+                    <div class="arrow-up"></div>
+                    <div class="arrow-down"></div>
+                  </div>
+                <div>
+                
+              
+            </section>
+            <div class="b-wrapper">
+              B
+            </div>
           </div>
           
+          <div id="position-label" style="margin-top: 20px; font-size: 24px; ">
+            <p style="font-weight: bold;"> Position: <span id="position-value" style=" color: var(--light-blue);
+              text-shadow: 2px 1px 10px rgba(195, 242, 245, 1);">0 mm</span></p>
+        </div>  
+           <!-- Position Label -->
         </section>
 
         <section id="section3" class="page">
@@ -276,6 +330,7 @@
               id="searchInput"
               placeholder="Search position..."
             />
+            <div class="table-scroll">
             <table id="positionsTable">
               <thead>
                 <tr>
@@ -284,47 +339,64 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- Example positions -->
-                <tr>
-                  <td>1</td>
-                  <td>Entry Conveyor</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Exit Conveyor</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Charging station</td>
-                </tr>
-                <!-- Add more positions here -->
+                <!-- Positions will be inserted here -->
               </tbody>
             </table>
+          </div>
+          <div class="input-container">
+            <label>Value: 0mm</label>
+            <input id="value-input">
+            <button id="teachInButton">Teach In</button>
+            <hr>
+            <button id="SetButton">Set</button>
           </div>
         </section>
         <!-- SECTION 4 WMS -->
         <section id="section4" class="page">
           <h1 id="WMS_title">WMS INFO</h1>
           <div class="WMS-container">
-              <div id="WMS-to-PLC">
-                <h2>WMS-to-PLC</h2>
-                <p>Product ID: 123456</p>
-                <p>Product Name: Product 1</p>
-                <p>Product Type: Type 1</p>
-              </div>
+            <div id="WMS-to-PLC">
+              <h2>WMS-to-PLC</h2>
+              <p>Id: <span id="wms_plc_id">0</span></p>
+              <p>Task number: <span id="wms_plc_task_number">0</span></p>
+              <p>Coordinate: <span id="wms_plc_coordinate">0</span></p>
+              <p>Echo Status: <span id="wms_plc_echo_status">0</span></p>
+              <p>Execute: <span id="wms_plc_execute">0</span></p>
               <hr>
-              <div id="PLC-to-WMS">
-                <h2>PLC-to-WMS</h2>
-                <p>Location ID: 123456</p>
-                <p>Location Name: Location 1</p>
-                <p>Location Type: Type 1</p>
-              </div>
+              <p>Selection Man/Auto: <span id="wms_plc_selection">0</span></p>
+              <p>Start: <span id="wms_plc_start">0</span></p>
+              <p>Stop: <span id="wms_plc_stop">0</span></p>
+              <p>Reset: <span id="wms_plc_reset">0</span></p>
+            </div>
+            <hr id="hr-v">
+            <div id="PLC-to-WMS">
+              <h2>PLC-to-WMS</h2>
+              <p>Id: <span id="plc_wms_id">0</span></p>
+              <p>Task Number: <span id="plc_wms_task_number">0</span></p>
+              <p>Coordinate: <span id="plc_wms_coordinate">0</span></p>
+              <p>Result: <span id="plc_wms_result">0</span></p>
+              <p>Error Code: <span id="plc_wms_error_code">0 </span>  <span class="info">i</span>
+                <!-- <p class="description">
+                this is an example of what the info box shoudl explain a
+                specific setting
+              </p> -->
+            </p>
+              <p>Task Status: <span id="plc_wms_task_status">0</span></p>
+              <hr>
+              <p>Current Mode: <span id="plc_wms_current_mode">0</span></p>
+              <p>Current State: <span id="plc_wms_current_state">0</span></p>
+              <p>Carrier Status: <span id="plc_wms_carrier_status">0</span></p>
+              <p>Carrier Position: <span id="plc_wms_carrier_position">0</span></p>
+              <p>Lifter Status: <span id="plc_wms_lifter_status">0</span></p>
+              <p>Lifter Position: <span id="plc_wms_lifter_position">0</span></p>
+            </div>
+            
             </div>
 
         </section>
 
       <!-- SECTION 5 SETTINGS -->
-        <section id="section5" class="page">
+        <!-- <section id="section5" class="page">
           <div class="settings-container">
             <h1>SETTINGS</h1>
             <form id="settings-form">
@@ -398,7 +470,7 @@
               <h3 class="saved">Settings Saved</h3>
             </form>
           </div>
-        </section>
+        </section> -->
         <section id="section6" class="page">
           <div class="Alarms">
             <h2>ALARMS</h2>
@@ -407,6 +479,7 @@
               <thead>
                 <tr>
                   <th id="alarmIDth">ID</th>
+                  <th id="type">Type</th>
                   <th>Description</th>
                 </tr>
               </thead>
@@ -423,8 +496,6 @@
     <script type="text/javascript" src="assets/js/global.js"></script>
     <!-- SCROLL -->
     <script type="text/javascript" src="assets/js/scroll.js"></script>
-    <!-- HOME -->
-    <script type="text/javascript" src="assets/js/home.js"></script>
     <!-- READ I/O -->
     <script type="text/javascript" src="assets/js/I0Read_Pure.js"></script>
     <!-- SELECTION -->
@@ -432,15 +503,31 @@
       type="text/javascript"
       src="assets/js/machine.js"
     ></script>
+    <!-- positions_obj -->
+    <script type="text/javascript" src="assets/js/Comms/positions_obj.js"></script>
+    <!-- header -->
+    <script type="text/javascript" src="assets/js/header.js"></script>
     <!-- WMS -->
     <script type="text/javascript" src="assets/js/wms.js"></script>
     <!-- SETTINGS -->
-    <script type="text/javascript" src="assets/js/settings.js"></script>
+    <!-- <script type="text/javascript" src="assets/js/settings.js"></script> -->
     <!-- ALARMS -->
     <script type="text/javascript" src="assets/js/alarms.js"></script>
     <!-- MODE -->
     <script type="text/javascript" src="assets/js/sidebar.js"></script>
     <!--Positions-->
     <script type="text/javascript" src="assets/js/positions.js"></script>
+    <!-- alarms_obj -->
+    <script type="text/javascript" src="assets/js/Comms/alarms_obj.js"></script>
+    <!-- HMI_PLC -->
+    <script type="text/javascript" src="assets/js/Comms/HMI_PLC.js"></script>
+    <!-- ShuttleToWMS -->
+    <script type="text/javascript" src="assets/js/Comms/ShuttleToWMS.js"></script>
+    <!-- WMSToShuttle -->
+    <script type="text/javascript" src="assets/js/Comms/WMSToShuttle.js"></script>
+     <!-- HOME -->
+     <script type="text/javascript" src="assets/js/home.js"></script>
+
+
   </body>
 </html>

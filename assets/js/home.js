@@ -1,11 +1,18 @@
-// Function to update the layer title based on PLC data
-const updateLayerTitle = (layerNumber) => {
-  const layerTitle = document.getElementById("layer-title");
-  layerTitle.textContent = `Row ${layerNumber} Column ${newPosition}`;
+// Function to update the row title based on PLC data
+
+const updaterowTitle = (rowNumber) => {
+  const rowTitle = document.getElementById("row-title");
+  rowTitle.textContent = `${ShuttleToWMS.Status.Carrier.Position}`;
 };
 
 // Function to update the position of the AGV and highlight the corresponding Number
 const updateAGVPosition = (newPosition) => {
+  var positionString = ShuttleToWMS.Status.Carrier.Position;
+  // Extracting the column number from the position string using a regular expression.
+  // This will match the 'R' followed by any digit(s) and capture the digits only.
+  var match = positionString.match(/A(\d+)/);
+  var newPosition = match ? parseInt(match[1], 10) : null;
+
   // First, remove the 'active' class from all squares and Numbers
   document
     .querySelectorAll(".square.active, .Number.active")
@@ -27,27 +34,10 @@ const updateAGVPosition = (newPosition) => {
   }
 };
 
-// Simulating PLC variable updates
-var newPosition = 0;
-var currentLayer = 1;
-
-const getPLCPosition = () => {
-  newPosition = (newPosition % 38) + 1; // This will cycle the position from 1 to 38
-  return newPosition;
-};
-
-const getPLCLayer = () => {
-  // Placeholder for actual PLC layer data retrieval
-  currentLayer = (currentLayer % 3) + 1; // This will cycle the layer from 1 to 3
-  return currentLayer;
-};
-
 // Update function call
 setInterval(() => {
-  const newPosition = getPLCPosition(); // Simulate getting new position from PLC
-  const newLayer = getPLCLayer(); // Simulate getting new layer from PLC
-  updateAGVPosition(newPosition);
-  updateLayerTitle(newLayer);
+  updateAGVPosition(ShuttleToWMS.Status.Carrier.Position);
+  updaterowTitle(ShuttleToWMS.Status.Carrier.Position);
 }, 1000); // Update rate
 
 const btnLogical = document.getElementById("btn_logical");
@@ -59,16 +49,16 @@ const confirmPositionBtn = document.getElementById("confirm-position");
 const dimensionLabel = document.getElementById("dimension-label");
 
 // Arrays for dropdown options
-const layers = ["Row", "Row 1", "Row 2"]; // Replace with actual layers
-const positions = ["Column", "Column 1", "Column 2"]; // Replace with actual positions
+const rows = positionsData.rows; // Replace with actual rows
+const positions = positionsData.columns; // Replace with actual positions
 
 // Populate dropdowns for logical controls
-const layerSelect = createDropdown("layer-select", layers);
+const rowSelect = createDropdown("row-select", rows);
 const positionSelect = createDropdown("position-select", positions);
-const layerLabel = document.getElementById("logical-label");
+const rowLabel = document.getElementById("logical-label");
 const positionLabel = document.getElementById("position-label");
-layerLabel.appendChild(layerSelect);
-layerSelect.setAttribute("disabled", "true");
+rowLabel.appendChild(rowSelect);
+rowSelect.setAttribute("disabled", "true");
 logicalControls.appendChild(positionSelect);
 positionSelect.setAttribute("disabled", "true");
 
@@ -78,6 +68,7 @@ btnLogical.addEventListener("click", function () {
   btnLogical.classList.add("active");
   btnPhysical.classList.remove("active");
   btn_go.classList.remove("active");
+  HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical = true;
   dimensionLabel.textContent = "0 mm";
   physicalPositionInput.value = 0;
 });
@@ -88,9 +79,11 @@ btnPhysical.addEventListener("click", function () {
   btnPhysical.classList.add("active");
   btnLogical.classList.remove("active");
   btn_go.classList.remove("active");
+  HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical = true;
   // Correct way to reset selects to their first option
-  layerSelect.value = layerSelect.options[0].value;
+  rowSelect.value = rowSelect.options[0].value;
   positionSelect.value = positionSelect.options[0].value;
+  document.getElementById("labelState span").innerHTML = "Physical";
 });
 
 confirmPositionBtn.addEventListener("click", function () {
@@ -134,7 +127,7 @@ function createDropdown(id, options) {
   return select;
 }
 
-let controlsInputs = [layerSelect, positionSelect]; // Correctly include both selects
+let controlsInputs = [rowSelect, positionSelect]; // Correctly include both selects
 let btn_go = document.getElementById("btn_go");
 
 controlsInputs.forEach((controlInput) => {
@@ -144,7 +137,7 @@ controlsInputs.forEach((controlInput) => {
     if (
       controlsInputs.every(
         (controlInput) =>
-          controlInput.value !== "Column" && controlInput.value !== "Row"
+          controlInput.value !== "Row" && controlInput.value !== "Column"
       )
     ) {
       btn_go.classList.add("active");
@@ -181,14 +174,78 @@ btn_go.addEventListener("mouseleave", () => {
 });
 
 btn_go.addEventListener("click", () => {
-  if (btn_go.classList.contains("active")) {
-    // Show the message
+  if (physicalPositionInput.value > 0) {
+    HMI_PLC.FromHMI.Setting.Carrier.PositionToReach_mm = parseFloat(
+      physicalPositionInput.value
+    );
+    // console.log(HMI_PLC.FromHMI.Setting.Carrier.PositionToReach_mm); // For testing
+    GoMessage.style.display = "flex";
+    btn_go.classList.remove("active");
+  } else if (rowSelect.value !== "Row" && positionSelect.value !== "Column") {
+    HMI_PLC.FromHMI.Setting.Carrier.PositionToReach_logical =
+      createPositionString(rowSelect.value, positionSelect.value);
     GoMessage.style.display = "flex";
     btn_go.classList.remove("active");
   }
+
+  // ShuttleToWMS.Status.Carrier.Position = HMI_PLC.FromHMI.Setting.Carrier.PositionToReach_logical; Only for Testing
+  // HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical = false;  toggle?
 
   // Hide the message after 10 seconds
   setTimeout(() => {
     GoMessage.style.display = "none";
   }, 3000);
+});
+
+function createPositionString(row, column) {
+  // Assuming row is like 'R019' and column is like 'A01'
+  // Construct the final string
+  return `A-L01${row}${column}`; // Using template literal
+}
+
+// Assuming you have an array of steps like this
+const steps = [
+  "Step",
+  "Init",
+  "Lift up",
+  "Lift Down",
+  "Go To Position",
+  "Go To First Position",
+  "Go To Mother",
+];
+
+// Reuse your createDropdown function
+const stepDropdown = createDropdown("stepSelect", steps);
+document.getElementById("stepSelect").appendChild(stepDropdown);
+
+// Adding an event listener to the button (assuming the button has an id 'stepChangeButton')
+document
+  .getElementById("stepChangeButton")
+  .addEventListener("click", function () {
+    const selectedStep = stepDropdown.value;
+    console.log(
+      `Changing to step: ${selectedStep} with change value: ${changeValue}`
+    );
+    // Implement the logic for changing the step here
+  });
+
+// Select the specific buttons using their IDs
+const dropdownButtons = [
+  document.getElementById("stepChangeButton"),
+  document.getElementById("ChangeBatteryButton"),
+];
+
+// Adding "mousedown", "mouseup", and "mouseleave" events to simulate button press and release
+dropdownButtons.forEach((button) => {
+  button.addEventListener("mousedown", function () {
+    button.classList.add("clicked"); // Add the 'clicked' class on mousedown
+  });
+
+  button.addEventListener("mouseup", function () {
+    setTimeout(() => button.classList.remove("clicked"), 150); // Remove the 'clicked' class shortly after mouseup
+  });
+
+  button.addEventListener("mouseleave", function () {
+    setTimeout(() => button.classList.remove("clicked"), 150); // Also remove the 'clicked' class when the mouse leaves the button
+  });
 });

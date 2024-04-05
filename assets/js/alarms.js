@@ -1,34 +1,39 @@
-// Simulated alarm data
-const alarms = [
-  { id: 1, description: "High temperature in reactor 3" },
-  { id: 2, description: "Pressure drop in line 4" },
-  { id: 3, description: "Unexpected flow rate in valve 5" },
-  // Add more alarms as needed
-];
-
 document.addEventListener("DOMContentLoaded", function () {
   // Find the table's tbody
   const tableBody = document.querySelector("#alarmTable tbody");
 
-  let alarmsCounter = document.getElementById("alarmsCounter"); // Removed the "#" from "alarmsCounter"
+  let alarmsCounter = document.getElementById("alarmsCounter");
 
-  if (alarms.length > 0) {
-    // Correct condition to check the length of the alarms array
-    alarmsCounter.textContent = alarms.length;
-    alarmsCounter.style.display = "flex"; // Ensure this matches your CSS for visibility
-  }else{
-    alarmsCounter.style.display = "none"; // Ensure this matches your CSS for visibility
+  // Filter active alarms and warnings
+  const activeAlarmsAndWarnings = alarmsAndWarnings.filter(
+    (item) => item.active
+  );
+
+  if (activeAlarmsAndWarnings.length > 0) {
+    alarmsCounter.textContent = activeAlarmsAndWarnings.length;
+    alarmsCounter.style.display = "flex";
+
+    // Change color to yellow if there are no alarms and only warnings are active
+    if (!activeAlarmsAndWarnings.some((item) => item.type === "Alarm")) {
+      alarmsCounter.style.color = "yellow";
+      alarmsCounter.style.boxShadow = "0 0 10px yellow";
+    }
+  } else {
+    alarmsCounter.style.display = "none";
   }
 
-  // Populate the table with alarms
-  alarms.forEach((alarm) => {
+  // Populate the table with active alarms and warnings
+  activeAlarmsAndWarnings.forEach((item) => {
     const row = document.createElement("tr");
     const idCell = document.createElement("td");
-    idCell.textContent = alarm.id;
+    idCell.textContent = item.id;
+    const typeCell = document.createElement("td");
+    typeCell.textContent = item.type;
     const descCell = document.createElement("td");
-    descCell.textContent = alarm.description;
+    descCell.textContent = item.description;
 
     row.appendChild(idCell);
+    row.appendChild(typeCell);
     row.appendChild(descCell);
     tableBody.appendChild(row);
   });

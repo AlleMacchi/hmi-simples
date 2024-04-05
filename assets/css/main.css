@@ -3,7 +3,7 @@
 @import url("sections.css");
 @import url("machine.css");
 @import url("home.css");
-@import url("settings.css");
+/* @import url("settings.css"); */
 @import url("alarms.css");
 @import url("sidebar.css");
 @import url("positions.css");
@@ -31,6 +31,29 @@
   --text-shadow-red: 0px 0px 20px red;
   --gradient-bg: linear-gradient(145deg, #555353, #363535, #303030);
   --gradient-bg-btn: linear-gradient(#555353, #363535, #303030);
+
+  /* fonts */
+  --font-inter: Inter;
+
+  /* font sizes */
+  --font-size-lg: 18px;
+
+  /* Colors */
+  --color-crimson: #d61414;
+  --color-darkgray-100: #7e7e7e;
+  --color-darkgray-200: #7e7e7e;
+
+  /* Gaps */
+  --gap-24xl: 43px;
+
+  /* Paddings */
+  --padding-xl: 20px;
+  --padding-mini: 15px;
+  --padding-sm: 14px;
+
+  /* Border radiuses */
+  --br-11xl: 30px;
+  --br-8xs: 5px;
 }
 
 * {
@@ -93,3 +116,6 @@ body {
     height: 100vh;
   }
 }
+
+/* Resolution */
+/* 1920 x 1080 */

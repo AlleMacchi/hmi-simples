@@ -5,7 +5,14 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(data => {
 
                 gCarrierManSpeed = data.CarrierManSpeed;
-                console.log("Read: " + gCarrierManSpeed);
+
+
+
+
+
             });
     }, 1500);
 });
+
+// 
+

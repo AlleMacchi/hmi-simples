@@ -19,10 +19,10 @@ document.getElementById("btn_section4").addEventListener("click", function () {
   scrollToSection("section4");
 });
 
-document.getElementById("btn_section5").addEventListener("click", function () {
-  btn_section1.classList.remove("active");
-  scrollToSection("section5");
-});
+// document.getElementById("btn_section5").addEventListener("click", function () {
+//   btn_section1.classList.remove("active");
+//   scrollToSection("section5");
+// });
 
 document.getElementById("btn_section6").addEventListener("click", function () {
   btn_section1.classList.remove("active");
