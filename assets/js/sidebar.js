@@ -3,9 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Update mode display in the header
   function updateHeaderMode(mode) {
-    const labelMode = document
-      .getElementById("labelMode")
-      .querySelector("span"); // Correctly select the span within #labelMode
     labelMode.textContent = mode;
   }
 
@@ -74,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
     toggleMode("AUTO");
   });
 
+  
   // Initialize the sidebar in MANUAL mode
   toggleMode(currentMode);
 

@@ -15,8 +15,8 @@
     <div id="header">
       <div id="logo">Production Reality Group</div>
       <div id="div_Status">
-        <h3 id="labelMode">Current Mode: <span> MANUAL </span></h3>
-        <h3 id="labelState">Current State: <span> EXECUTIVE </span></h3>
+        <h3 id="labelMode">Current Mode: <span>X</span></h3>
+        <h3 id="labelState">Current State: <span>X</span></h3>
       </div>
       <div id="div_Mode">
         <button type="button" id="btn_Mode">MODE</button>
@@ -56,9 +56,9 @@
         <section id="section1" class="page">
           <div class="home">
             <h1>Home</h1>
-            <div id="layer-title">Layer 1</div>
+            <div id="row-title">row 1</div>
 
-            <div id="layer-container-squares">
+            <div id="row-container-squares">
               <!-- The 38 position squares -->
               <div class="position-div">
                 <div class="Number" data-position="1">1</div>
@@ -324,6 +324,7 @@
               id="searchInput"
               placeholder="Search position..."
             />
+            <div class="table-scroll">
             <table id="positionsTable">
               <thead>
                 <tr>
@@ -332,22 +333,10 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- Example positions -->
-                <tr>
-                  <td>A-L01.Positions[1,1,0]</td>
-                  <td>AL01R001</td>
-                </tr>
-                <tr>
-                  <td>A-L01.Positions[1,2,0]</td>
-                  <td>AL01R002</td>
-                </tr>
-                <tr>
-                  <td>A-L01.Positions[1,3,0]</td>
-                  <td>AL01R003</td>
-                </tr>
-                <!-- Add more positions here -->
+                <!-- Positions will be inserted here -->
               </tbody>
             </table>
+          </div>
           </div>
         </section>
         <!-- SECTION 4 WMS -->
@@ -356,38 +345,38 @@
           <div class="WMS-container">
             <div id="WMS-to-PLC">
               <h2>WMS-to-PLC</h2>
-              <p>Id: <span id="wms_plc_id">200</span></p>
-              <p>Task number: <span id="wms_plc_task_number">201</span></p>
-              <p>Coordinate: <span id="wms_plc_coordinate">202</span></p>
-              <p>Echo Status: <span id="wms_plc_echo_status">203</span></p>
-              <p>Execute: <span id="wms_plc_execute">204</span></p>
+              <p>Id: <span id="wms_plc_id">0</span></p>
+              <p>Task number: <span id="wms_plc_task_number">0</span></p>
+              <p>Coordinate: <span id="wms_plc_coordinate">0</span></p>
+              <p>Echo Status: <span id="wms_plc_echo_status">0</span></p>
+              <p>Execute: <span id="wms_plc_execute">0</span></p>
               <hr>
-              <p>Selection Man/Auto: <span id="wms_plc_selection">205</span></p>
-              <p>Start: <span id="wms_plc_start">206</span></p>
-              <p>Stop: <span id="wms_plc_stop">207</span></p>
-              <p>Reset: <span id="wms_plc_reset">208</span></p>
+              <p>Selection Man/Auto: <span id="wms_plc_selection">0</span></p>
+              <p>Start: <span id="wms_plc_start">0</span></p>
+              <p>Stop: <span id="wms_plc_stop">0</span></p>
+              <p>Reset: <span id="wms_plc_reset">0</span></p>
             </div>
             <hr id="hr-v">
             <div id="PLC-to-WMS">
               <h2>PLC-to-WMS</h2>
-              <p>Id: <span id="plc_wms_id">300</span></p>
-              <p>Task Number: <span id="plc_wms_task_number">301</span></p>
-              <p>Coordinate: <span id="plc_wms_coordinate">302</span></p>
-              <p>Result: <span id="plc_wms_result">303</span></p>
-              <p>Error Code: <span id="plc_wms_error_code">304 </span>  <span class="info">i</span>
+              <p>Id: <span id="plc_wms_id">0</span></p>
+              <p>Task Number: <span id="plc_wms_task_number">0</span></p>
+              <p>Coordinate: <span id="plc_wms_coordinate">0</span></p>
+              <p>Result: <span id="plc_wms_result">0</span></p>
+              <p>Error Code: <span id="plc_wms_error_code">0 </span>  <span class="info">i</span>
                 <!-- <p class="description">
                 this is an example of what the info box shoudl explain a
                 specific setting
               </p> -->
             </p>
-              <p>Task Status: <span id="plc_wms_task_status">305</span></p>
+              <p>Task Status: <span id="plc_wms_task_status">0</span></p>
               <hr>
-              <p>Current Mode: <span id="plc_wms_current_mode">306</span></p>
-              <p>Current State: <span id="plc_wms_current_state">307</span></p>
-              <p>Carrier Status: <span id="plc_wms_carrier_status">308</span></p>
-              <p>Carrier Position: <span id="plc_wms_carrier_position">309</span></p>
-              <p>Lifter Status: <span id="plc_wms_lifter_status">310</span></p>
-              <p>Lifter Position: <span id="plc_wms_lifter_position">311</span></p>
+              <p>Current Mode: <span id="plc_wms_current_mode">0</span></p>
+              <p>Current State: <span id="plc_wms_current_state">0</span></p>
+              <p>Carrier Status: <span id="plc_wms_carrier_status">0</span></p>
+              <p>Carrier Position: <span id="plc_wms_carrier_position">0</span></p>
+              <p>Lifter Status: <span id="plc_wms_lifter_status">0</span></p>
+              <p>Lifter Position: <span id="plc_wms_lifter_position">0</span></p>
             </div>
             
             </div>
@@ -495,8 +484,6 @@
     <script type="text/javascript" src="assets/js/global.js"></script>
     <!-- SCROLL -->
     <script type="text/javascript" src="assets/js/scroll.js"></script>
-    <!-- HOME -->
-    <script type="text/javascript" src="assets/js/home.js"></script>
     <!-- READ I/O -->
     <script type="text/javascript" src="assets/js/I0Read_Pure.js"></script>
     <!-- SELECTION -->
@@ -504,6 +491,10 @@
       type="text/javascript"
       src="assets/js/machine.js"
     ></script>
+    <!-- positions_obj -->
+    <script type="text/javascript" src="assets/js/Comms/positions_obj.js"></script>
+    <!-- header -->
+    <script type="text/javascript" src="assets/js/header.js"></script>
     <!-- WMS -->
     <script type="text/javascript" src="assets/js/wms.js"></script>
     <!-- SETTINGS -->
@@ -514,5 +505,17 @@
     <script type="text/javascript" src="assets/js/sidebar.js"></script>
     <!--Positions-->
     <script type="text/javascript" src="assets/js/positions.js"></script>
+    <!-- alarms_obj -->
+    <script type="text/javascript" src="assets/js/Comms/alarms_obj.js"></script>
+    <!-- HMI_PLC -->
+    <script type="text/javascript" src="assets/js/Comms/HMI_PLC.js"></script>
+    <!-- ShuttleToWMS -->
+    <script type="text/javascript" src="assets/js/Comms/ShuttleToWMS.js"></script>
+    <!-- WMSToShuttle -->
+    <script type="text/javascript" src="assets/js/Comms/WMSToShuttle.js"></script>
+     <!-- HOME -->
+     <script type="text/javascript" src="assets/js/home.js"></script>
+
+
   </body>
 </html>
