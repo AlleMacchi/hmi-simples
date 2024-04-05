@@ -71,7 +71,6 @@ btnLogical.addEventListener("click", function () {
   HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical = true;
   dimensionLabel.textContent = "0 mm";
   physicalPositionInput.value = 0;
-  
 });
 
 btnPhysical.addEventListener("click", function () {
@@ -203,3 +202,50 @@ function createPositionString(row, column) {
   // Construct the final string
   return `A-L01${row}${column}`; // Using template literal
 }
+
+// Assuming you have an array of steps like this
+const steps = [
+  "Step",
+  "Init",
+  "Lift up",
+  "Lift Down",
+  "Go To Position",
+  "Go To First Position",
+  "Go To Mother",
+];
+
+// Reuse your createDropdown function
+const stepDropdown = createDropdown("stepSelect", steps);
+document.getElementById("stepSelect").appendChild(stepDropdown);
+
+// Adding an event listener to the button (assuming the button has an id 'stepChangeButton')
+document
+  .getElementById("stepChangeButton")
+  .addEventListener("click", function () {
+    const selectedStep = stepDropdown.value;
+    console.log(
+      `Changing to step: ${selectedStep} with change value: ${changeValue}`
+    );
+    // Implement the logic for changing the step here
+  });
+
+// Select the specific buttons using their IDs
+const dropdownButtons = [
+  document.getElementById("stepChangeButton"),
+  document.getElementById("ChangeBatteryButton"),
+];
+
+// Adding "mousedown", "mouseup", and "mouseleave" events to simulate button press and release
+dropdownButtons.forEach((button) => {
+  button.addEventListener("mousedown", function () {
+    button.classList.add("clicked"); // Add the 'clicked' class on mousedown
+  });
+
+  button.addEventListener("mouseup", function () {
+    setTimeout(() => button.classList.remove("clicked"), 150); // Remove the 'clicked' class shortly after mouseup
+  });
+
+  button.addEventListener("mouseleave", function () {
+    setTimeout(() => button.classList.remove("clicked"), 150); // Also remove the 'clicked' class when the mouse leaves the button
+  });
+});

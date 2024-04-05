@@ -5,7 +5,7 @@
   justify-content: flex-start;
   width: 90%;
   gap: 20px;
-  height: 100vh;
+  height: 70vh;
 }
 
 .table-scroll {
@@ -100,4 +100,81 @@
   /* border-bottom: 1px solid var(--light-blue); */
   box-shadow: 4px 4px 5px -5px var(--light-blue);
   border-radius: 10px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  width: 100%;
+  padding: 1%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background: var(--dark-grey);
+  box-shadow: var(--box-shadow);
+}
+
+.input-container label {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  width: 10%; /* Adjust as necessary */
+}
+
+.input-container input {
+  width: 30%; /* Adjust as necessary */
+  padding: 1%;
+  border-radius: 10px;
+  border: 2px solid var(--black);
+  font-size: 16px;
+  
+}
+
+.input-container input:focus {
+  outline: none;
+  box-shadow: 0 0 10px var(--light-blue);
+  border-color: var(--light-blue);
+}
+
+.input-container hr {
+  width: 3px; /* Width of the vertical line */
+  height: 100%; /* Height of the vertical line */
+  background-color: var(--light-blue); /* Color of the vertical line */
+  text-shadow: var(--text-shadow-blue); /* Text shadow for the vertical line */
+  border: none; /* Remove the default border */
+}
+
+.input-container button {
+  cursor: pointer;
+  padding: 1% 2%;
+  color: var(--black);
+  font-weight: 600;
+  border-radius: 10px;
+  background: var(--gradient-bg-btn);
+  box-shadow: var(--box-shadow);
+  border: 2px solid var(--black);
+  font-size: 18px;
+  text-align: center;
+}
+
+.input-container button:hover {
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
+}
+
+.input-container button.clicked {
+  transform: scale(0.95);
+  opacity: 0.8;
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
+  box-shadow: var(--box-shadow-selected);
+}
+
+.input-container button:focus {
+  outline: none;
+  box-shadow: var(--box-shadow-selected);
+  text-shadow: var(--text-shadow-blue);
+  color: var(--light-blue);
 }

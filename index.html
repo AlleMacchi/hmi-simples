@@ -6,7 +6,6 @@
     <title>HMI Simple</title>
     <!-- MY CSS  -->
     <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="assets/css/home.css" />
   </head>
   <body>
     <div id="warning">
@@ -240,6 +239,13 @@
                 </div>
               </div>
             </div>
+            <div class="dropdown-container">
+              <label>Actual Step: 0</label>
+              <div id="stepSelect"></div>
+              <button id="stepChangeButton">Change</button>
+              <hr>
+              <button id="ChangeBatteryButton">Change Battery</button>
+            </div>
         </section>
 
         <section id="section2" class="page">
@@ -337,6 +343,12 @@
               </tbody>
             </table>
           </div>
+          <div class="input-container">
+            <label>Value: 0mm</label>
+            <input id="value-input">
+            <button id="teachInButton">Teach In</button>
+            <hr>
+            <button id="SetButton">Set</button>
           </div>
         </section>
         <!-- SECTION 4 WMS -->
