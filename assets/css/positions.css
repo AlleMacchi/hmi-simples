@@ -14,6 +14,40 @@
   width: 100%;
   border-radius: 10px;
   box-shadow: var(--box-shadow);
+  scrollbar-width: thin;
+  scrollbar-color: var(--light-blue) var(--grey);
+}
+
+.table-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.table-scroll::-webkit-scrollbar-track {
+  background: var(--grey);
+  border-radius: 10px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+  background: var(--light-blue);
+  border-radius: 10px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb:hover {
+  background: #66e0ff;
+}
+
+#positionsTable {
+  background-color: var(--black);
+  width: 100%;
+  color: white;
+  border-collapse: collapse;
+}
+.table-scroll {
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 70vh; /* Adjust based on your needs */
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
 }
 
 .table-scroll::-webkit-scrollbar {
@@ -120,7 +154,7 @@
   color: white;
   font-size: 18px;
   font-weight: 600;
-  width: 10%; /* Adjust as necessary */
+  width: 20%; /* Adjust as necessary */
 }
 
 .input-container input {
@@ -129,13 +163,13 @@
   border-radius: 10px;
   border: 2px solid var(--black);
   font-size: 16px;
-  
 }
 
 .input-container input:focus {
   outline: none;
   box-shadow: 0 0 10px var(--light-blue);
   border-color: var(--light-blue);
+  background-color: white;
 }
 
 .input-container hr {
@@ -148,7 +182,7 @@
 
 .input-container button {
   cursor: pointer;
-  padding: 1% 2%;
+  padding: 1% 3%;
   color: var(--black);
   font-weight: 600;
   border-radius: 10px;
@@ -157,6 +191,7 @@
   border: 2px solid var(--black);
   font-size: 18px;
   text-align: center;
+  width: 20%;
 }
 
 .input-container button:hover {
@@ -178,3 +213,18 @@
   text-shadow: var(--text-shadow-blue);
   color: var(--light-blue);
 }
+
+.selected {
+  /* background: var(--light-blue); */
+  /* color: var(--black); */
+  box-shadow: 0 0 20px 5px var(--light-blue);
+  /* text-shadow: var(--text-shadow-blue); */
+}
+
+#outMessage {
+  width: 50%;
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+}
+

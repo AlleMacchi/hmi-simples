@@ -4,13 +4,13 @@ const HMI_PLC = {
     Status: {
       Machine: "EXECUTIVE", //  string
       Mode: "AUTO", //  string
-      Step: 0, //  integer
+      Step: 4, //  integer
       Carrier: {
         inPosition: false, //  boolean
         isMoving: false, //  boolean
         isFault: false, //  boolean
         actSpeed: 0.0, //  float
-        actPosition_mm: 0.0, //  float
+        actPosition_mm: 100.0, //  float
         actPosition_logical: "", //  string
       },
       Lifter: {

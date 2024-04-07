@@ -45,8 +45,8 @@
       
       <div class="commands">
         <div>
-          <button type="button">UP/FWD/ON</button>
-          <button type="button">DWN/BWD/OFF</button>
+          <button id="btnUpFwdOn" type="button">UP/FWD/ON</button>
+          <button id="btnDownBwdOff" type="button">DWN/BWD/OFF</button>
         </div>
       </div>
     </div>
@@ -240,11 +240,11 @@
               </div>
             </div>
             <div class="dropdown-container">
-              <label>Actual Step: 0</label>
-              <div id="stepSelect"></div>
+              <label id="currentStepLabel">Current Step: <span id="currentStep">X</span></label>
+              <label id="stepLabel"></label>
               <button id="stepChangeButton">Change</button>
               <hr>
-              <button id="ChangeBatteryButton">Change Battery</button>
+              <button id="ChargeBatteryButton">Charge Battery</button>
             </div>
         </section>
 
@@ -274,7 +274,7 @@
               A
             </div>
             <section class="agv-group">
-              <div class="rectangle-parent">
+              <div class="rectangle-parent">  
                 <div class="frame-child"></div>
                 <div class="rectangle-group">
                   <div class="frame-item"></div>
@@ -317,7 +317,7 @@
           
           <div id="position-label" style="margin-top: 20px; font-size: 24px; ">
             <p style="font-weight: bold;"> Position: <span id="position-value" style=" color: var(--light-blue);
-              text-shadow: 2px 1px 10px rgba(195, 242, 245, 1);">0 mm</span></p>
+              text-shadow: 2px 1px 10px rgba(195, 242, 245, 1);">x mm</span></p>
         </div>  
            <!-- Position Label -->
         </section>
@@ -336,6 +336,7 @@
                 <tr>
                   <th id="positionTableth">Position</th>
                   <th>Description</th>
+                  <!-- <th>Physical Location</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -344,11 +345,12 @@
             </table>
           </div>
           <div class="input-container">
-            <label>Value: 0mm</label>
+            <label id="AGV-position">AGV Position: <br><span></span> mm</label>
             <input id="value-input">
             <button id="teachInButton">Teach In</button>
             <hr>
-            <button id="SetButton">Set</button>
+            <button id="SetButton" disabled>Set</button>
+            <p id="outMessage"></p>
           </div>
         </section>
         <!-- SECTION 4 WMS -->
@@ -375,12 +377,7 @@
               <p>Task Number: <span id="plc_wms_task_number">0</span></p>
               <p>Coordinate: <span id="plc_wms_coordinate">0</span></p>
               <p>Result: <span id="plc_wms_result">0</span></p>
-              <p>Error Code: <span id="plc_wms_error_code">0 </span>  <span class="info">i</span>
-                <!-- <p class="description">
-                this is an example of what the info box shoudl explain a
-                specific setting
-              </p> -->
-            </p>
+              <p>Error Code: <span id="plc_wms_error_code">0</span><span id="ErrorInfoIcon">i</span><h6 id="ErrorDescription"></h6> </p>
               <p>Task Status: <span id="plc_wms_task_status">0</span></p>
               <hr>
               <p>Current Mode: <span id="plc_wms_current_mode">0</span></p>
@@ -498,13 +495,16 @@
     <script type="text/javascript" src="assets/js/scroll.js"></script>
     <!-- READ I/O -->
     <script type="text/javascript" src="assets/js/I0Read_Pure.js"></script>
-    <!-- SELECTION -->
-    <script
-      type="text/javascript"
-      src="assets/js/machine.js"
-    ></script>
     <!-- positions_obj -->
     <script type="text/javascript" src="assets/js/Comms/positions_obj.js"></script>
+    <!-- HMI_PLC -->
+    <script type="text/javascript" src="assets/js/Comms/HMI_PLC.js"></script>
+    <!-- ShuttleToWMS -->
+    <script type="text/javascript" src="assets/js/Comms/ShuttleToWMS.js"></script>
+    <!-- WMSToShuttle -->
+    <script type="text/javascript" src="assets/js/Comms/WMSToShuttle.js"></script>
+     <!-- alarms_obj -->
+     <script type="text/javascript" src="assets/js/Comms/alarms_obj.js"></script>
     <!-- header -->
     <script type="text/javascript" src="assets/js/header.js"></script>
     <!-- WMS -->
@@ -517,14 +517,11 @@
     <script type="text/javascript" src="assets/js/sidebar.js"></script>
     <!--Positions-->
     <script type="text/javascript" src="assets/js/positions.js"></script>
-    <!-- alarms_obj -->
-    <script type="text/javascript" src="assets/js/Comms/alarms_obj.js"></script>
-    <!-- HMI_PLC -->
-    <script type="text/javascript" src="assets/js/Comms/HMI_PLC.js"></script>
-    <!-- ShuttleToWMS -->
-    <script type="text/javascript" src="assets/js/Comms/ShuttleToWMS.js"></script>
-    <!-- WMSToShuttle -->
-    <script type="text/javascript" src="assets/js/Comms/WMSToShuttle.js"></script>
+      <!-- SELECTION -->
+      <script
+      type="text/javascript"
+      src="assets/js/machine.js"
+    ></script>
      <!-- HOME -->
      <script type="text/javascript" src="assets/js/home.js"></script>
 

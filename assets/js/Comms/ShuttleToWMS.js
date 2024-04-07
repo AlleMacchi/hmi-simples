@@ -1,27 +1,27 @@
 const ShuttleToWMS = {
   Message: {
-    Id: 0, // Assuming initial value is 0, use actual initial values as needed
-    TaskNumber: 0, // Same assumption as above
-    Coordinate: "A-L01R019A03", // Example value
-    Result: 0,
-    ErrorCode: 0,
-    TaskStatus: 0,
+    Id: 0, // Assuming initial value is 0, use actual initial values as needed 300
+    TaskNumber: 2, // Same assumption as above 301
+    Coordinate: "A-L01R019A03", // Example value 302
+    Result: 0, // 303
+    ErrorCode: 0, // 304
+    TaskStatus: 0, //305
   },
   Status: {
-    CurrentMode: 0,
-    CurrentState: 0,
+    CurrentMode: 0, //306
+    CurrentState: 0, //307
     Carrier: {
-      Status: 0,
-      Position: "A-L01R019A03", // Example value
+      Status: 0, //308
+      Position: "A-L01R019A03", // Example value //309
     },
     Lifter: {
-      Status: 0,
-      Position: 0,
+      Status: 0, //310
+      Position: 0, //311
     },
   },
   Digital_Input: {
-    Module0: new Array(32).fill(false), // Assuming a 16-bit integer, representing each bit as true/false
-    Module1: new Array(32).fill(false), // Same as above
+    Module0: intToBits(280), // Assuming a 16-bit integer, representing each bit as true/false
+    Module1: intToBits(280), // Same as above
   },
   Analog_Input: {
     Module_0: {
@@ -30,8 +30,6 @@ const ShuttleToWMS = {
   },
 };
 
-// To use this object to check the status of a digital input, you would convert the integer to bits
-// Here's a function to convert an integer to an array of bits (booleans)
 function intToBits(int) {
   const bits = [];
   for (let i = 0; i < 32; i++) {
@@ -40,13 +38,15 @@ function intToBits(int) {
   return bits;
 }
 
+// To use this object to check the status of a digital input, you would convert the integer to bits
+// Here's a function to convert an integer to an array of bits (booleans)
+
 // Example usage: Assuming 'digitalInputValue' is the integer read from the PLC for Module0
-const digitalInputValue = 517; // This is a random example integer
-ShuttleToWMS.Digital_Input.Module0 = intToBits(digitalInputValue);
+// const digitalInputValue = 517; // This is a random example integer
+// ShuttleToWMS.Digital_Input.Module0 = intToBits(digitalInputValue);
+// console.log(ShuttleToWMS.Digital_Input.Module0);
 
 // Now the 'ShuttleToWMS.Digital_Input.Module0' array contains the bit status as true/false
-
-
 
 // Code to divide and see the individual bits of an integer:
 // =============================================================================

@@ -45,16 +45,16 @@ function scrollToSection(sectionId) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  const navToggle = document.getElementById("nav-toggle");
-  const navbar = document.getElementById("navbar");
+// document.addEventListener("DOMContentLoaded", function () {
+//   const navToggle = document.getElementById("nav-toggle");
+//   const navbar = document.getElementById("navbar");
 
-  const content = document.getElementById("container-section");
+//   const content = document.getElementById("container-section");
 
-  navToggle.addEventListener("click", function () {
-    navbar.classList.toggle("closed");
-    content.classList.toggle("full-width");
-  });
+//   navToggle.addEventListener("click", function () {
+//     navbar.classList.toggle("closed");
+//     content.classList.toggle("full-width");
+//   });
 
-  // Keep your existing navigation logic here
-});
+//   // Keep your existing navigation logic here
+// });

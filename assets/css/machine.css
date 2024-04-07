@@ -76,8 +76,6 @@
   color: var(--light-blue);
 }
 
-
-
 .a {
   width: 114px;
   position: relative;
@@ -286,7 +284,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 10%;
-  width: 90%;
+  width: 100%;
   margin-left: 145px;
 }
 
@@ -312,7 +310,7 @@
   border-radius: 10px;
   /* background-color: var(--black); */
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   /* padding: 0 18.1px 0 47px; */
@@ -355,6 +353,24 @@
   left: 0;
 } */
 
+#sensor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+#sensor .active {
+  background-color: #00ff00; /* Green background for active sensors */
+}
+
+#sensor .low-battery {
+  background-color: #ff0000; /* Red background for low battery */
+}
+
+
 @media screen and (max-width: 450px) {
   .rectangle-parent {
     flex-wrap: wrap;
@@ -367,4 +383,21 @@
     padding-left: var(--padding-xl);
     box-sizing: border-box;
   }
+}
+
+#sensor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+#sensor .active {
+  background-color: #00ff00; /* Green background for active sensors */
+}
+
+#sensor .low-battery {
+  background-color: #ff0000; /* Red background for low battery */
 }

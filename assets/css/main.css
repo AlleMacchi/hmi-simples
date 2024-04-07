@@ -85,6 +85,23 @@ body {
   display: none;
 }
 
+/* Assuming you already have the .active and .disabled styles from previous suggestions */
+
+/* Enabled state for inputs and buttons */
+input:enabled,
+select:enabled {
+  cursor: pointer;
+  opacity: 1; /* Fully visible for enabled elements */
+}
+
+/* Disabled state for inputs and buttons */
+input:disabled,
+button:disabled,
+select:disabled {
+  cursor: not-allowed;
+  opacity: 0.5; /* Faded appearance for disabled elements */
+}
+
 @media screen and (max-width: 665px) {
   #contents {
     display: none;

@@ -3,6 +3,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const positionsTable = document
     .getElementById("positionsTable")
     .getElementsByTagName("tbody")[0];
+  const valueInput = document.getElementById("value-input");
+  const setButton = document.getElementById("SetButton");
+  const teachInButton = document.getElementById("teachInButton");
+  const AGVposition = document
+    .getElementById("AGV-position")
+    .querySelector("span");
+  const outMessage = document.getElementById("outMessage");
+  let selectedRow = null;
 
   searchInput.addEventListener("keyup", function () {
     const searchTerm = searchInput.value.toLowerCase();
@@ -14,76 +22,80 @@ document.addEventListener("DOMContentLoaded", function () {
       row.style.display = match ? "" : "none";
     });
   });
-});
 
-function fillPositionsTable(positionsData) {
-  // Get the tbody element where the positions will be inserted
-  const tbody = document.querySelector("#positionsTable tbody");
+  function fillPositionsTable(positionsData) {
+    const tbody = document.querySelector("#positionsTable tbody");
+    tbody.innerHTML = "";
 
-  // Clear any existing rows in the tbody
-  tbody.innerHTML = "";
+    positionsData.rows.forEach((row, rowIndex) => {
+      if (rowIndex === 0) return; // Skip the header
 
-  // Loop through each row and column to create the table cells
-  positionsData.rows.forEach((row, rowIndex) => {
-    if (rowIndex === 0) return; // Skip the placeholder "Row"
+      positionsData.columns.forEach((col, colIndex) => {
+        if (colIndex === 0) return; // Skip the header
 
-    positionsData.columns.forEach((col, colIndex) => {
-      if (colIndex === 0) return; // Skip the placeholder "Column"
+        const positionString = `A-L01${row}${col}`;
+        const cellString = `A-L01.Positions[${rowIndex},${colIndex},0]`;
 
-      // Create the string A-L01R...A...
-      const positionString = `A-L01${row}A${col
-        .substring(1)
-        .padStart(2, "0")}`;
-      const cellString = `A-L01.Positions[${colIndex},${rowIndex},0]`;
+        const tr = document.createElement("tr");
+        const tdPosition = document.createElement("td");
+        const tdDescription = document.createElement("td");
 
-      // Create the table row and cells
-      const tr = document.createElement("tr");
-      const tdPosition = document.createElement("td");
-      tdPosition.textContent = cellString;
+        tdPosition.textContent = cellString;
+        tdDescription.textContent = positionString;
 
-      const tdDescription = document.createElement("td");
-      tdDescription.textContent = positionString;
+        tr.appendChild(tdPosition);
+        tr.appendChild(tdDescription);
 
-      // Append the cells to the row
-      tr.appendChild(tdPosition);
-      tr.appendChild(tdDescription);
+        // Add click event to the row for selection
+        tr.addEventListener("click", function () {
+          // Remove the selected class from the previously selected row
+          if (selectedRow) {
+            selectedRow.classList.remove("selected");
+          }
+          selectedRow = tr;
+          tr.classList.add("selected");
+          // Focus on the input field for immediate editing
+          valueInput.focus();
+          setButton.disabled = false;
+        });
 
-      // Append the row to the table body
-      tbody.appendChild(tr);
+        tbody.appendChild(tr);
+      });
     });
+  }
+
+  // Call the function to fill the table
+  fillPositionsTable(positionsData);
+
+  AGVposition.textContent = `${HMI_PLC.ToHMI.Status.Carrier.actPosition_mm}`;
+
+  teachInButton.addEventListener("click", () => {
+    // Copy actPosition_mm to the input
+    const actPosition = HMI_PLC.ToHMI.Status.Carrier.actPosition_mm;
+    valueInput.value = actPosition;
   });
-}
 
-// Call the function to fill the table
-fillPositionsTable(positionsData);
+  setButton.addEventListener("click", () => {
+    // Update HMI_PLC object with new value from input
+    if (selectedRow === null) {
+      console.log("No position selected");
+      outMessage.textContent = "Please select a position before setting.";
+      outMessage.style.color = "red"; // Optional: Change color for error message
+      return;
+    }
+    if (valueInput.value === "") {
+      console.log("No value entered");
+      outMessage.textContent = "Please enter a value before setting.";
+      outMessage.style.color = "red"; // Optional: Change color for error message
+      return;
+    }
 
-// =============================================================================
+    const newValue = parseFloat(valueInput.value);
+    selectedRow.value = newValue;
+    outMessage.style.color = "white";
+    outMessage.textContent = "Position updated successfully.";
 
-// Position Mother Shuttle
-// 100		"A-L01".Positions[1,9,0]	Float	(il numero centrale rimane sempre 9)
-// 101		"A-L01".Positions[1,9,1]	Float	Il numero a sinistra da 1 a 38 e si alterna 0 e 1 con quello di destra,
-// 102		"A-L01".Positions[2,9,0]	Float	pertanto 1,9,0 e 1,9,1
-// 103		"A-L01".Positions[2,9,1]	Float	I prossimi sarrano 2,9,0 e 2,9,1
-// 		…		e cosí via
-// 		"A-L01".Positions[38,9,0]	Float
-// 		"A-L01".Positions[38,9,1]	Float
-
-// Position Baby Shuttle
-// 100		"A-L01".Positions[1,1,0]	Float	array multidimensionale di 38 per 38 con il numero a destra sempre a 0
-// 101		"A-L01".Positions[1,2,0]	Float
-// 102		"A-L01".Positions[1,3,0]	Float
-// 103		"A-L01".Positions[1,4,0]	Float
-// 		…
-// 		"A-L01".Positions[1,38,0]	Float
-
-// 		"A-L01".Positions[2,1,0]	Float
-// 		"A-L01".Positions[2,2,0]	Float
-// 		"A-L01".Positions[2,3,0]	Float
-// 		"A-L01".Positions[2,4,0]	Float
-// 		…
-// 		"A-L01".Positions[2,38,0]	Float
-
-// 		Fino alla
-// 		"A-L01".Positions[38,38,0]
-
-// =============================================================================
+    // Log the updated HMI_PLC object (or handle as necessary)
+    // console.log(selectedRow.value, newValue);
+  });
+});
