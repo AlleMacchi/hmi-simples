@@ -123,38 +123,38 @@ const alarmsAndWarnings = [
   },
 ];
 
-document.addEventListener("DOMContentLoaded", function () {
-  setInterval(function () {
-    fetch("IORead.html")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        // Assuming data.Alarm_000 is the correct path
-        Alarms.Controller[0].bit0 = data.Alarm_000;
-        console.log("Updated: " + Alarms.Controller[0].bit0);
-      })
-      .catch((error) => {
-        console.log(
-          "There has been a problem with your fetch operation:",
-          error
-        );
-        console.log(response);
-        console.log(data);
-      });
-  }, 1500);
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//   setInterval(function () {
+//     fetch("IORead.html")
+//       .then((response) => {
+//         if (!response.ok) {
+//           throw new Error("Network response was not ok");
+//         }
+//         return response.json();
+//       })
+//       .then((data) => {
+//         // Assuming data.Alarm_000 is the correct path
+//         Alarms.Controller[0].bit0 = data.Alarm_000;
+//         console.log("Updated: " + Alarms.Controller[0].bit0);
+//       })
+//       .catch((error) => {
+//         console.log(
+//           "There has been a problem with your fetch operation:",
+//           error
+//         );
+//         console.log(response);
+//         console.log(data);
+//       });
+//   }, 1500);
+// });
 
-document.addEventListener("DOMContentLoaded", function () {
-  setInterval(function () {
-    fetch("IORead.html")
-      .then((response) => response.json())
-      .then((data) => {
-        gCarrierManSpeed = data.CarrierManSpeed;
-        console.log("Read: " + gCarrierManSpeed);
-      });
-  }, 1500);
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//   setInterval(function () {
+//     fetch("IORead.html")
+//       .then((response) => response.json())
+//       .then((data) => {
+//         gCarrierManSpeed = data.CarrierManSpeed;
+//         console.log("Read: " + gCarrierManSpeed);
+//       });
+//   }, 1500);
+// });

@@ -63,27 +63,13 @@ logicalControls.appendChild(positionSelect);
 positionSelect.setAttribute("disabled", "true");
 
 btnLogical.addEventListener("click", function () {
-  enableSection(logicalControls);
-  disableSection(physicalControls);
-  btnLogical.classList.add("active");
-  btnPhysical.classList.remove("active");
-  btn_go.classList.remove("active");
-  HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical = true;
-  dimensionLabel.textContent = "0 mm";
-  physicalPositionInput.value = 0;
+  HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical = false;
+  checkControls();
 });
 
 btnPhysical.addEventListener("click", function () {
-  disableSection(logicalControls);
-  enableSection(physicalControls);
-  btnPhysical.classList.add("active");
-  btnLogical.classList.remove("active");
-  btn_go.classList.remove("active");
   HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical = true;
-  // Correct way to reset selects to their first option
-  rowSelect.value = rowSelect.options[0].value;
-  positionSelect.value = positionSelect.options[0].value;
-  document.getElementById("labelState span").innerHTML = "Physical";
+  checkControls();
 });
 
 confirmPositionBtn.addEventListener("click", function () {
@@ -204,48 +190,89 @@ function createPositionString(row, column) {
 }
 
 // Assuming you have an array of steps like this
-const steps = [
-  "Step",
-  "Init",
-  "Lift up",
-  "Lift Down",
-  "Go To Position",
-  "Go To First Position",
-  "Go To Mother",
-];
+const taskToStepsMapping = {
+  1: [
+    "0: Init",
+    "1: Lift Down",
+    "2: Go to Position",
+    "3: Lift Up",
+    "4: Go to First Position",
+    "5: Go to Mother",
+  ],
+  2: [
+    "0: Init",
+    "1: Lift Up",
+    "2: Go to Position",
+    "3: Lift Down",
+    "4: Go to First Position",
+    "5: Go to mother",
+  ],
+  3: ["0: Init", "1: Go to Position"],
+  // ... Add more mappings for other task numbers as per the image
+};
 
-// Reuse your createDropdown function
-const stepDropdown = createDropdown("stepSelect", steps);
-document.getElementById("stepSelect").appendChild(stepDropdown);
+function updateStepDropdown(taskNumber) {
+  const steps = taskToStepsMapping[taskNumber] || [
+    "Step",
+  ];
+  const stepDropdown = createDropdown("stepSelect", steps);
+  // console.log(steps);
+  // console.log(stepDropdown.options);
+  document.getElementById("stepLabel").appendChild(stepDropdown);
+
+  // Clear existing options
+}
 
 // Adding an event listener to the button (assuming the button has an id 'stepChangeButton')
 document
   .getElementById("stepChangeButton")
   .addEventListener("click", function () {
-    const selectedStep = stepDropdown.value;
-    console.log(
-      `Changing to step: ${selectedStep} with change value: ${changeValue}`
-    );
-    // Implement the logic for changing the step here
+    HMI_PLC.FromHMI.Setting.Machine.newStep =
+      document.getElementById("stepSelect").value[0];
+      // console.log(HMI_PLC.FromHMI.Setting.Machine.newStep);
+    HMI_PLC.FromHMI.Command.updateStep = true; // ? and then?
   });
 
-// Select the specific buttons using their IDs
-const dropdownButtons = [
-  document.getElementById("stepChangeButton"),
-  document.getElementById("ChangeBatteryButton"),
-];
+const stepControlsContainer =
+  document.getElementsByClassName("dropdown-container")[0];
+const currentStep = document.getElementById("currentStep");
 
-// Adding "mousedown", "mouseup", and "mouseleave" events to simulate button press and release
-dropdownButtons.forEach((button) => {
-  button.addEventListener("mousedown", function () {
-    button.classList.add("clicked"); // Add the 'clicked' class on mousedown
-  });
+function checkStepsControls() {
+  currentStep.textContent =
+    taskToStepsMapping[ShuttleToWMS.Message.TaskNumber][
+      HMI_PLC.ToHMI.Status.Step
+    ];
 
-  button.addEventListener("mouseup", function () {
-    setTimeout(() => button.classList.remove("clicked"), 150); // Remove the 'clicked' class shortly after mouseup
-  });
+  if (HMI_PLC.ToHMI.Status.Mode == "AUTO") {
+    stepControlsContainer.classList.add("ControlsDisabled");
+  } else {
+    updateStepDropdown(ShuttleToWMS.Message.TaskNumber);
+    stepControlsContainer.classList.remove("ControlsDisabled");
+  }
+}
 
-  button.addEventListener("mouseleave", function () {
-    setTimeout(() => button.classList.remove("clicked"), 150); // Also remove the 'clicked' class when the mouse leaves the button
-  });
-});
+function checkControls() {
+  if (!HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical) {
+    enableSection(logicalControls);
+    disableSection(physicalControls);
+    btnLogical.classList.add("active");
+    btnPhysical.classList.remove("active");
+    btn_go.classList.remove("active");
+    dimensionLabel.textContent = "0 mm";
+    physicalPositionInput.value = 0;
+    // console.log(HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical);
+  } else {
+    disableSection(logicalControls);
+    enableSection(physicalControls);
+    btnPhysical.classList.add("active");
+    btnLogical.classList.remove("active");
+    btn_go.classList.remove("active");
+    // console.log(HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical);
+    // Correct way to reset selects to their first option
+    rowSelect.value = rowSelect.options[0].value;
+    positionSelect.value = positionSelect.options[0].value;
+  }
+}
+
+checkControls();
+checkStepsControls();
