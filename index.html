@@ -55,7 +55,7 @@
         <section id="section1" class="page">
           <div class="home">
             <h1>Home</h1>
-            <div id="row-title">row 1</div>
+            <div id="row-title">X</div>
 
             <div id="row-container-squares">
               <!-- The 38 position squares -->
@@ -357,33 +357,33 @@
           <div class="WMS-container">
             <div id="WMS-to-PLC">
               <h2>WMS-to-PLC</h2>
-              <p>Id: <span id="wms_plc_id">0</span></p>
-              <p>Task number: <span id="wms_plc_task_number">0</span></p>
-              <p>Coordinate: <span id="wms_plc_coordinate">0</span></p>
-              <p>Echo Status: <span id="wms_plc_echo_status">0</span></p>
-              <p>Execute: <span id="wms_plc_execute">0</span></p>
+              <p>Id: <span id="wms_plc_id">-</span></p>
+              <p>Task number: <span id="wms_plc_task_number">-</span></p>
+              <p>Coordinate: <span id="wms_plc_coordinate">-</span></p>
+              <p>Echo Status: <span id="wms_plc_echo_status">-</span></p>
+              <p>Execute: <span id="wms_plc_execute">-</span></p>
               <hr>
-              <p>Selection Man/Auto: <span id="wms_plc_selection">0</span></p>
-              <p>Start: <span id="wms_plc_start">0</span></p>
-              <p>Stop: <span id="wms_plc_stop">0</span></p>
-              <p>Reset: <span id="wms_plc_reset">0</span></p>
+              <p>Selection Man/Auto: <span id="wms_plc_selection">-</span></p>
+              <p>Start: <span id="wms_plc_start">-</span></p>
+              <p>Stop: <span id="wms_plc_stop">-</span></p>
+              <p>Reset: <span id="wms_plc_reset">-</span></p>
             </div>
             <hr id="hr-v">
             <div id="PLC-to-WMS">
               <h2>PLC-to-WMS</h2>
-              <p>Id: <span id="plc_wms_id">0</span></p>
-              <p>Task Number: <span id="plc_wms_task_number">0</span></p>
-              <p>Coordinate: <span id="plc_wms_coordinate">0</span></p>
-              <p>Result: <span id="plc_wms_result">0</span></p>
-              <p>Error Code: <span id="plc_wms_error_code">0</span><span id="ErrorInfoIcon">i</span><h6 id="ErrorDescription"></h6> </p>
-              <p>Task Status: <span id="plc_wms_task_status">0</span></p>
+              <p>Id: <span id="plc_wms_id">-</span></p>
+              <p>Task Number: <span id="plc_wms_task_number">-</span></p>
+              <p>Coordinate: <span id="plc_wms_coordinate">-</span></p>
+              <p>Result: <span id="plc_wms_result">-</span></p>
+              <p>Error Code: <span id="plc_wms_error_code">-</span><span id="ErrorInfoIcon">i</span><h6 id="ErrorDescription"></h6> </p>
+              <p>Task Status: <span id="plc_wms_task_status">-</span></p>
               <hr>
-              <p>Current Mode: <span id="plc_wms_current_mode">0</span></p>
-              <p>Current State: <span id="plc_wms_current_state">0</span></p>
-              <p>Carrier Status: <span id="plc_wms_carrier_status">0</span></p>
-              <p>Carrier Position: <span id="plc_wms_carrier_position">0</span></p>
-              <p>Lifter Status: <span id="plc_wms_lifter_status">0</span></p>
-              <p>Lifter Position: <span id="plc_wms_lifter_position">0</span></p>
+              <p>Current Mode: <span id="plc_wms_current_mode">-</span></p>
+              <p>Current State: <span id="plc_wms_current_state">-</span></p>
+              <p>Carrier Status: <span id="plc_wms_carrier_status">-</span></p>
+              <p>Carrier Position: <span id="plc_wms_carrier_position">-</span></p>
+              <p>Lifter Status: <span id="plc_wms_lifter_status">-</span></p>
+              <p>Lifter Position: <span id="plc_wms_lifter_position">-</span></p>
             </div>
             
             </div>
@@ -489,6 +489,8 @@
 
     <!-- GLOBAL VARIABLE -->
     <script type="text/javascript" src="assets/js/global.js"></script>
+    <!-- Test Object-->
+    <script type="text/javascript" src="assets/js/Comms/gData_test_object.js"></script>
     <!-- SCROLL -->
     <script type="text/javascript" src="assets/js/scroll.js"></script>
     <!-- Writing.js -->
@@ -498,17 +500,16 @@
     <!-- positions_obj -->
     <script type="text/javascript" src="assets/js/Comms/positions_obj.js"></script>
     <!-- HMI_PLC -->
-    <script type="text/javascript" src="assets/js/Comms/HMI_PLC.js"></script>
+    <!-- <script type="text/javascript" src="assets/js/Comms/HMI_PLC_test_object.js.js"></script> -->
     <!-- ShuttleToWMS -->
-    <script type="text/javascript" src="assets/js/Comms/ShuttleToWMS.js"></script>
+    <!-- <script type="text/javascript" src="assets/js/Comms/ShuttleToWMS_test_object.js.js"></script> -->
     <!-- WMSToShuttle -->
-    <script type="text/javascript" src="assets/js/Comms/WMSToShuttle.js"></script>
+    <!-- <script type="text/javascript" src="assets/js/Comms/WMSToShuttle_test_object.js.js"></script> -->
      <!-- alarms_obj -->
      <script type="text/javascript" src="assets/js/Comms/alarms_obj.js"></script>
     <!-- header -->
     <script type="text/javascript" src="assets/js/header.js"></script>
-    <!-- WMS -->
-    <script type="text/javascript" src="assets/js/wms.js"></script>
+   
     <!-- SETTINGS -->
     <!-- <script type="text/javascript" src="assets/js/settings.js"></script> -->
     <!-- ALARMS -->
@@ -520,9 +521,13 @@
       type="text/javascript"
       src="assets/js/machine.js"
     ></script>
+     <!-- WMS -->
+     <script type="text/javascript" src="assets/js/wms.js"></script>
      <!-- HOME -->
      <script type="text/javascript" src="assets/js/home.js"></script>
      <!-- MODE -->
     <script type="text/javascript" src="assets/js/sidebar.js"></script>
+    <!-- Update -->
+    <script type="text/javascript" src="assets/js/Comms/Update.Js"></script>
   </body>
 </html>

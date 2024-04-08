@@ -1,13 +1,13 @@
 // Function to update the row title based on PLC data
 
-const updaterowTitle = (rowNumber) => {
+const updaterowTitle = () => {
   const rowTitle = document.getElementById("row-title");
-  rowTitle.textContent = `${ShuttleToWMS.Status.Carrier.Position}`;
+  rowTitle.textContent = decodeHTMLEntity(gData.ShuttleToWMS_Carrier_Position);
 };
 
 // Function to update the position of the AGV and highlight the corresponding Number
 const updateAGVPosition = (newPosition) => {
-  var positionString = ShuttleToWMS.Status.Carrier.Position;
+  var positionString = decodeHTMLEntity(newPosition);
   // Extracting the column number from the position string using a regular expression.
   // This will match the 'R' followed by any digit(s) and capture the digits only.
   var match = positionString.match(/A(\d+)/);
@@ -34,12 +34,6 @@ const updateAGVPosition = (newPosition) => {
   }
 };
 
-// Update function call
-setInterval(() => {
-  updateAGVPosition(ShuttleToWMS.Status.Carrier.Position);
-  updaterowTitle(ShuttleToWMS.Status.Carrier.Position);
-}, 1000); // Update rate
-
 const btnLogical = document.getElementById("btn_logical");
 const btnPhysical = document.getElementById("btn_physical");
 const logicalControls = document.getElementById("logical-controls");
@@ -63,13 +57,37 @@ logicalControls.appendChild(positionSelect);
 positionSelect.setAttribute("disabled", "true");
 
 btnLogical.addEventListener("click", function () {
-  HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical = false;
-  checkControls();
+  // HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical = true;
+  sendDataToUrl(
+    "IOWrite.html",
+    `"HMI_PLC".FromHMI.Selection.Carrier.mm_or_logical`,
+    true
+  );
+  enableSection(logicalControls);
+  disableSection(physicalControls);
+  btnLogical.classList.add("active");
+  btnPhysical.classList.remove("active");
+  btn_go.classList.remove("active");
+  dimensionLabel.textContent = "0 mm";
+  physicalPositionInput.value = 0;
+  // console.log(HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical);
 });
 
 btnPhysical.addEventListener("click", function () {
-  HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical = true;
-  checkControls();
+  sendDataToUrl(
+    "IOWrite.html",
+    `"HMI_PLC".FromHMI.Selection.Carrier.mm_or_logical`,
+    false
+  );
+  disableSection(logicalControls);
+  enableSection(physicalControls);
+  btnPhysical.classList.add("active");
+  btnLogical.classList.remove("active");
+  btn_go.classList.remove("active");
+  // console.log(HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical);
+  // Correct way to reset selects to their first option
+  rowSelect.value = rowSelect.options[0].value;
+  positionSelect.value = positionSelect.options[0].value;
 });
 
 confirmPositionBtn.addEventListener("click", function () {
@@ -161,15 +179,27 @@ btn_go.addEventListener("mouseleave", () => {
 
 btn_go.addEventListener("click", () => {
   if (physicalPositionInput.value > 0) {
-    HMI_PLC.FromHMI.Setting.Carrier.PositionToReach_mm = parseFloat(
-      physicalPositionInput.value
+    // HMI_PLC.FromHMI.Setting.Carrier.PositionToReach_mm = parseFloat(
+    //   physicalPositionInput.value
+    // );
+
+    sendDataToUrl(
+      "IOWrite.html",
+      `"HMI_PLC".FromHMI.Setting.Carrier.PositionToReach_mm`,
+      parseFloat(physicalPositionInput.value)
     );
+
     // console.log(HMI_PLC.FromHMI.Setting.Carrier.PositionToReach_mm); // For testing
     GoMessage.style.display = "flex";
     btn_go.classList.remove("active");
   } else if (rowSelect.value !== "Row" && positionSelect.value !== "Column") {
-    HMI_PLC.FromHMI.Setting.Carrier.PositionToReach_logical =
-      createPositionString(rowSelect.value, positionSelect.value);
+    // HMI_PLC.FromHMI.Setting.Carrier.PositionToReach_logical =
+    //   createPositionString(rowSelect.value, positionSelect.value);
+    sendDataToUrl(
+      "IOWrite.html",
+      `"HMI_PLC".FromHMI.Setting.Carrier.PositionToReach_logical`,
+      createPositionString(rowSelect.value, positionSelect.value)
+    );
     GoMessage.style.display = "flex";
     btn_go.classList.remove("active");
   }
@@ -216,6 +246,12 @@ function updateStepDropdown(taskNumber) {
   const stepDropdown = createDropdown("stepSelect", steps);
   // console.log(steps);
   // console.log(stepDropdown.options);
+
+  // Check if the dropdown has any options
+  if (document.getElementById("stepLabel").childElementCount > 0) {
+    // If it has options, remove the dropdown from its parent
+    stepSelect.parentNode.removeChild(stepSelect);
+  }
   document.getElementById("stepLabel").appendChild(stepDropdown);
 
   // Clear existing options
@@ -225,10 +261,25 @@ function updateStepDropdown(taskNumber) {
 document
   .getElementById("stepChangeButton")
   .addEventListener("click", function () {
-    HMI_PLC.FromHMI.Setting.Machine.newStep =
-      document.getElementById("stepSelect").value[0];
-    // console.log(HMI_PLC.FromHMI.Setting.Machine.newStep);
-    HMI_PLC.FromHMI.Command.updateStep = true; // ? and then?
+    sendDataToUrl(
+      "IOWrite.html",
+      `"HMI_PLC".FromHMI.Setting.Machine.newStep`,
+      document.getElementById("stepSelect").value[0]
+    );
+    sendDataToUrl("IOWrite.html", `"HMI_PLC".FromHMI.Command.updateStep`, true);
+
+    setInterval(() => {
+      sendDataToUrl(
+        "IOWrite.html",
+        `"HMI_PLC".FromHMI.Command.updateStep`,
+        false
+      );
+    }, 1000);
+
+    // HMI_PLC.FromHMI.Setting.Machine.newStep =
+    //   document.getElementById("stepSelect").value[0];
+    // // console.log(HMI_PLC.FromHMI.Setting.Machine.newStep);
+    // HMI_PLC.FromHMI.Command.updateStep = true; // ? and then?
   });
 
 const stepControlsContainer =
@@ -236,44 +287,34 @@ const stepControlsContainer =
 const currentStep = document.getElementById("currentStep");
 
 function checkStepsControls() {
-  console.log("check");
   currentStep.textContent =
-    taskToStepsMapping[ShuttleToWMS.Message.TaskNumber][
-      HMI_PLC.ToHMI.Status.Step
-    ];
+    taskToStepsMapping[gData.WMStoShuttle_TaskNumber][gData.Step];
 
-  if (HMI_PLC.ToHMI.Status.Mode == "AUTO") {
+  if (gData.StatusMode == "AUTO") {
+    // if (decodeHTMLEntity(gData.StatusMode) == "AUTO") {
     stepControlsContainer.classList.add("ControlsDisabled");
-    console.log("Controls disabled");
+    document
+      .getElementsByClassName("position-controls")[0]
+      .classList.add("ControlsDisabled");
+    document
+      .getElementsByClassName("position-controls")[1]
+      .classList.add("ControlsDisabled");
+    document
+      .getElementsByClassName("position-controls")[2]
+      .classList.add("ControlsDisabled");
   } else {
-    updateStepDropdown(ShuttleToWMS.Message.TaskNumber);
+    updateStepDropdown(gData.WMStoShuttle_TaskNumber);
     stepControlsContainer.classList.remove("ControlsDisabled");
-    console.log("Controls enable");
+    document
+      .getElementsByClassName("position-controls")[0]
+      .classList.remove("ControlsDisabled");
+    document
+      .getElementsByClassName("position-controls")[1]
+      .classList.remove("ControlsDisabled");
+    document
+      .getElementsByClassName("position-controls")[2]
+      .classList.remove("ControlsDisabled");
   }
 }
 
-function checkControls() {
-  if (!HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical) {
-    enableSection(logicalControls);
-    disableSection(physicalControls);
-    btnLogical.classList.add("active");
-    btnPhysical.classList.remove("active");
-    btn_go.classList.remove("active");
-    dimensionLabel.textContent = "0 mm";
-    physicalPositionInput.value = 0;
-    // console.log(HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical);
-  } else {
-    disableSection(logicalControls);
-    enableSection(physicalControls);
-    btnPhysical.classList.add("active");
-    btnLogical.classList.remove("active");
-    btn_go.classList.remove("active");
-    // console.log(HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical);
-    // Correct way to reset selects to their first option
-    rowSelect.value = rowSelect.options[0].value;
-    positionSelect.value = positionSelect.options[0].value;
-  }
-}
-
-checkControls();
 checkStepsControls();

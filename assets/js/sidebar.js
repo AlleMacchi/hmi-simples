@@ -1,9 +1,9 @@
-let currentMode = gData.StatusMode; // Use let for variable reassignment
+let currentMode = gData.StatusMode;
 
 // Update mode display in the header
-function updateHeaderMode(mode) {
-  labelMode.textContent = mode;
-}
+// function updateHeaderMode(mode) {
+//   labelMode.textContent = mode;
+// }
 
 // Toggle sidebar and update mode
 const btnMode = document.getElementById("btn_Mode");
@@ -46,7 +46,6 @@ function toggleMode(selectedMode) {
   );
 
   currentMode = selectedMode;
-
   if (selectedMode === 0) {
     btnManual.classList.add("button-active");
     btnAuto.classList.remove("button-active");
@@ -66,8 +65,6 @@ function toggleMode(selectedMode) {
       }
     );
   }
-
-  checkControls();
   checkStepsControls();
 }
 
@@ -93,6 +90,7 @@ function handleCommand(command, isActive) {
     `"HMI_PLC".FromHMI.Command.${command}`,
     isActive
   );
+  command;
   // Additional command handling can go here
   console.log(`Command: ${command} is ${isActive ? "active" : "inactive"}`);
 }
@@ -104,19 +102,22 @@ document
   .forEach((button, index) => {
     const commands = ["Start", "Stop", "Reset"];
     button.addEventListener("click", function () {
-      handleCommand(`Command.${commands[index]}`, true);
-      // setTimeout(() => handleCommand(`Command.${commands[index]}`, false), 500); // Example delay to rollback
+      handleCommand(`${commands[index]}`, true);
+      // setTimeout(() => handleCommand(`${commands[index]}`, false), 500); // Example delay to rollback
     });
     // Adding "mousedown" event to simulate button press
     button.addEventListener("mousedown", function () {
       button.classList.add("clicked");
+      handleCommand(`${commands[index]}`, true);
     });
 
     button.addEventListener("mouseup", function () {
+      handleCommand(`${commands[index]}`, false);
       setTimeout(() => button.classList.remove("clicked"), 150);
     });
 
     button.addEventListener("mouseleave", function () {
+      handleCommand(`${commands[index]}`, false);
       setTimeout(() => button.classList.remove("clicked"), 150);
     });
   });
@@ -199,11 +200,6 @@ downBwdOffButton.addEventListener("touchend", () => {
   stopHold("DownBwdOff");
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Other initialization code
-  checkControls();
-});
-
 // ============================================================
 // COMMAND BUTTONS
 // ============================================================
@@ -223,3 +219,5 @@ document.addEventListener("DOMContentLoaded", function () {
 // }
 
 // ============================================================
+
+
