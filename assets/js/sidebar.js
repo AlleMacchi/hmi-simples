@@ -62,6 +62,11 @@ function toggleMode(selectedMode) {
       }
     );
   }
+
+  checkControls();
+  checkStepsControls();
+  // console.log(`Mode: ${currentMode}`);   Man auto si to write checks are on actual Mode so to consider delay or implement check SelManAuto
+  // console.log(HMI_PLC.FromHMI.Command.SelManAuto);
 }
 
 // Event listeners for mode buttons
@@ -172,9 +177,4 @@ downBwdOffButton.addEventListener("touchstart", (e) => {
 downBwdOffButton.addEventListener("touchend", () => {
   setTimeout(() => downBwdOffButton.classList.remove("clicked"), 150);
   stopHold("DownBwdOff");
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  // Other initialization code
-  checkControls();
 });
