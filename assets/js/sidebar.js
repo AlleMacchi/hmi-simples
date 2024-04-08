@@ -1,4 +1,4 @@
-let currentMode = HMI_PLC.ToHMI.Status.Mode; // Use let for variable reassignment
+let currentMode = gData.StatusMode; // Use let for variable reassignment
 
 // Update mode display in the header
 function updateHeaderMode(mode) {
@@ -38,10 +38,14 @@ const btnAuto = document.querySelector(".switch button:last-child");
 const commandsContainer = document.querySelector(".commands");
 
 function toggleMode(selectedMode) {
-  HMI_PLC.FromHMI.Command.SelManAuto = selectedMode; // Update the currentMode
+  // HMI_PLC.FromHMI.Command.SelManAuto = selectedMode; // Update the currentMode
+  sendDataToUrl(
+    "IOWrite.html",
+    `"HMI_PLC".FromHMI.Command.SelManAuto`,
+    selectedMode
+  );
 
-  currentMode = selectedMode === 0 ? "MANUAL" : "AUTO";
-  updateHeaderMode(currentMode); // Update the header mode display
+  currentMode = selectedMode;
 
   if (selectedMode === 0) {
     btnManual.classList.add("button-active");
@@ -62,6 +66,9 @@ function toggleMode(selectedMode) {
       }
     );
   }
+
+  checkControls();
+  checkStepsControls();
 }
 
 // Event listeners for mode buttons
@@ -81,7 +88,11 @@ const roundButtons = document.querySelectorAll("#roundCommands button");
 
 // Function to handle start/stop/reset commands
 function handleCommand(command, isActive) {
-  HMI_PLC.FromHMI.Command[command] = isActive;
+  sendDataToUrl(
+    "IOWrite.html",
+    `"HMI_PLC".FromHMI.Command.${command}`,
+    isActive
+  );
   // Additional command handling can go here
   console.log(`Command: ${command} is ${isActive ? "active" : "inactive"}`);
 }
@@ -122,7 +133,6 @@ function startHold(command) {
   holdInterval = setInterval(() => {
     var name = `"HMI_PLC".FromHMI.Command.${command}`;
     sendDataToUrl("IOWrite.html", name, 1);
-
   }, 100); // Repeat every 100ms as an example
 }
 
@@ -141,17 +151,29 @@ function preventDefaultTouch(e) {
 
 commandButtons.forEach((button) => {
   button.addEventListener("mousedown", function () {
-    startHold("UpFwdOn");
+    if (button.textContent == "upFwdOn") {
+      startHold("UpFwdOn");
+    } else if (button.textContent == "downBwdOff") {
+      startHold("DownBwdOff");
+    }
     button.classList.add("clicked");
   });
 
   button.addEventListener("mouseup", function () {
-    stopHold("UpFwdOn");
+    if (button.textContent == "upFwdOn") {
+      startHold("UpFwdOn");
+    } else if (button.textContent == "downBwdOff") {
+      startHold("DownBwdOff");
+    }
     setTimeout(() => button.classList.remove("clicked"), 150);
   });
 
   button.addEventListener("mouseleave", function () {
-    stopHold("UpFwdOn");
+    if (button.textContent == "upFwdOn") {
+      startHold("UpFwdOn");
+    } else if (button.textContent == "downBwdOff") {
+      startHold("DownBwdOff");
+    }
     setTimeout(() => button.classList.remove("clicked"), 150);
   });
 });
@@ -186,19 +208,18 @@ document.addEventListener("DOMContentLoaded", function () {
 // COMMAND BUTTONS
 // ============================================================
 
-function sendDataToUrl(url, name, val) {
-  var sdata = encodeURIComponent(name) + '=' + val;
-  
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", url, true);
-  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  xhr.onreadystatechange = function() {
-      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-          // Request finished, do something with the response if needed
-      }
-  };
-  xhr.send(sdata);
-}
+// function sendDataToUrl(url, name, val) {
+//   var sdata = encodeURIComponent(name) + '=' + val;
+
+//   var xhr = new XMLHttpRequest();
+//   xhr.open("POST", url, true);
+//   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+//   xhr.onreadystatechange = function() {
+//       if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+//           // Request finished, do something with the response if needed
+//       }
+//   };
+//   xhr.send(sdata);
+// }
 
 // ============================================================
-
