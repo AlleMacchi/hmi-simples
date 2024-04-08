@@ -212,9 +212,7 @@ const taskToStepsMapping = {
 };
 
 function updateStepDropdown(taskNumber) {
-  const steps = taskToStepsMapping[taskNumber] || [
-    "Step",
-  ];
+  const steps = taskToStepsMapping[taskNumber] || ["Step"];
   const stepDropdown = createDropdown("stepSelect", steps);
   // console.log(steps);
   // console.log(stepDropdown.options);
@@ -229,7 +227,7 @@ document
   .addEventListener("click", function () {
     HMI_PLC.FromHMI.Setting.Machine.newStep =
       document.getElementById("stepSelect").value[0];
-      // console.log(HMI_PLC.FromHMI.Setting.Machine.newStep);
+    // console.log(HMI_PLC.FromHMI.Setting.Machine.newStep);
     HMI_PLC.FromHMI.Command.updateStep = true; // ? and then?
   });
 
@@ -238,6 +236,7 @@ const stepControlsContainer =
 const currentStep = document.getElementById("currentStep");
 
 function checkStepsControls() {
+  console.log("check");
   currentStep.textContent =
     taskToStepsMapping[ShuttleToWMS.Message.TaskNumber][
       HMI_PLC.ToHMI.Status.Step
@@ -245,9 +244,11 @@ function checkStepsControls() {
 
   if (HMI_PLC.ToHMI.Status.Mode == "AUTO") {
     stepControlsContainer.classList.add("ControlsDisabled");
+    console.log("Controls disabled");
   } else {
     updateStepDropdown(ShuttleToWMS.Message.TaskNumber);
     stepControlsContainer.classList.remove("ControlsDisabled");
+    console.log("Controls enable");
   }
 }
 

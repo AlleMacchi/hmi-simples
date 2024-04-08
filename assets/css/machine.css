@@ -100,7 +100,7 @@
   display: none;
   max-width: 100%;
 }
-.frame-item {
+#sensor-404 {
   width: 30px;
   height: 30px;
   position: relative;
@@ -110,7 +110,7 @@
   box-shadow: 0 0 15px 3px var(--light-blue);
   z-index: 1;
 }
-.shape-set {
+#sensor-408 {
   height: 27px;
   width: 29px;
   border-radius: 50%;
@@ -118,14 +118,14 @@
   background-color: var(--light-blue);
   box-shadow: 0 0 15px 3px var(--light-blue);
 }
-.shape-set-wrapper {
+#sensor-408-wrapper {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-end;
   padding: 0 var(--padding-mini) 0 0;
 }
-.frame-inner {
+#sensor-405 {
   width: 30px;
   height: 30px;
   position: relative;
@@ -135,7 +135,7 @@
   box-shadow: 0 0 15px 3px var(--light-blue);
   z-index: 1;
 }
-.rectangle-group {
+.left-sensors-group {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -148,7 +148,7 @@
   position: relative;
   z-index: 1;
 }
-.polygon-wrapper {
+#sensor-423 {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -158,26 +158,25 @@
   border-bottom: 30px solid var(--color-darkgray-100);
 }
 
-.battery-label-child {
-  height: 55px;
-  width: 118px;
-  position: relative;
-  border-radius: var(--br-8xs);
-  background-color: var(--color-darkgray-200);
-  display: none;
-}
-.battery {
+#battery-text {
   font-size: 18px;
   font-weight: 600;
   text-align: center;
   z-index: 2;
+  color: black;
 }
-.battery-label,
-.frame-group {
+
+.central-sensors-group {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 40px;
 }
-.battery-label {
+
+#sensor-432 {
+  display: flex;
+  justify-content: center;
   cursor: pointer;
   border: 0;
   padding: var(--padding-sm) var(--padding-sm) 12px var(--padding-mini);
@@ -188,16 +187,8 @@
   align-items: flex-start;
   z-index: 1;
 }
-.battery-label:hover {
-  background-color: #707070;
-}
-.frame-group {
-  width: 118px;
-  flex-direction: column;
-  align-items: center;
-  gap: 46px;
-}
-.rectangle-div {
+
+#sensor-406 {
   width: 30px;
   height: 30px;
   position: relative;
@@ -205,7 +196,7 @@
   background-color: var(--color-darkgray-200);
   z-index: 1;
 }
-.ellipse-div {
+#sensor-409 {
   height: 27px;
   width: 29px;
   position: relative;
@@ -213,14 +204,15 @@
   background-color: var(--color-darkgray-100);
   z-index: 1;
 }
-.ellipse-wrapper {
+
+#sensor-409-wrapper {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
   padding: 0 0 0 var(--padding-mini);
 }
-.frame-child1 {
+#sensor-407 {
   width: 30px;
   height: 30px;
   position: relative;
@@ -228,14 +220,15 @@
   background-color: var(--color-darkgray-200);
   z-index: 1;
 }
-.rectangle-container {
+
+.right-sensors-group {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   gap: var(--gap-24xl);
 }
-.rectangle-parent {
+.agv-Baby {
   flex: 1;
   border-radius: 30px;
   box-shadow: 0 0 10px 5px var(--color-crimson);
@@ -245,10 +238,10 @@
   justify-content: space-between;
   padding: var(--padding-xl) 8px 18px 7px;
   box-sizing: border-box;
-  min-width: 206px;
-  width: 70%;
-  gap: 20px;
+  /* min-width: 206px; */
+  width: 100%;
 }
+
 .arrow-icon,
 .frame-child2 {
   width: 0.4px;
@@ -281,11 +274,12 @@
   align-self: stretch;
   display: flex;
   flex-direction: row;
+  justify-content: center; 
   align-items: center;
-  justify-content: space-between;
   gap: 10%;
-  width: 100%;
-  margin-left: 145px;
+  width: 70%;
+
+  /* margin-left: 145px; */
 }
 
 .b {
@@ -314,7 +308,7 @@
   justify-content: center;
   align-items: center;
   /* padding: 0 18.1px 0 47px; */
-  gap: 10%;
+  gap: 5%;
 }
 
 .arrows {
@@ -322,12 +316,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  height: 50%;
   width: 10%;
-  gap: 20%;
+  gap: 10%;
 }
 
-.arrow-up {
+#sensor-410 {
   box-shadow: 0 0 15px 3px var(--light-blue);
   clip-path: polygon(50% 50%, 0% 100%, 100% 100%);
   background-color: var(--light-blue);
@@ -335,7 +329,7 @@
   width: 100%;
 }
 
-.arrow-down {
+#sensor-411 {
   box-shadow: 0 0 15px 3px var(--light-blue);
   clip-path: polygon(50% 50%, 0 0, 100% 0);
   background-color: var(--color-darkgray-100);
@@ -370,9 +364,8 @@
   background-color: #ff0000; /* Red background for low battery */
 }
 
-
-@media screen and (max-width: 450px) {
-  .rectangle-parent {
+/* @media screen and (max-width: 450px) {
+  .agvBaby {
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -396,8 +389,8 @@
 
 #sensor .active {
   background-color: #00ff00; /* Green background for active sensors */
-}
+/* } */
 
-#sensor .low-battery {
+/* #sensor .low-battery {
   background-color: #ff0000; /* Red background for low battery */
-}
+/* } */
