@@ -1,31 +1,66 @@
-var gStatusMachine;
-var gMode;
-var gCarrierInPosition;
-var gCarrierInMotion;
-var gCarrierManSpeed;
-var gCarrierPositionToReach_N;
-var gCarrierPositionToReach_mm;
-var gCarrierActPosition_N;
-var gCarrierActPosition_mm;
-var gPosition_1_mm;
-var gPosition_2_mm;
-var gPosition_3_mm;
-var gPosition_4_mm;
-var gPosition_5_mm;
-var gPosition_6_mm;
-var gPosition_7_mm;
 
 
-var gAlarm_000;
-var gAlarm_001;
-var gAlarm_002;
-var gAlarm_003;
-var gAlarm_004;
-var gAlarm_005;
-var gAlarm_006;
-var gAlarm_100;
-var gAlarm_101;
-var gAlarm_102;
-var gAlarm_103;
-var gAlarm_104;
-var gAlarm_105;
+// DO NOT ELIMINATE THE FOLLOWING CODE, I NEED IT TO TEST THE CODE LOCALLY!
+
+function createGDataObject() {
+    return {
+      "StatusMachine": "EXECUTIVE",
+      "StatusMode": "AUTO",
+      "Step": undefined,
+      "CarrierInPosition": undefined,
+      "CarrierIsMoving": undefined,
+      "CarrierIsFault": undefined,
+      "CarrierActualSpeed": undefined,
+      "CarrierActualPosition_mm": undefined,
+      "CarrierActualPosition_logical": undefined,
+      "LifterInPositionUp": undefined,
+      "LifterInPositionDown": undefined,
+      "LifterIsMoving": undefined,
+      "LifterIsFault": undefined,
+      "Position_result": undefined,
+      "Position_mm": undefined,
+      "WMStoShuttle_Id": undefined,
+      "WMStoShuttle_TaskNumber": undefined,
+      "WMStoShuttle_Coordinate": undefined,
+      "WMStoShuttle_ECHOStatus": undefined,
+      "WMStoShuttle_Execute": undefined,
+      "WMStoShuttle_SelManAuto": undefined,
+      "WMStoShuttle_Start": undefined,
+      "WMStoShuttle_Stop": undefined,
+      "WMStoShuttle_Reset": undefined,
+      "ShuttleToWMS_Id": undefined,
+      "ShuttleToWMS_TaskNumber": undefined,
+      "ShuttleToWMS_Coordinate": undefined,
+      "ShuttleToWMS_Result": undefined,
+      "ShuttleToWMS_ErrorCode": undefined,
+      "ShuttleToWMS_TaskStatus": undefined,
+      "ShuttleToWMS_CurrentMode": undefined,
+      "ShuttleToWMS_CurrentState": undefined,
+      "ShuttleToWMS_Carrier_Status": undefined,
+      "ShuttleToWMS_Carrier_Position": undefined,
+      "ShuttleToWMS_Lifter_Status": undefined,
+      "ShuttleToWMS_Lifter_Position": undefined,
+      "Alarms_Controller0_bit0": undefined,
+      "Alarms_Controller0_bit1": undefined,
+      "Alarms_Controller0_bit2": undefined,
+      "Alarms_Controller0_bit3": undefined,
+      "Alarms_Controller0_bit4": undefined,
+      "Alarms_Controller1_bit0": undefined,
+      "Alarms_Carrier0_bit0": undefined,
+      "Alarms_Carrier0_bit1": undefined,
+      "Alarms_Carrier0_bit2": undefined,
+      "Alarms_Carrier0_bit3": undefined,
+      "Alarms_Carrier0_bit4": undefined,
+      "Alarms_Carrier0_bit5": undefined,
+      "Alarms_Carrier0_bit6": undefined,
+      "Alarms_Lifter0_bit0": undefined,
+      "Alarms_Lifter0_bit1": undefined,
+      "Alarms_Lifter0_bit2": undefined,
+      "ShuttleToWMS_DI_Module0": undefined,
+      "ShuttleToWMS_DI_Module1": undefined,
+      "ShuttleToWMS_AI_Module_0_Channel_0": undefined,
+    };
+  }
+  
+  var gData = createGDataObject();
+  
