@@ -120,7 +120,9 @@ function startHold(command) {
   // Start interval to continuously set command to true
   console.log(`Holding ${command}`);
   holdInterval = setInterval(() => {
-    HMI_PLC.FromHMI.Command[command] = true;
+    var name = `"HMI_PLC".FromHMI.Command.${command}`;
+    sendDataToUrl("IOWrite.html", name, 1);
+
   }, 100); // Repeat every 100ms as an example
 }
 
@@ -128,7 +130,8 @@ function stopHold(command) {
   console.log(`Releasing ${command}`);
   // Clear interval and set command to false
   clearInterval(holdInterval);
-  HMI_PLC.FromHMI.Command[command] = false;
+  var name = `"HMI_PLC".FromHMI.Command.${command}`;
+  sendDataToUrl("IOWrite.html", name, 0);
 }
 
 // Helper function to prevent default behavior for touch events
@@ -178,3 +181,24 @@ document.addEventListener("DOMContentLoaded", function () {
   // Other initialization code
   checkControls();
 });
+
+// ============================================================
+// COMMAND BUTTONS
+// ============================================================
+
+function sendDataToUrl(url, name, val) {
+  var sdata = encodeURIComponent(name) + '=' + val;
+  
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          // Request finished, do something with the response if needed
+      }
+  };
+  xhr.send(sdata);
+}
+
+// ============================================================
+
