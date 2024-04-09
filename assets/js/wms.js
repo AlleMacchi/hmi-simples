@@ -1,78 +1,70 @@
 function updateWMSScreen() {
   // Update WMS-to-PLC section
-  document.getElementById("wms_plc_id").textContent = WMSToShuttle.Message.Id;
+  document.getElementById("wms_plc_id").textContent = gData.WMStoShuttle_Id;
   document.getElementById("wms_plc_task_number").textContent =
-    getTaskDescription(WMSToShuttle.Message.TaskNumber);
-  document.getElementById("wms_plc_coordinate").textContent =
-    WMSToShuttle.Message.Coordinate;
+    getTaskDescription(gData.WMStoShuttle_TaskNumber);
+  document.getElementById("wms_plc_coordinate").textContent = decodeHTMLEntity(
+    gData.WMStoShuttle_Coordinate
+  );
   document.getElementById("wms_plc_echo_status").textContent =
-    WMSToShuttle.Message.ECHOStatus;
-  document.getElementById("wms_plc_execute").textContent = WMSToShuttle.Message
-    .Execute
-    ? "Yes"
-    : "No";
-  document.getElementById("wms_plc_selection").textContent = WMSToShuttle
-    .Command.SelManAuto
-    ? "Manual"
-    : "Auto";
-  document.getElementById("wms_plc_start").textContent = WMSToShuttle.Command
-    .Start
-    ? "Yes"
-    : "No";
-  document.getElementById("wms_plc_stop").textContent = WMSToShuttle.Command
-    .Stop
-    ? "Yes"
-    : "No";
-  document.getElementById("wms_plc_reset").textContent = WMSToShuttle.Command
-    .Reset
-    ? "Yes"
-    : "No";
+    gData.WMStoShuttle_ECHOStatus;
+  document.getElementById("wms_plc_execute").textContent =
+    gData.WMStoShuttle_Execute ? "True" : "False";
+  document.getElementById("wms_plc_selection").textContent =
+    gData.WMStoShuttle_SelManAuto ? "1: AUTO" : "0: MANUAL";
+  document.getElementById("wms_plc_start").textContent =
+    gData.WMStoShuttle_Start ? "True" : "False";
+  document.getElementById("wms_plc_stop").textContent = gData.WMStoShuttle_Stop
+    ? "True"
+    : "False";
+  document.getElementById("wms_plc_reset").textContent =
+    gData.WMStoShuttle_Reset ? "True" : "False";
 
   // Update PLC-to-WMS section
-  document.getElementById("plc_wms_id").textContent = ShuttleToWMS.Message.Id;
+  document.getElementById("plc_wms_id").textContent = gData.ShuttleToWMS_Id;
   document.getElementById("plc_wms_task_number").textContent =
-    getTaskDescription(ShuttleToWMS.Message.TaskNumber);
-  document.getElementById("plc_wms_coordinate").textContent =
-    ShuttleToWMS.Message.Coordinate;
+    getTaskDescription(gData.ShuttleToWMS_TaskNumber);
+  document.getElementById("plc_wms_coordinate").textContent = decodeHTMLEntity(
+    gData.ShuttleToWMS_Coordinate
+  );
   document.getElementById("plc_wms_result").textContent = getResultDescription(
-    ShuttleToWMS.Message.Result
+    gData.ShuttleToWMS_Result
   );
   document.getElementById("plc_wms_error_code").textContent =
-    ShuttleToWMS.Message.ErrorCode.toString();
-  if (ShuttleToWMS.Message.ErrorCode !== 0) {
-    let errorC = document.getElementById("plc_wms_error_code");
-    errorC.style.color = "red";
-    errorC.style.fontWeight = "bold";
-    errorC.style.fontSize = "24px";
+    gData.ShuttleToWMS_ErrorCode;
+
+  if (gData.ShuttleToWMS_ErrorCode !== 0) {
+    document.getElementById("ErrorInfoIcon").style.display = "block";
+    document.getElementById("plc_wms_error_code").style.color = "red";
+    document.getElementById("plc_wms_error_code").style.fontWeight = "bold";
+    document.getElementById("plc_wms_error_code").style.fontSize = "24px";
   }
 
   document.getElementById("plc_wms_task_status").textContent =
-    getTaskStatusDescription(ShuttleToWMS.Message.TaskStatus);
+    getTaskStatusDescription(gData.ShuttleToWMS_TaskStatus);
   document.getElementById("plc_wms_current_mode").textContent =
-    ShuttleToWMS.Status.CurrentMode;
+    gData.ShuttleToWMS_CurrentMode;
   document.getElementById("plc_wms_current_state").textContent =
-    ShuttleToWMS.Status.CurrentState;
+    gData.ShuttleToWMS_CurrentState;
   document.getElementById("plc_wms_carrier_status").textContent =
-    ShuttleToWMS.Status.Carrier.Status;
+    gData.ShuttleToWMS_Carrier_Status;
   document.getElementById("plc_wms_carrier_position").textContent =
-    ShuttleToWMS.Status.Carrier.Position;
+    decodeHTMLEntity(gData.ShuttleToWMS_Carrier_Position);
   document.getElementById("plc_wms_lifter_status").textContent =
-    ShuttleToWMS.Status.Lifter.Status;
+    gData.ShuttleToWMS_Lifter_Status;
   document.getElementById("plc_wms_lifter_position").textContent =
-    ShuttleToWMS.Status.Lifter.Position;
+    gData.ShuttleToWMS_Lifter_Position;
 }
-
-updateWMSScreen();
 
 // Utility function to get task description
 function getTaskDescription(TaskNumber) {
   const descriptions = {
-    1: "Pick-up",
-    2: "Drop-off",
-    3: "Translation",
-    60: "Pause",
-    61: "Resume",
-    63: "Erase",
+    1: "1: Pick-up",
+    2: "2: Drop-off",
+    3: "3: Translation",
+    60: "60: Pause",
+    61: "61: Resume",
+    63: "63: Erase",
   };
   return descriptions[TaskNumber] || "Unknown Task";
 }
@@ -80,9 +72,9 @@ function getTaskDescription(TaskNumber) {
 // Utility function to get result description
 function getResultDescription(resultCode) {
   const descriptions = {
-    0: "Stand-by",
-    1: "Accepted",
-    99: "Rejected",
+    0: "0: Stand-by",
+    1: "1: Accepted",
+    99: "99: Rejected",
   };
   return descriptions[resultCode] || "Unknown Result";
 }
@@ -90,10 +82,10 @@ function getResultDescription(resultCode) {
 // Utility function to get task status description
 function getTaskStatusDescription(statusCode) {
   const descriptions = {
-    0: "Standby",
-    1: "In progress",
-    10: "In pause",
-    99: "Erase",
+    0: "0: Standby",
+    1: "1: In progress",
+    10: "10: In pause",
+    99: "99: Erase",
   };
   return descriptions[statusCode] || "Unknown Status";
 }
