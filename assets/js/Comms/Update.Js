@@ -7,4 +7,4 @@ setInterval(() => {
     updateWMSScreen();
     updateAGVPositionHMI_mm(gData.CarrierActualPosition_mm);
     // console.log("Update");
-  }, 500); // Update rate
+  }, 1000); // Update rate
