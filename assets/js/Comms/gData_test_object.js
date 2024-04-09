@@ -3,7 +3,7 @@
 function createGDataObject() {
   return {
     StatusMachine: "&quot;EXECUTIVE&quot;",
-    StatusMode: "&quot;MANUAL&quot;",
+    StatusMode: "&quot;Manual&quot;",
     Step: 0,
     CarrierInPosition: undefined,
     CarrierIsMoving: undefined,
