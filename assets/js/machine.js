@@ -1,9 +1,3 @@
-// 404   423  406        410
-// 408   432  409        411
-// 405        407
-
-//         17
-
 // Get the select element
 const selection = document.getElementById("standard-select");
 
@@ -58,66 +52,74 @@ selection.addEventListener("change", function (event) {
   // console.log("Lifter enabled: ", HMI_PLC.FromHMI.Selection.Lifter.enable);
 });
 
-// function updateSensorsFromBits() {
-//   // Mapping from sensor IDs to their respective bits in the ShuttleToWMS object
-//   const sensorMapping = {
-//     "sensor-404": ShuttleToWMS.Digital_Input.Module0[4],
-//     "sensor-405": ShuttleToWMS.Digital_Input.Module0[5],
-//     "sensor-406": ShuttleToWMS.Digital_Input.Module0[6],
-//     "sensor-407": ShuttleToWMS.Digital_Input.Module0[7],
-//     "sensor-408": ShuttleToWMS.Digital_Input.Module0[8],
-//     "sensor-409": ShuttleToWMS.Digital_Input.Module0[9],
-//     "sensor-410": ShuttleToWMS.Digital_Input.Module0[10],
-//     "sensor-411": ShuttleToWMS.Digital_Input.Module0[11],
-//     "sensor-416": ShuttleToWMS.Digital_Input.Module1[0],
-//     "sensor-417": ShuttleToWMS.Digital_Input.Module1[1],
-//     "sensor-418": ShuttleToWMS.Digital_Input.Module1[2],
-//     "sensor-419": ShuttleToWMS.Digital_Input.Module1[3],
-//     "sensor-420": ShuttleToWMS.Digital_Input.Module1[4],
-//     "sensor-423": ShuttleToWMS.Digital_Input.Module1[7],
-//     // The battery level isn't a binary sensor, so we'll handle it separately
-//   };
+// 404   423  406        410
+// 408   432  409        411
+// 405        407
 
-//   console.log(sensorMapping);
+//         17
 
-//   // Iterate over the sensorMapping and update the classes accordingly
-//   for (const [sensorId, isActive] of Object.entries(sensorMapping)) {
-//     const sensorElement = document.getElementById(sensorId);
-//     if (sensorElement) {
-//       if (isActive) {
-//         sensorElement.classList.add("active");
-//       } else {
-//         sensorElement.classList.remove("active");
-//       }
-//     }
-//   }
+var Modulo_0 = readBits(gData.ShuttleToWMS_DI_Module0);
+var Modulo_1 = readBits(gData.ShuttleToWMS_DI_Module1);
+var Battery = gData.ShuttleToWMS_AI_Module_0_Channel_0 > 0 ? 1 : 0;
 
-//   // Update the battery level indicator
-//   const batteryLevel = ShuttleToWMS.Analog_Input.Module_0.Channel_0;
-//   const batteryLevelElement = document.getElementById("battery-level");
-//   if (batteryLevelElement) {
-//     batteryLevelElement.style.width = `${batteryLevel}%`;
-//     batteryLevelElement.textContent = `${batteryLevel}%`;
-//     // Add the 'low-battery' class if the battery level is below a threshold, e.g., 20%
-//     if (batteryLevel <= 20) {
-//       batteryLevelElement.classList.add("low-battery");
-//     } else {
-//       batteryLevelElement.classList.remove("low-battery");
-//     }
-//   }
-// }
+function updateSensorsFromBits() {
+  // Mapping from sensor IDs to their respective bits in the ShuttleToWMS object
+  const sensorMapping = {
+    "sensor-404": Modulo_0[4],
+    "sensor-405": Modulo_0[5],
+    "sensor-406": Modulo_0[6],
+    "sensor-407": Modulo_0[7],
+    "sensor-408": Modulo_0[8],
+    "sensor-409": Modulo_0[9],
+    "sensor-410": Modulo_0[10],
+    "sensor-411": Modulo_0[11],
+    "sensor-416": Modulo_1[0],
+    "sensor-417": Modulo_1[1],
+    "sensor-418": Modulo_1[2],
+    "sensor-419": Modulo_1[3],
+    "sensor-420": Modulo_1[4],
+    "sensor-423": Modulo_1[7],
+    "sensor-432": Battery,
+    // The battery level isn't a binary sensor, so we'll handle it separately
+  };
 
-// // This function should be called whenever the ShuttleToWMS object is updated with new sensor data
+  // console.log(sensorMapping["sensor-404"]);
 
-// updateSensorsFromBits();
+  // console.log(sensorMapping);
 
-// function updatePosition(positionInMillimeters) {
-//   document.getElementById(
-//     "position-value"
-//   ).textContent = `${positionInMillimeters} mm`;
-// }
+  // Iterate over the sensorMapping and update the classes accordingly
+  for (const [sensorId, isActive] of Object.entries(sensorMapping)) {
+    const sensorElement = document.getElementById(sensorId);
+    // console.log(sensorElement.classList, isActive);
+    if (sensorElement) {
+      if (isActive) {
+        sensorElement.classList.add("activeSensor");
+      } else {
+        sensorElement.classList.remove("activeSensor");
+      }
+    }
+  }
 
-// updatePosition(HMI_PLC.ToHMI.Status.Carrier.actPosition_mm);
+  // Update the battery level indicator
+  const batteryLevel = gData.ShuttleToWMS_AI_Module_0_Channel_0;
+  const batteryLevelElement = document.getElementById("sensor-432");
+  if (batteryLevelElement) {
+    batteryLevelElement.style.width = `${batteryLevel}%`;
+    batteryLevelElement.textContent = `${batteryLevel}%`;
+
+    // Add the 'low-battery' class if the battery level is below a threshold, e.g., 20%
+    if (batteryLevel <= 20) {
+      batteryLevelElement.classList.remove("activeSensor");
+      batteryLevelElement.classList.add("low-batterySensor");
+      batteryLevelElement.style.color = "var(--light-blue)";
+    } else {
+      batteryLevelElement.classList.remove("low-batterySensor");
+      batteryLevelElement.style.color = "black";
+    }
+  }
+}
+
+// This function should be called whenever the ShuttleToWMS object is updated with new sensor data
 
 // // =================================================================================================
 
