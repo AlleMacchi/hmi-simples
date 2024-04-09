@@ -238,11 +238,10 @@ const taskToStepsMapping = {
     "5: Go to mother",
   ],
   3: ["0: Init", "1: Go to Position"],
-  // ... Add more mappings for other task numbers as per the image
 };
 
 function updateStepDropdown(taskNumber) {
-  const steps = taskToStepsMapping[taskNumber] || ["Step"];
+  const steps = taskToStepsMapping[taskNumber] || ["0: Init"];
   const stepDropdown = createDropdown("stepSelect", steps);
   // console.log(steps);
   // console.log(stepDropdown.options);
@@ -257,6 +256,8 @@ function updateStepDropdown(taskNumber) {
   // Clear existing options
 }
 
+updateStepDropdown(gData.WMStoShuttle_TaskNumber);
+
 // Adding an event listener to the button (assuming the button has an id 'stepChangeButton')
 document
   .getElementById("stepChangeButton")
@@ -264,8 +265,10 @@ document
     sendDataToUrl(
       "IOWrite.html",
       `"HMI_PLC".FromHMI.Setting.Machine.newStep`,
-      document.getElementById("stepSelect").value[0]
+      document.getElementById("stepSelect").value[0].split(":")[0]
     );
+
+    console.log(document.getElementById("stepSelect").value[0].split(":")[0]);
     sendDataToUrl("IOWrite.html", `"HMI_PLC".FromHMI.Command.updateStep`, true);
 
     setInterval(() => {
@@ -282,15 +285,22 @@ document
     // HMI_PLC.FromHMI.Command.updateStep = true; // ? and then?
   });
 
+function updateCurrentStep() {
+  currentStep.textContent =
+    taskToStepsMapping[gData.WMStoShuttle_TaskNumber][gData.Step];
+}
+
 const stepControlsContainer =
   document.getElementsByClassName("dropdown-container")[0];
 const currentStep = document.getElementById("currentStep");
 
-function checkStepsControls() {
+function updateCurrentStep() {
   currentStep.textContent =
     taskToStepsMapping[gData.WMStoShuttle_TaskNumber][gData.Step];
+}
 
-  if (gData.StatusMode == "AUTO") {
+function checkStepsControls() {
+  if (decodeHTMLEntity(gData.StatusMode) == "Auto") {
     // if (decodeHTMLEntity(gData.StatusMode) == "AUTO") {
     stepControlsContainer.classList.add("ControlsDisabled");
     document
@@ -317,4 +327,4 @@ function checkStepsControls() {
   }
 }
 
-checkStepsControls();
+// checkStepsControls();
