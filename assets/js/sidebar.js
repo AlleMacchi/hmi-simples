@@ -1,4 +1,4 @@
-let currentMode = gData.StatusMode;
+let currentMode = decodeHTMLEntity(gData.StatusMode);
 
 // Update mode display in the header
 // function updateHeaderMode(mode) {
@@ -45,7 +45,6 @@ function toggleMode(selectedMode) {
     selectedMode
   );
 
-  currentMode = selectedMode;
   if (selectedMode === 0) {
     btnManual.classList.add("button-active");
     btnAuto.classList.remove("button-active");
@@ -65,7 +64,7 @@ function toggleMode(selectedMode) {
       }
     );
   }
-  checkStepsControls();
+  // checkStepsControls();
 }
 
 // Event listeners for mode buttons
@@ -76,8 +75,16 @@ btnAuto.addEventListener("click", function () {
   toggleMode(1);
 });
 
+function StringTovariableMode(currentMode) {
+  if (currentMode === "Manual") {
+    return 0;
+  } else {
+    return 1;
+  }
+
+}
 // Initialize the sidebar in MANUAL mode
-toggleMode(currentMode);
+toggleMode(StringTovariableMode(currentMode));
 
 // Button click visual effect
 const commandButtons = document.querySelectorAll(".commands button");
@@ -219,5 +226,3 @@ downBwdOffButton.addEventListener("touchend", () => {
 // }
 
 // ============================================================
-
-
