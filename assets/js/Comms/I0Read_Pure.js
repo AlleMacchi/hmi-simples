@@ -15,22 +15,22 @@ document.addEventListener("DOMContentLoaded", function () {
 // ============================================================
 
 // Function to decode HTML entities using a regular expression
-// function decodeHTMLEntity(htmlString) {
-//   // Regular expression to match HTML entities like "&#x27;"
-//   var entityRegex = /&#(?:x([\da-fA-F]+)|(\d+));/g;
-
-//   // Replace HTML entities with their corresponding characters
-//   return htmlString.replace(entityRegex, function (match, hex, dec) {
-//     return hex
-//       ? String.fromCharCode(parseInt(hex, 16))
-//       : String.fromCharCode(dec);
-//   });
-// }
-
 function decodeHTMLEntity(htmlString) {
-  var doc = new DOMParser().parseFromString(htmlString, "text/html");
-  return removeFirstAndLastChar(doc.documentElement.textContent);
+  // Regular expression to match HTML entities like "&#x27;"
+  var entityRegex = /&#(?:x([\da-fA-F]+)|(\d+));/g;
+
+  // Replace HTML entities with their corresponding characters
+  return htmlString.replace(entityRegex, function (match, hex, dec) {
+    return hex
+      ? String.fromCharCode(parseInt(hex, 16))
+      : String.fromCharCode(dec);
+  });
 }
+
+// function decodeHTMLEntity(htmlString) {
+//   var doc = new DOMParser().parseFromString(htmlString, "text/html");
+//   return removeFirstAndLastChar(doc.documentElement.textContent);
+// }
 
 function removeFirstAndLastChar(str) {
   // Check if the string has at least two characters
