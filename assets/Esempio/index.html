@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- JQuery  -->
+    <script type="text/javascript" src="jquery-3.7.1.min.js"></script>
+
+    <style>
+        * {
+          box-sizing: border-box;
+        }
+        
+        .flex-container {
+          display: flex;
+          flex-direction: row;
+          font-size: 30px;
+          text-align: center;
+        }
+        
+        .flex-item-left {
+          background-color: #f1f1f1;
+          padding: 10px;
+          flex: 50%;
+          font-size: 14px;
+        }
+        
+        .flex-item-right {
+          background-color: dodgerblue;
+          padding: 10px;
+          flex: 50%;
+          font-size: 14px;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="flex-container">
+    <div class="flex-item-left">
+        <button id="SelMan">Selection Manual</button>
+        <button id="SelAuto">Selection Automatic</button>
+        <br><br>
+        <button id="btnStart">Start</button>
+        <button id="btnStop">Stop</button>
+        <br><br>
+        <button id="btnReset">Reset</button>
+        <br><br>
+        <button id="btnForward">Forward</button>
+        <button id="btnBackward">Backward</button>
+        <br><br>
+        <button id="btnGo">GoToPosition</button>
+        <br><br>
+        <button id="btnCarrierEnable">Carrier Enable</button>
+        <button id="btnLifterEnable">Lifter Enable</button>
+        <br><br>
+        <button id="btnCarrier_mm_or_logical">Carrier mm_or_logical</button>
+        <br><br>
+        <button id="btnChargeEnable">Charge Enable</button>
+        <br><br>
+        <label for="fstep">New Step: </label>
+        <input type="text" id="fstep" name="fstep">
+        <button id="btnConfirmStep">Confirm</button>
+        <br><br>
+        <label for="fname">Position: </label>
+        <input type="text" id="fname" name="fname">
+        <button id="btnConfirmPosition">Confirm</button>
+        <br><br>
+        <label for="flogical">Position Logical: </label>
+        <input type="text" id="flogical" name="flogical">
+        <button id="btnConfirmLogical">Confirm</button>
+        <br><br>
+        <label for="flifterSpd">Lifter Speed: </label>
+        <input type="text" id="flifterSpd" name="flifterSpd">
+        <button id="btnConfirmLifterSpd">Confirm</button>
+        <br><br>
+        <label for="fcarrerSpd">Carrier Speed: </label>
+        <input type="text" id="fcarrerSpd" name="fcarrerSpd">
+        <button id="btnConfirmcarrerSpd">Confirm</button>
+        <br><br>
+        <label for="fPosLog">PositionLog: </label>
+        <input type="text" id="fPosLog" name="fPosLog">
+        <button id="btnConfirmPosLog">Confirm</button>
+        <br><br>
+        <label for="fPosMm">PositionMM: </label>
+        <input type="text" id="fPosMm" name="fPosMm">
+        <button id="btnConfirmPosMm">Confirm</button>
+        <br><br>
+        <button id="btnUpdate">Update</button>
+        <button id="btnRequest">Request</button>
+    </div>
+    <div class="flex-item-right">
+        ARRAY 1 : <label id="Array_1"></label>  &nbsp
+        ARRAY 2 : <label id="Array_2"></label>  <br><br>
+        ARRAY 3 : <label id="Array_3"></label>  &nbsp
+        ARRAY 4 : <label id="Array_4"></label>  <br><br>
+        ARRAY 5 : <label id="Array_5"></label>  &nbsp
+        ARRAY 6 : <label id="Array_6"></label>  <br><br>
+        ARRAY 7 : <label id="Array_7"></label>  &nbsp
+        ARRAY 8 : <label id="Array_8"></label>  <br><br>
+        ARRAY 9 : <label id="Array_9"></label> &nbsp
+        ARRAY 10 : <label id="Array_10"></label>  <br><br>
+        ARRAY 11 : <label id="Array_11"></label>  &nbsp
+        ARRAY 12 : <label id="Array_12"></label>  <br><br>
+        ARRAY 13 : <label id="Array_13"></label>  &nbsp
+        ARRAY 14 : <label id="Array_14"></label>  <br><br>
+        ARRAY 15 : <label id="Array_15"></label>  &nbsp
+        ARRAY 16 : <label id="Array_16"></label>  <br><br>
+        ARRAY 17 : <label id="Array_17"></label>  &nbsp
+        ARRAY 18 : <label id="Array_18"></label>  <br><br>
+        ARRAY 19 : <label id="Array_19"></label> &nbsp
+        ARRAY 20 : <label id="Array_20"></label>  <br><br>
+        ARRAY 21 : <label id="Array_21"></label>  &nbsp
+        ARRAY 22 : <label id="Array_22"></label>  <br><br>
+        ARRAY 23 : <label id="Array_23"></label>  &nbsp
+        ARRAY 24 : <label id="Array_24"></label>  <br><br>
+        ARRAY 25 : <label id="Array_25"></label>  &nbsp
+        ARRAY 26 : <label id="Array_26"></label>  <br><br>
+        ARRAY 27 : <label id="Array_27"></label>  &nbsp
+        ARRAY 28 : <label id="Array_28"></label>  <br><br>
+        ARRAY 29 : <label id="Array_29"></label> &nbsp
+        ARRAY 30 : <label id="Array_30"></label>  <br><br>
+        ARRAY 31 : <label id="Array_31"></label>  &nbsp
+        ARRAY 32 : <label id="Array_32"></label>  <br><br>
+        ARRAY 33 : <label id="Array_33"></label>  &nbsp
+        ARRAY 34 : <label id="Array_34"></label>  <br><br>
+        ARRAY 35 : <label id="Array_35"></label>  &nbsp
+        ARRAY 36 : <label id="Array_36"></label>  <br><br>
+        ARRAY 37 : <label id="Array_37"></label>  &nbsp
+        ARRAY 38 : <label id="Array_38"></label>  <br><br>
+        ARRAY 39 : <label id="Array_39"></label> &nbsp
+        ARRAY 40 : <label id="Array_40"></label>  <br><br>
+        ARRAY 41 : <label id="Array_41"></label>  &nbsp
+        ARRAY 42 : <label id="Array_42"></label>  <br><br>
+
+    </div>
+</div>
+    
+    <script type="text/javascript" src="Write.js"></script>
+    <script type="text/javascript" src="Read.js"></script>
+</body>
+</html>
