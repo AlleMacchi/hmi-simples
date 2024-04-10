@@ -7,36 +7,36 @@ selection.addEventListener("change", function (event) {
   // Set the corresponding selection to true based on the dropdown choice
   if (event.target.value === "Wheels") {
     sendDataToUrl(
-      "IOWrite.html",
+      "IOWriteLifterEnable.html",
       '"HMI_PLC".FromHMI.Selection.Lifter.enable',
       false
     );
     sendDataToUrl(
-      "IOWrite.html",
+      "IOWriteCarrierEnable.html",
       '"HMI_PLC".FromHMI.Selection.Carrier.enable',
       true
     );
     // HMI_PLC.FromHMI.Selection.Carrier.enable = true;
   } else if (event.target.value === "Lifter") {
     sendDataToUrl(
-      "IOWrite.html",
+      "IOWriteCarrierEnable.html",
       '"HMI_PLC".FromHMI.Selection.Carrier.enable',
       false
     );
     sendDataToUrl(
-      "IOWrite.html",
+      "IOWriteLifterEnable.html",
       '"HMI_PLC".FromHMI.Selection.Lifter.enable',
       true
     );
     // HMI_PLC.FromHMI.Selection.Lifter.enable = true;
   } else {
     sendDataToUrl(
-      "IOWrite.html",
+      "IOWriteLifterEnable.html",
       '"HMI_PLC".FromHMI.Selection.Lifter.enable',
       false
     );
     sendDataToUrl(
-      "IOWrite.html",
+      "IOWriteCarrierEnable.html",
       '"HMI_PLC".FromHMI.Selection.Carrier.enable',
       false
     );
@@ -178,7 +178,7 @@ function updateSensorsFromBits() {
       batteryLevelElement.classList.add("low-batterySensor");
       batteryLevelElement.style.color = "var(--light-blue)";
     } else {
-      batteryLevelElement.classList.remove("low-batterySensor");
+      batteryLevelElement.classList.remove("low-batterySensor");      
       batteryLevelElement.style.color = "black";
     }
   }

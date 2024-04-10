@@ -64,7 +64,7 @@ positionSelect.setAttribute("disabled", "true");
 btnLogical.addEventListener("click", function () {
   // HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical = true;
   sendDataToUrl(
-    "IOWrite.html",
+    "IOWriteCarrierMmOrLogical.html",
     `"HMI_PLC".FromHMI.Selection.Carrier.mm_or_logical`,
     true
   );
@@ -80,7 +80,7 @@ btnLogical.addEventListener("click", function () {
 
 btnPhysical.addEventListener("click", function () {
   sendDataToUrl(
-    "IOWrite.html",
+    "IOWriteCarrierMmOrLogical.html",
     `"HMI_PLC".FromHMI.Selection.Carrier.mm_or_logical`,
     false
   );
@@ -189,7 +189,7 @@ btn_go.addEventListener("click", () => {
     // );
 
     sendDataToUrl(
-      "IOWrite.html",
+      "IOWritePosition.html",
       `"HMI_PLC".FromHMI.Setting.Carrier.PositionToReach_mm`,
       parseFloat(physicalPositionInput.value)
     );
@@ -201,7 +201,7 @@ btn_go.addEventListener("click", () => {
     // HMI_PLC.FromHMI.Setting.Carrier.PositionToReach_logical =
     //   createPositionString(rowSelect.value, positionSelect.value);
     sendDataToUrl(
-      "IOWrite.html",
+      "IOWritePositionLogical.html",
       `"HMI_PLC".FromHMI.Setting.Carrier.PositionToReach_logical`,
       createPositionString(rowSelect.value, positionSelect.value)
     );
@@ -276,17 +276,21 @@ document
   .getElementById("stepChangeButton")
   .addEventListener("click", function () {
     sendDataToUrl(
-      "IOWrite.html",
+      "IOWriteNewStep.html",
       `"HMI_PLC".FromHMI.Setting.Machine.newStep`,
       document.getElementById("stepSelect").value[0].split(":")[0]
     );
 
     console.log(document.getElementById("stepSelect").value[0].split(":")[0]);
-    sendDataToUrl("IOWrite.html", `"HMI_PLC".FromHMI.Command.updateStep`, true);
+    sendDataToUrl(
+      "IOWriteUpdateStep.html",
+      `"HMI_PLC".FromHMI.Command.updateStep`,
+      true
+    );
 
     if (updatePositionResult() == 1) {
       sendDataToUrl(
-        "IOWrite.html",
+        "IOWriteUpdateStep.html",
         `"HMI_PLC".FromHMI.Command.updateStep`,
         false
       );

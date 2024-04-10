@@ -1,3 +1,32 @@
+function createPositions() {
+  var positions = {};
+  var rows = ["Row"];
+  var columns = ["Column"];
+  var direction = ["A", "B"];
+
+  for (var row = 1; row <= 38; row++) {
+    var rowKey = "R" + row.toString().padStart(3, "0");
+    positions[rowKey] = [];
+    rows.push(rowKey); // Add this row to the rows list
+
+    for (var column = 1; column <= 38; column++) {
+      var columnKey = direction[0] + column.toString().padStart(2, "0");
+      positions[rowKey].push({
+        description: columnKey,
+        value: 0,
+      });
+      if (row === 1) {
+        // Only add columns for the first row to avoid duplicates
+        columns.push(columnKey);
+      }
+    }
+  }
+
+  return { positions: positions, rows: rows, columns: columns }; // Return an object containing all three
+}
+var positionsData = createPositions();
+// console.log(positionsData);
+
 const searchInput = document.getElementById("searchInput");
 const positionsTable = document
   .getElementById("positionsTable")
@@ -52,19 +81,20 @@ function fillPositionsTable(positionsData) {
           valueInput.value = "";
           selectedRow.classList.remove("selected");
           sendDataToUrl(
-            "IOWrite.html",
+            "IOWritePositionLogic.html",
             `"HMI_PLC".FromHMI.Position.logical`,
             selectedRow.description
           );
           sendDataToUrl(
-            "IOWrite.html",
+            "IOWriteRequest.html",
             `"HMI_PLC".FromHMI.Position.request`,
             true
           );
+          // TODO: possible problem delay on request
           if (updatePositionResult() == 1) {
             valueInput.value = gData.Position_mm;
             sendDataToUrl(
-              "IOWrite.html",
+              "IOWriteRequest.html",
               `"HMI_PLC".FromHMI.Position.request`,
               false
             );
@@ -113,11 +143,15 @@ setButton.addEventListener("click", () => {
   }
 
   const newValue = parseFloat(valueInput.value);
-  sendDataToUrl("IOWrite.html", `"HMI_PLC".FromHMI.Position.mm`, newValue);
-  sendDataToUrl("IOWrite.html", `"HMI_PLC".FromHMI.Position.update`, 1);
+  sendDataToUrl(
+    "IOWritePositionMM.html",
+    `"HMI_PLC".FromHMI.Position.mm`,
+    newValue
+  );
+  sendDataToUrl("IOWriteUpdate.html", `"HMI_PLC".FromHMI.Position.update`, 1);
 
   if (updatePositionResult() == 1) {
-    sendDataToUrl("IOWrite.html", `"HMI_PLC".FromHMI.Position.update`, 0);
+    sendDataToUrl("IOWriteUpdate.html", `"HMI_PLC".FromHMI.Position.update`, 0);
     outMessage.style.color = "white";
     outMessage.textContent = "Position updated successfully.";
   } else {

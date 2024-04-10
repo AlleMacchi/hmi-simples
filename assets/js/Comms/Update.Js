@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   setInterval(() => {
     // Home
     updateAGVPosition();
+
     updatePositionResult();
     updaterowTitle();
     updateStepDropdown();
@@ -19,6 +20,11 @@ document.addEventListener("DOMContentLoaded", function () {
     updateSensorsFromBits();
     //sidebar
     updateSpeedLabels();
-    updateStatusModeFromstring();
+    // updateStatusModeFromstring();
+    console.log(decodeHTMLEntity(newGData.Array_1));
+    //Test
+    // setInterval(() => {
+    //   Test();
+    // }, 1000); // Update rate
   }, 1000); // Update rate
 });

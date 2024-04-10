@@ -1,1 +1,2 @@
 var gData;
+var newGData;
