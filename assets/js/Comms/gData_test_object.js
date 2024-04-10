@@ -54,9 +54,9 @@ function createGDataObject() {
     Alarms_Lifter0_bit0: undefined,
     Alarms_Lifter0_bit1: undefined,
     Alarms_Lifter0_bit2: undefined,
-    ShuttleToWMS_DI_Module0: undefined,
-    ShuttleToWMS_DI_Module1: undefined,
-    ShuttleToWMS_AI_Module_0_Channel_0: undefined,
+    ShuttleToWMS_DI_Module0: 200,
+    ShuttleToWMS_DI_Module1: 100,
+    ShuttleToWMS_AI_Module_0_Channel_0: 90,
   };
 }
 

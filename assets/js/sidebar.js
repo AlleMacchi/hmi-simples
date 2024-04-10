@@ -30,7 +30,6 @@ const btnAuto = document.querySelector(".switch button:last-child");
 const commandsContainer = document.querySelector(".commands");
 
 function toggleMode(selectedMode) {
-
   // HMI_PLC.FromHMI.Command.SelManAuto = selectedMode; // Update the currentMode
   sendDataToUrl(
     "IOWrite.html",

@@ -34,6 +34,11 @@ const updateAGVPosition = (newPosition) => {
   }
 };
 
+function updateAGVPositionHMI_mm(value) {
+  AGVposition.textContent = value;
+  document.getElementById("position-value").textContent = `${value} mm`;
+}
+
 const btnLogical = document.getElementById("btn_logical");
 const btnPhysical = document.getElementById("btn_physical");
 const logicalControls = document.getElementById("logical-controls");
@@ -200,7 +205,8 @@ btn_go.addEventListener("click", () => {
       `"HMI_PLC".FromHMI.Setting.Carrier.PositionToReach_logical`,
       createPositionString(rowSelect.value, positionSelect.value)
     );
-    GoMessage.style.display = "flex";
+    if(gData.W)
+    // GoMessage.style.display = "flex";
     btn_go.classList.remove("active");
   }
 
@@ -271,13 +277,15 @@ document
     console.log(document.getElementById("stepSelect").value[0].split(":")[0]);
     sendDataToUrl("IOWrite.html", `"HMI_PLC".FromHMI.Command.updateStep`, true);
 
-    setInterval(() => {
+    if (gData.Position_result == 1) {
       sendDataToUrl(
         "IOWrite.html",
         `"HMI_PLC".FromHMI.Command.updateStep`,
         false
       );
-    }, 1000);
+    } else {
+      console.log("Position request not set");
+    }
 
     // HMI_PLC.FromHMI.Setting.Machine.newStep =
     //   document.getElementById("stepSelect").value[0];
@@ -285,18 +293,16 @@ document
     // HMI_PLC.FromHMI.Command.updateStep = true; // ? and then?
   });
 
-function updateCurrentStep() {
-  currentStep.textContent =
-    taskToStepsMapping[gData.WMStoShuttle_TaskNumber][gData.Step];
-}
-
 const stepControlsContainer =
   document.getElementsByClassName("dropdown-container")[0];
 const currentStep = document.getElementById("currentStep");
 
 function updateCurrentStep() {
-  currentStep.textContent =
-    taskToStepsMapping[gData.WMStoShuttle_TaskNumber][gData.Step];
+  // console.log(currentStep.textContent);
+  currentStep.textContent = taskToStepsMapping[gData.WMStoShuttle_TaskNumber][
+    gData.Step
+  ] || ["No Step"];
+  console.log(currentStep.textContent);
 }
 
 function checkStepsControls() {
