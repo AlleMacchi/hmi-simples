@@ -1,5 +1,3 @@
-// let currentMode = decodeHTMLEntity(gData.StatusMode);
-
 // Update mode display in the header
 // function updateHeaderMode(mode) {
 //   labelMode.textContent = mode;
@@ -32,7 +30,7 @@ const commandsContainer = document.querySelector(".commands");
 function toggleMode(selectedMode) {
   // HMI_PLC.FromHMI.Command.SelManAuto = selectedMode; // Update the currentMode
   sendDataToUrl(
-    "IOWrite.html",
+    "IOWriteManAuto.html",
     `"HMI_PLC".FromHMI.Command.SelManAuto`,
     selectedMode
   );
@@ -75,24 +73,18 @@ function StringTovariableMode(currentMode) {
     return 1;
   }
 }
-// Initialize the sidebar in MANUAL mode
-toggleMode(StringTovariableMode(decodeHTMLEntity(gData.StatusMode)));
+
+// function updateStatusModeFromstring(){
+//   StringTovariableMode(decodeHTMLEntity(gData.StatusMode))
+// }
+// // Initialize the sidebar in MANUAL mode
+// toggleMode(updateStatusModeFromstring());
 
 // Button click visual effect
 const commandButtons = document.querySelectorAll(".commands button");
 const roundButtons = document.querySelectorAll("#roundCommands button");
 
 // Function to handle start/stop/reset commands
-function handleCommand(command, isActive) {
-  sendDataToUrl(
-    "IOWrite.html",
-    `"HMI_PLC".FromHMI.Command.${command}`,
-    isActive
-  );
-  command;
-  // Additional command handling can go here
-  console.log(`Command: ${command} is ${isActive ? "active" : "inactive"}`);
-}
 
 // Event listeners for round command buttons
 document
@@ -101,22 +93,39 @@ document
   .forEach((button, index) => {
     const commands = ["Start", "Stop", "Reset"];
     button.addEventListener("click", function () {
-      handleCommand(`${commands[index]}`, true);
+      sendDataToUrl(
+        `IOWrite${commands[index]}.html`,
+        `"HMI_PLC".FromHMI.Command.${commands[index]}`,
+        true
+      );
+      console.log(`Clicked ${commands[index]}`);
       // setTimeout(() => handleCommand(`${commands[index]}`, false), 500); // Example delay to rollback
     });
     // Adding "mousedown" event to simulate button press
     button.addEventListener("mousedown", function () {
       button.classList.add("clicked");
-      handleCommand(`${commands[index]}`, true);
+      sendDataToUrl(
+        `IOWrite${commands[index]}.html`,
+        `"HMI_PLC".FromHMI.Command.${commands[index]}`,
+        true
+      );
     });
 
     button.addEventListener("mouseup", function () {
-      handleCommand(`${commands[index]}`, false);
+      sendDataToUrl(
+        `IOWrite${commands[index]}.html`,
+        `"HMI_PLC".FromHMI.Command.${commands[index]}`,
+        false
+      );
       setTimeout(() => button.classList.remove("clicked"), 150);
     });
 
     button.addEventListener("mouseleave", function () {
-      handleCommand(`${commands[index]}`, false);
+      sendDataToUrl(
+        `IOWrite${commands[index]}.html`,
+        `"HMI_PLC".FromHMI.Command.${commands[index]}`,
+        false
+      );
       setTimeout(() => button.classList.remove("clicked"), 150);
     });
   });
@@ -127,23 +136,6 @@ const downBwdOffButton = document.querySelector(".commands button:last-child");
 
 let holdInterval;
 
-function startHold(command) {
-  // Start interval to continuously set command to true
-  console.log(`Holding ${command}`);
-  holdInterval = setInterval(() => {
-    var name = `"HMI_PLC".FromHMI.Command.${command}`;
-    sendDataToUrl("IOWrite.html", name, 1);
-  }, 100); // Repeat every 100ms as an example
-}
-
-function stopHold(command) {
-  console.log(`Releasing ${command}`);
-  // Clear interval and set command to false
-  clearInterval(holdInterval);
-  var name = `"HMI_PLC".FromHMI.Command.${command}`;
-  sendDataToUrl("IOWrite.html", name, 0);
-}
-
 // Helper function to prevent default behavior for touch events
 function preventDefaultTouch(e) {
   e.preventDefault();
@@ -152,27 +144,47 @@ function preventDefaultTouch(e) {
 commandButtons.forEach((button) => {
   button.addEventListener("mousedown", function () {
     if (button.textContent == "upFwdOn") {
-      startHold("UpFwdOn");
+      console.log(`Holding upFwdOn`);
+      holdInterval = setInterval(() => {
+        var name = `"HMI_PLC".FromHMI.Command.UpFwdOn`;
+        sendDataToUrl("IOWriteForward.html", name, 1);
+      }, 100); // Repeat every 100ms as an example
     } else if (button.textContent == "downBwdOff") {
-      startHold("DownBwdOff");
+      console.log(`Holding downBwdOff`);
+      holdInterval = setInterval(() => {
+        var name = `"HMI_PLC".FromHMI.Command.DownBwdOff`;
+        sendDataToUrl("IOWriteBackward.html", name, 1);
+      }, 100); // Repeat every 100ms as an example
     }
     button.classList.add("clicked");
   });
 
   button.addEventListener("mouseup", function () {
     if (button.textContent == "upFwdOn") {
-      startHold("UpFwdOn");
+      console.log(`Holding upFwdOn`);
+      clearInterval(holdInterval);
+      var name = `"HMI_PLC".FromHMI.Command.UpFwdOn`;
+      sendDataToUrl("IOWriteForward.html", name, 0);
+      // Repeat every 100ms as an example
     } else if (button.textContent == "downBwdOff") {
-      startHold("DownBwdOff");
+      clearInterval(holdInterval);
+      var name = `"HMI_PLC".FromHMI.Command.DownBwdOff`;
+      sendDataToUrl("IOWriteBackward.html", name, 0);
+      // Repeat every 100ms as an example
     }
     setTimeout(() => button.classList.remove("clicked"), 150);
   });
 
   button.addEventListener("mouseleave", function () {
     if (button.textContent == "upFwdOn") {
-      startHold("UpFwdOn");
+      console.log(`Holding upFwdOn`);
+      clearInterval(holdInterval);
+      var name = `"HMI_PLC".FromHMI.Command.UpFwdOn`;
+      sendDataToUrl("IOWriteForward.html", name, 0);
     } else if (button.textContent == "downBwdOff") {
-      startHold("DownBwdOff");
+      clearInterval(holdInterval);
+      var name = `"HMI_PLC".FromHMI.Command.DownBwdOff`;
+      sendDataToUrl("IOWriteBackward.html", name, 0);
     }
     setTimeout(() => button.classList.remove("clicked"), 150);
   });
@@ -182,22 +194,102 @@ commandButtons.forEach((button) => {
 upFwdOnButton.addEventListener("touchstart", (e) => {
   preventDefaultTouch(e);
   upFwdOnButton.classList.add("clicked");
-  startHold("UpFwdOn");
+  console.log(`Holding upFwdOn`);
+  holdInterval = setInterval(() => {
+    var name = `"HMI_PLC".FromHMI.Command.UpFwdOn`;
+    sendDataToUrl("IOWriteForward.html", name, 1);
+  }, 100); // Repeat every 100ms as an example
 });
 upFwdOnButton.addEventListener("touchend", () => {
   setTimeout(() => upFwdOnButton.classList.remove("clicked"), 150);
-  stopHold("UpFwdOn");
+  clearInterval(holdInterval);
+  var name = `"HMI_PLC".FromHMI.Command.UpFwdOn`;
+  sendDataToUrl("IOWriteForward.html", name, 0);
 });
 
 downBwdOffButton.addEventListener("touchstart", (e) => {
   preventDefaultTouch(e);
   downBwdOffButton.classList.add("clicked");
-  startHold("DownBwdOff");
+  console.log(`Holding downBwdOff`);
+  holdInterval = setInterval(() => {
+    var name = `"HMI_PLC".FromHMI.Command.DownBwdOff`;
+    sendDataToUrl("IOWriteBackward.html", name, 1);
+  }, 100); // Repeat every 100ms as an example
 });
 downBwdOffButton.addEventListener("touchend", () => {
   setTimeout(() => downBwdOffButton.classList.remove("clicked"), 150);
-  stopHold("DownBwdOff");
+  clearInterval(holdInterval);
+  var name = `"HMI_PLC".FromHMI.Command.DownBwdOff`;
+  sendDataToUrl("IOWriteBackward.html", name, 0);
 });
+
+// Elements for Carrier speed
+var carrierSpeedInput = document.getElementById("carrier-speed-input");
+var setCarrierSpeedButton = document.getElementById("set-carrier-speed");
+var carrierCurrentSpeedLabel = document.getElementById("carrier-current-speed");
+
+// Elements for Lifter speed
+var lifterSpeedInput = document.getElementById("lifter-speed-input");
+var setLifterSpeedButton = document.getElementById("set-lifter-speed");
+var lifterCurrentSpeedLabel = document.getElementById("lifter-current-speed");
+
+function updateSpeedLabels() {
+  carrierCurrentSpeedLabel.textContent =
+    "Current Speed: " + gData.CarrierActualSpeed;
+  lifterCurrentSpeedLabel.textContent =
+    "Current Speed: " + gData.LifterActualSpeed;
+}
+
+// Event listener for setting Carrier speed
+setCarrierSpeedButton.addEventListener("click", function () {
+  var speed = carrierSpeedInput.value;
+  if (
+    speed >= 0 &&
+    speed <= 100 &&
+    speed != gData.CarrierActualSpeed &&
+    speed != ""
+  ) {
+    // Mock setting the Carrier speed in the PLC
+    console.log("Setting Carrier speed to:", speed); // For debugging
+    sendDataToUrl(
+      "IOWriteCarrierSpeed.html",
+      `"HMI_PLC".FromHMI.Setting.Carrier.Speed`,
+      speed
+    );
+    // HMI_PLC.FromHMI.Setting.Carrier.Speed = speed; // Uncomment for actual use
+    carrierCurrentSpeedLabel.textContent = "Current Speed: " + speed;
+  } else {
+    console.log("Please enter a speed value between 0 and 100 for Carrier.");
+  }
+});
+
+// Event listener for setting Lifter speed
+setLifterSpeedButton.addEventListener("click", function () {
+  var speed = lifterSpeedInput.value;
+  if (speed >= 0 && speed <= 100) {
+    // Mock setting the Lifter speed in the PLC
+    console.log("Setting Lifter speed to:", speed); // For debugging
+    sendDataToUrl(
+      "IOWriteLifterSpeed.html",
+      `"HMI_PLC".FromHMI.Setting.Lifter.Speed`,
+      speed
+    );
+    lifterCurrentSpeedLabel.textContent =
+      "Current Speed: " + gData.LifterActualSpeed;
+  } else {
+    console.log("Please enter a speed value between 0 and 100 for Lifter.");
+  }
+});
+
+// Mock updating the current speed labels periodically
+// setInterval(function () {
+//   // These would be replaced with actual reads from the PLC
+//   var currentCarrierSpeed = /* HMI_PLC.ToHMI.Status.Carrier.actSpeed */ "50"; // Placeholder
+//   var currentLifterSpeed = /* HMI_PLC.ToHMI.Status.Lifter.actSpeed */ "20"; // Placeholder
+
+//   carrierCurrentSpeedLabel.textContent = "Current: " + currentCarrierSpeed;
+//   lifterCurrentSpeedLabel.textContent = "Current: " + currentLifterSpeed;
+// }, 1000); // Update every second
 
 // ============================================================
 // COMMAND BUTTONS
