@@ -43,10 +43,31 @@ function removeFirstAndLastChar(str) {
   }
 }
 
-function intToBits(int) {
-  const bits = [];
-  for (let i = 0; i < 32; i++) {
-    bits.push(Boolean(int & (1 << i)));
+// function intToBits(int) {
+//   const bits = [];
+//   for (let i = 0; i < 32; i++) {
+//     bits.push(Boolean(int & (1 << i)));
+//   }
+//   return bits;
+// }
+
+
+function readBits(integer) {
+  var bits = [];
+  var mask = 1;
+      for (var i = 0; i < 32; i++) { // Assuming 32-bit integers
+          bits.push(integer & mask ? 1 : 0);
+          mask <<= 1;
+      }
+      return bits
   }
-  return bits;
-}
+
+  // // Example usage:
+  // var Digital_Input = 3; // Example integer
+  // var bits = readBits(Digital_Input);
+  // console.log(bits);
+
+  // var limit_Switch_Left = bits[1];
+  // console.log(bits[0]);
+  // console.log(limit_Switch_Left);
+

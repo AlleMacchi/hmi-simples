@@ -1,4 +1,4 @@
-let currentMode = decodeHTMLEntity(gData.StatusMode);
+// let currentMode = decodeHTMLEntity(gData.StatusMode);
 
 // Update mode display in the header
 // function updateHeaderMode(mode) {
@@ -17,19 +17,11 @@ function toggleSidebar(open) {
   }
 }
 
-// btnMode.addEventListener("click", function () {
-//   sidebarMode.classList.toggle("open");
-//   btnMode.textContent = sidebarMode.classList.contains("open") ? "X" : "Mode";
-// });
-
 btnMode.addEventListener("click", function () {
   // Toggle sidebar on mode button click
   const isOpen = sidebarMode.classList.contains("open");
   toggleSidebar(!isOpen);
-  // if (!isOpen) {
-  //   // Update the current mode when opening the sidebar
-  //   btnMode.style.width = "5%";
-  // }
+
   btnMode.textContent = isOpen ? "MODE" : "X";
 });
 
@@ -76,15 +68,15 @@ btnAuto.addEventListener("click", function () {
 });
 
 function StringTovariableMode(currentMode) {
+  console.log(currentMode);
   if (currentMode === "Manual") {
     return 0;
   } else {
     return 1;
   }
-
 }
 // Initialize the sidebar in MANUAL mode
-toggleMode(StringTovariableMode(currentMode));
+toggleMode(StringTovariableMode(decodeHTMLEntity(gData.StatusMode)));
 
 // Button click visual effect
 const commandButtons = document.querySelectorAll(".commands button");

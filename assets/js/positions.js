@@ -61,18 +61,19 @@ function fillPositionsTable(positionsData) {
             `"HMI_PLC".FromHMI.Position.request`,
             true
           );
-          if (gData.Position_result !== 1) {
+          if (gData.Position_result == 1) {
+            valueInput.value = gData.Position_mm;
+            sendDataToUrl(
+              "IOWrite.html",
+              `"HMI_PLC".FromHMI.Position.request`,
+              false
+            );
+          } else {
             console.log("Position request not set");
             outMessage.textContent = "Something went wrong. Please try again.";
             outMessage.style.color = "red"; // Optional: Change color for error message
             return;
           }
-          valueInput.value = gData.Position_mm;
-          sendDataToUrl(
-            "IOWrite.html",
-            `"HMI_PLC".FromHMI.Position.request`,
-            false
-          );
         }
         selectedRow = tr;
         tr.classList.add("selected");
@@ -116,16 +117,16 @@ setButton.addEventListener("click", () => {
   sendDataToUrl("IOWrite.html", `"HMI_PLC".FromHMI.Position.mm`, newValue);
   sendDataToUrl("IOWrite.html", `"HMI_PLC".FromHMI.Position.update`, 1);
 
-  if (gData.Position_result !== 1) {
+  if (gData.Position_result == 1) {
+    sendDataToUrl("IOWrite.html", `"HMI_PLC".FromHMI.Position.update`, 0);
+    outMessage.style.color = "white";
+    outMessage.textContent = "Position updated successfully.";
+  } else {
     console.log("Position request not set");
     outMessage.textContent = "Something went wrong. Please try again.";
     outMessage.style.color = "red"; // Optional: Change color for error message
     return;
   }
-
-  sendDataToUrl("IOWrite.html", `"HMI_PLC".FromHMI.Position.update`, 0);
-  outMessage.style.color = "white";
-  outMessage.textContent = "Position updated successfully.";
 
   // Reset the selected row
   //  valueInput.value = "";
@@ -137,6 +138,4 @@ setButton.addEventListener("click", () => {
   // console.log(selectedRow.value, newValue);
 });
 
-function updateAGVPositionHMI_mm(value) {
-  AGVposition.textContent = value;
-}
+

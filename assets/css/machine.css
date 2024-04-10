@@ -105,9 +105,9 @@
   height: 30px;
   position: relative;
   border-radius: var(--br-8xs);
-  /* background-color: var(--color-darkgray-200); */
-  background-color: var(--light-blue);
-  box-shadow: 0 0 15px 3px var(--light-blue);
+  background-color: var(--color-darkgray-200);
+  /* background-color: var(--light-blue); */
+  /* box-shadow: 0 0 15px 3px var(--light-blue); */
   z-index: 1;
 }
 #sensor-408 {
@@ -115,8 +115,7 @@
   width: 29px;
   border-radius: 50%;
   background-color: var(--color-darkgray-100);
-  background-color: var(--light-blue);
-  box-shadow: 0 0 15px 3px var(--light-blue);
+  /* box-shadow: 0 0 15px 3px var(--light-blue); */
 }
 #sensor-408-wrapper {
   display: flex;
@@ -130,9 +129,8 @@
   height: 30px;
   position: relative;
   border-radius: var(--br-8xs);
-  /* background-color: var(--color-darkgray-200); */
-  background-color: var(--light-blue);
-  box-shadow: 0 0 15px 3px var(--light-blue);
+  background-color: var(--color-darkgray-200);
+  /* box-shadow: 0 0 15px 3px var(--light-blue); */
   z-index: 1;
 }
 .left-sensors-group {
@@ -150,12 +148,13 @@
 }
 #sensor-423 {
   display: flex;
-  flex-direction: row;
+  direction: column;
   align-items: center;
   justify-content: center;
-  border-left: 30px solid transparent;
-  border-right: 30px solid transparent;
-  border-bottom: 30px solid var(--color-darkgray-100);
+  width: 50%;
+  height: 30px;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  background-color: var(--color-darkgray-200);
 }
 
 #battery-text {
@@ -172,20 +171,23 @@
   align-items: center;
   flex-direction: column;
   gap: 40px;
+  width: 30%;
 }
 
+/* battery */
 #sensor-432 {
   display: flex;
   justify-content: center;
-  cursor: pointer;
+  align-items: center;
   border: 0;
-  padding: var(--padding-sm) var(--padding-sm) 12px var(--padding-mini);
+  /* padding: 10%; */
   background-color: var(--color-darkgray-200);
   align-self: stretch;
   border-radius: var(--br-8xs);
-  flex-direction: row;
-  align-items: flex-start;
-  z-index: 1;
+  /* z-index: 1; */
+  font-size: 24px;
+  font-weight: 600;
+  color: black;
 }
 
 #sensor-406 {
@@ -242,39 +244,11 @@
   width: 100%;
 }
 
-.arrow-icon,
-.frame-child2 {
-  width: 0.4px;
-  flex: 1;
-  position: relative;
-  max-height: 100%;
-  object-fit: contain;
-}
-.frame-child2 {
-  width: 28.9px;
-}
-.frame-wrapper,
-.vector-parent {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.vector-parent {
-  flex: 1;
-  justify-content: flex-start;
-  gap: 27px;
-}
-.frame-wrapper {
-  height: 203px;
-  justify-content: flex-end;
-  padding: 0 0 6px;
-  box-sizing: border-box;
-}
 .agv-group {
   align-self: stretch;
   display: flex;
   flex-direction: row;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
   gap: 10%;
   width: 70%;
@@ -305,7 +279,7 @@
   /* background-color: var(--black); */
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   /* padding: 0 18.1px 0 47px; */
   gap: 5%;
@@ -324,7 +298,7 @@
 #sensor-410 {
   box-shadow: 0 0 15px 3px var(--light-blue);
   clip-path: polygon(50% 50%, 0% 100%, 100% 100%);
-  background-color: var(--light-blue);
+  background-color: var(--color-darkgray-100);
   height: 100%;
   width: 100%;
 }
@@ -335,6 +309,7 @@
   background-color: var(--color-darkgray-100);
   height: 100%;
   width: 100%;
+  border: 2px solid var(--color-darkgray-200);
 }
 
 /* .arrows {
@@ -356,14 +331,81 @@
   width: 100%;
 }
 
-#sensor .active {
-  background-color: #00ff00; /* Green background for active sensors */
+.activeSensor {
+  background-color: var(--light-blue) !important;
+  box-shadow: 0 0 15px 3px var(--light-blue) !important;
 }
 
-#sensor .low-battery {
-  background-color: #ff0000; /* Red background for low battery */
+.low-batterySensor {
+  background-color: #ff0000 !important; /* Red background for low battery */
+  box-shadow: 0 0 15px 3px red !important;
 }
 
+/* Tooltip container */
+.sensor-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+.sensor-tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: var(--black);
+  color: #fff;
+  text-align: left;
+  padding: 20px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px; /* Use half of the width value to align */
+  opacity: 0;
+  transition: opacity 0.3s;
+  width: 300px;
+  border-radius: 10px;
+}
+
+/* Tooltip arrow */
+.sensor-tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.sensor-tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+  z-index: 5;
+}
+
+.sensor-tooltip:hover .tooltiptext span {
+  color: var(--light-blue);
+  text-shadow: var(--text-shadow-blue);
+}
+
+#ArrowWrap_sensor-423 {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  height: 30px;
+}
+
+#ArrowWrap_sensor-410 {
+  width: 100%;
+  height: 100px;
+}
+
+#ArrowWrap_sensor-411 {
+  width: 100%;
+  height: 100px;
+}
 /* @media screen and (max-width: 450px) {
   .agvBaby {
     flex-wrap: wrap;
@@ -394,3 +436,25 @@
 /* #sensor .low-battery {
   background-color: #ff0000; /* Red background for low battery */
 /* } */
+
+#position-label p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+#position-value {
+  color: var(--light-blue);
+  text-shadow: var(--text-shadow-blue);
+  box-shadow: var(--box-shadow);
+  border-radius: 50px;
+  font-weight: 600;
+  padding: 5% 5%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  width: 200px;
+  margin-left: 10px;
+}
