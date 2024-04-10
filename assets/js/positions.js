@@ -61,7 +61,7 @@ function fillPositionsTable(positionsData) {
             `"HMI_PLC".FromHMI.Position.request`,
             true
           );
-          if (gData.Position_result == 1) {
+          if (updatePositionResult() == 1) {
             valueInput.value = gData.Position_mm;
             sendDataToUrl(
               "IOWrite.html",
@@ -93,7 +93,6 @@ fillPositionsTable(positionsData);
 
 teachInButton.addEventListener("click", () => {
   // Copy actPosition_mm to the input
-
   valueInput.value = gData.CarrierActualPosition_mm;
 });
 
@@ -117,7 +116,7 @@ setButton.addEventListener("click", () => {
   sendDataToUrl("IOWrite.html", `"HMI_PLC".FromHMI.Position.mm`, newValue);
   sendDataToUrl("IOWrite.html", `"HMI_PLC".FromHMI.Position.update`, 1);
 
-  if (gData.Position_result == 1) {
+  if (updatePositionResult() == 1) {
     sendDataToUrl("IOWrite.html", `"HMI_PLC".FromHMI.Position.update`, 0);
     outMessage.style.color = "white";
     outMessage.textContent = "Position updated successfully.";
@@ -137,5 +136,3 @@ setButton.addEventListener("click", () => {
   // selectedRow.value = newValue;
   // console.log(selectedRow.value, newValue);
 });
-
-

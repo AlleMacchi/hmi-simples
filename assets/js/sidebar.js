@@ -1,5 +1,3 @@
-// let currentMode = decodeHTMLEntity(gData.StatusMode);
-
 // Update mode display in the header
 // function updateHeaderMode(mode) {
 //   labelMode.textContent = mode;
@@ -75,8 +73,12 @@ function StringTovariableMode(currentMode) {
     return 1;
   }
 }
+
+function updateStatusModeFromstring(){
+  StringTovariableMode(decodeHTMLEntity(gData.StatusMode))
+}
 // Initialize the sidebar in MANUAL mode
-toggleMode(StringTovariableMode(decodeHTMLEntity(gData.StatusMode)));
+toggleMode(updateStatusModeFromstring());
 
 // Button click visual effect
 const commandButtons = document.querySelectorAll(".commands button");
@@ -198,6 +200,74 @@ downBwdOffButton.addEventListener("touchend", () => {
   setTimeout(() => downBwdOffButton.classList.remove("clicked"), 150);
   stopHold("DownBwdOff");
 });
+
+// Elements for Carrier speed
+var carrierSpeedInput = document.getElementById("carrier-speed-input");
+var setCarrierSpeedButton = document.getElementById("set-carrier-speed");
+var carrierCurrentSpeedLabel = document.getElementById("carrier-current-speed");
+
+// Elements for Lifter speed
+var lifterSpeedInput = document.getElementById("lifter-speed-input");
+var setLifterSpeedButton = document.getElementById("set-lifter-speed");
+var lifterCurrentSpeedLabel = document.getElementById("lifter-current-speed");
+
+function updateSpeedLabels() {
+  carrierCurrentSpeedLabel.textContent =
+    "Current Speed: " + gData.CarrierActualSpeed;
+  lifterCurrentSpeedLabel.textContent =
+    "Current Speed: " + gData.LifterActualSpeed;
+}
+
+// Event listener for setting Carrier speed
+setCarrierSpeedButton.addEventListener("click", function () {
+  var speed = carrierSpeedInput.value;
+  if (
+    speed >= 0 &&
+    speed <= 100 &&
+    speed != gData.CarrierActualSpeed &&
+    speed != ""
+  ) {
+    // Mock setting the Carrier speed in the PLC
+    console.log("Setting Carrier speed to:", speed); // For debugging
+    sendDataToUrl(
+      "IOWrite.html",
+      `"HMI_PLC".FromHMI.Setting.Carrier.Speed`,
+      speed
+    );
+    // HMI_PLC.FromHMI.Setting.Carrier.Speed = speed; // Uncomment for actual use
+    carrierCurrentSpeedLabel.textContent = "Current Speed: " + speed;
+  } else {
+    alert("Please enter a speed value between 0 and 100 for Carrier.");
+  }
+});
+
+// Event listener for setting Lifter speed
+setLifterSpeedButton.addEventListener("click", function () {
+  var speed = lifterSpeedInput.value;
+  if (speed >= 0 && speed <= 100) {
+    // Mock setting the Lifter speed in the PLC
+    console.log("Setting Lifter speed to:", speed); // For debugging
+    sendDataToUrl(
+      "IOWrite.html",
+      `"HMI_PLC".FromHMI.Setting.Lifter.Speed`,
+      speed
+    );
+    lifterCurrentSpeedLabel.textContent =
+      "Current Speed: " + gData.LifterActualSpeed;
+  } else {
+    alert("Please enter a speed value between 0 and 100 for Lifter.");
+  }
+});
+
+// Mock updating the current speed labels periodically
+// setInterval(function () {
+//   // These would be replaced with actual reads from the PLC
+//   var currentCarrierSpeed = /* HMI_PLC.ToHMI.Status.Carrier.actSpeed */ "50"; // Placeholder
+//   var currentLifterSpeed = /* HMI_PLC.ToHMI.Status.Lifter.actSpeed */ "20"; // Placeholder
+
+//   carrierCurrentSpeedLabel.textContent = "Current: " + currentCarrierSpeed;
+//   lifterCurrentSpeedLabel.textContent = "Current: " + currentLifterSpeed;
+// }, 1000); // Update every second
 
 // ============================================================
 // COMMAND BUTTONS

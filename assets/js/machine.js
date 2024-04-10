@@ -4,9 +4,6 @@ const selection = document.getElementById("standard-select");
 // Add event listener for 'change' event
 selection.addEventListener("change", function (event) {
   // Reset selections to false
-  HMI_PLC.FromHMI.Selection.Carrier.enable = false;
-  HMI_PLC.FromHMI.Selection.Lifter.enable = false;
-
   // Set the corresponding selection to true based on the dropdown choice
   if (event.target.value === "Wheels") {
     sendDataToUrl(
@@ -58,47 +55,46 @@ selection.addEventListener("change", function (event) {
 
 //         17
 
-var Modulo_0 = readBits(gData.ShuttleToWMS_DI_Module0);
-var Modulo_1 = readBits(gData.ShuttleToWMS_DI_Module1);
-var Battery = gData.ShuttleToWMS_AI_Module_0_Channel_0 > 0 ? 1 : 0;
-
-const sensorDescriptions = {
-  "sensor-400": "Reserved for future use",
-  "sensor-401": "Reserved for future use",
-  "sensor-402": "Speed Hole Detection",
-  "sensor-403": "Stop Hole Detection",
-  "sensor-404": "Before Cargo Detection on Side A",
-  "sensor-405": "After Cargo Detection on Side A",
-  "sensor-406": "Before Cargo Detection on Side B",
-  "sensor-407": "After Cargo Detection on Side B",
-  "sensor-408": "Side A Detects the Mother Car Is In Place",
-  "sensor-409": "Side B Detects the Mother Car Is In Place",
-  "sensor-410": "Lift Upper Limit",
-  "sensor-411": "Jacking Lower Limit",
-  "sensor-412": "Jacking Drive Failure",
-  "sensor-413": "Travel Drive Failure",
-  "sensor-414": "Reserved for future use",
-  "sensor-415": "Reserved for future use",
-  "sensor-416": "Side A Detects Goods Close To",
-  "sensor-417": "Side A Detects Goods Far Away",
-  "sensor-418": "Side B Detects Goods Close To",
-  "sensor-419": "Side B Detects Goods Far Away",
-  "sensor-420": "Cargo Hole Detection",
-  "sensor-421": "Reserved for future use",
-  "sensor-422": "Reserved for future use",
-  "sensor-423": "Inspection of Return to Parent Vehicle",
-  "sensor-424": "Reserved for future use",
-  "sensor-425": "Reserved for future use",
-  "sensor-426": "Reserved for future use",
-  "sensor-427": "Reserved for future use",
-  "sensor-428": "Reserved for future use",
-  "sensor-429": "Reserved for future use",
-  "sensor-430": "Reserved for future use",
-  "sensor-431": "Reserved for future use",
-  "sensor-432": "Battery Level",
-};
-
 function updateSensorsFromBits() {
+  var Modulo_0 = readBits(gData.ShuttleToWMS_DI_Module0);
+  var Modulo_1 = readBits(gData.ShuttleToWMS_DI_Module1);
+  var Battery = gData.ShuttleToWMS_AI_Module_0_Channel_0 > 0 ? 1 : 0;
+
+  const sensorDescriptions = {
+    "sensor-400": "Reserved for future use",
+    "sensor-401": "Reserved for future use",
+    "sensor-402": "Speed Hole Detection",
+    "sensor-403": "Stop Hole Detection",
+    "sensor-404": "Before Cargo Detection on Side A",
+    "sensor-405": "After Cargo Detection on Side A",
+    "sensor-406": "Before Cargo Detection on Side B",
+    "sensor-407": "After Cargo Detection on Side B",
+    "sensor-408": "Side A Detects the Mother Car Is In Place",
+    "sensor-409": "Side B Detects the Mother Car Is In Place",
+    "sensor-410": "Lift Upper Limit",
+    "sensor-411": "Jacking Lower Limit",
+    "sensor-412": "Jacking Drive Failure",
+    "sensor-413": "Travel Drive Failure",
+    "sensor-414": "Reserved for future use",
+    "sensor-415": "Reserved for future use",
+    "sensor-416": "Side A Detects Goods Close To",
+    "sensor-417": "Side A Detects Goods Far Away",
+    "sensor-418": "Side B Detects Goods Close To",
+    "sensor-419": "Side B Detects Goods Far Away",
+    "sensor-420": "Cargo Hole Detection",
+    "sensor-421": "Reserved for future use",
+    "sensor-422": "Reserved for future use",
+    "sensor-423": "Inspection of Return to Parent Vehicle",
+    "sensor-424": "Reserved for future use",
+    "sensor-425": "Reserved for future use",
+    "sensor-426": "Reserved for future use",
+    "sensor-427": "Reserved for future use",
+    "sensor-428": "Reserved for future use",
+    "sensor-429": "Reserved for future use",
+    "sensor-430": "Reserved for future use",
+    "sensor-431": "Reserved for future use",
+    "sensor-432": "Battery Level",
+  };
   // Mapping from sensor IDs to their respective bits in the ShuttleToWMS object
   const sensorMapping = {
     "sensor-404": Modulo_0[4],

@@ -51,17 +51,21 @@
       </div>
       <!-- Speed controls for Carrier -->
 <div class="speed-control">
-  <label for="carrier-speed-input">Carrier Speed:</label>
+  <label for="carrier-speed-input">Carrier Speed</label>
+  <div id="input-div">
   <input type="number" id="carrier-speed-input" min="0" max="100" placeholder="0-100">
-  <button id="set-carrier-speed">Set Speed</button>
+  <button id="set-carrier-speed">SET</button>
+  </div>
   <span id="carrier-current-speed">Current: -</span>
 </div>
 
 <!-- Speed controls for Lifter -->
 <div class="speed-control">
-  <label for="lifter-speed-input">Lifter Speed:</label>
+  <label for="lifter-speed-input">Lifter Speed</label>
+  <div id="input-div">
   <input type="number" id="lifter-speed-input" min="0" max="100" placeholder="0-100">
-  <button id="set-lifter-speed">Set Speed</button>
+  <button id="set-lifter-speed">SET</button>
+</div>
   <span id="lifter-current-speed">Current: -</span>
 </div>
 
@@ -526,6 +530,7 @@
     <script type="text/javascript" src="assets/js/scroll.js"></script>
     <!-- READ I/O -->
     <script type="text/javascript" src="assets/js/Comms/I0Read_Pure.js"></script>
+    <script type="text/javascript" src="assets/js/Comms/Update.Js"></script>
     <!-- Writing.js -->
     <script type="text/javascript" src="assets/js/Comms/I0Write_Pure.js"></script>
     <!-- positions_obj -->
@@ -559,6 +564,6 @@
      <!-- MODE -->
     <script type="text/javascript" src="assets/js/sidebar.js"></script>
     <!-- Update -->
-    <script type="text/javascript" src="assets/js/Comms/Update.Js"></script>
+    
   </body>
 </html>
