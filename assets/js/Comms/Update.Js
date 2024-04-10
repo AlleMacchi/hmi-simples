@@ -1,5 +1,6 @@
 // Update function call
 setInterval(() => {
+  console.log(gData);
   updateAGVPosition(gData.ShuttleToWMS_Carrier_Position);
   updaterowTitle();
   updateHeaderStatus();

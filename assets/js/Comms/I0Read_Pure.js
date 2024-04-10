@@ -1,16 +1,16 @@
-document.addEventListener("DOMContentLoaded", function () {
-  setInterval(function () {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        var data = JSON.parse(xhr.responseText);
-        gData = data;
-      }
-    };
-    xhr.open("GET", "IORead.html", true);
-    xhr.send();
-  }, 1000);
-});
+function readFile(File) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      var data = JSON.parse(xhr.responseText);
+      gData = data;
+    }
+  };
+  xhr.open("GET", File, true);
+  xhr.send();
+}
+
+setInterval(readFile("IORead.html"), 1000);
 
 // ============================================================
 
@@ -51,23 +51,22 @@ function removeFirstAndLastChar(str) {
 //   return bits;
 // }
 
-
 function readBits(integer) {
   var bits = [];
   var mask = 1;
-      for (var i = 0; i < 32; i++) { // Assuming 32-bit integers
-          bits.push(integer & mask ? 1 : 0);
-          mask <<= 1;
-      }
-      return bits
+  for (var i = 0; i < 32; i++) {
+    // Assuming 32-bit integers
+    bits.push(integer & mask ? 1 : 0);
+    mask <<= 1;
   }
+  return bits;
+}
 
-  // // Example usage:
-  // var Digital_Input = 3; // Example integer
-  // var bits = readBits(Digital_Input);
-  // console.log(bits);
+// // Example usage:
+// var Digital_Input = 3; // Example integer
+// var bits = readBits(Digital_Input);
+// console.log(bits);
 
-  // var limit_Switch_Left = bits[1];
-  // console.log(bits[0]);
-  // console.log(limit_Switch_Left);
-
+// var limit_Switch_Left = bits[1];
+// console.log(bits[0]);
+// console.log(limit_Switch_Left);
