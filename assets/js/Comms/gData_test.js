@@ -30,7 +30,7 @@ function createGDataObject() {
     ShuttleToWMS_TaskNumber: 1,
     ShuttleToWMS_Coordinate: "&quot;A-L01R019A20&quot;",
     ShuttleToWMS_Result: 1,
-    ShuttleToWMS_ErrorCode: 0,
+    ShuttleToWMS_ErrorCode: 90,
     ShuttleToWMS_TaskStatus: 1,
     ShuttleToWMS_CurrentMode: 0,
     ShuttleToWMS_CurrentState: 1,

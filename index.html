@@ -274,35 +274,45 @@
               A
             </div>
             <section class="agv-group">
-              <div class="agv-Baby">  
-                
+              <div class="agv-Baby">      
                 <div class="left-sensors-group">
-                  <div id="sensor-404"></div>
+                  <div id="sensor-404" class="sensor-tooltip sensor-circle"><span class="tooltiptext">X<br>X<br>x</span></div>
+                  
                   <div id="sensor-408-wrapper">
-                    <div id="sensor-408"></div>
+                    <div id="sensor-408" class="sensor-tooltip sensor-circle"><span class="tooltiptext">X<br>X<br>x</span></div>
                   </div>
-                  <div id="sensor-405"></div>
+                  <div id="sensor-405" class="sensor-tooltip sensor-circle"><span class="tooltiptext">X<br>X<br>x</span></div>
                 </div>
                 <div class="central-sensors-group">
-                  <div id="sensor-423">
+                  <div id="ArrowWrap_sensor-423" class="sensor-tooltip sensor-circle">
+                    <span class="tooltiptext">X<br>X<br>x</span>
+                  <div id="sensor-423"></div>
                   </div>
-                  <div id="sensor-432">
+                  <div id="sensor-432" class="sensor-tooltip sensor-circle">
+                    <span id="tooltiptextBattery" class="tooltiptext">X<br>X<br>x</span>
                     <b id="battery-text">BATTERY</b>
                   </div>
                 </div>
                 <div class="right-sensors-group">
-                  <div id="sensor-406"></div>
+                  <div id="sensor-406" class="sensor-tooltip sensor-circle"><span class="tooltiptext">X<br>X<br>x</span></div>
                   <div id="sensor-409-wrapper">
-                    <div id="sensor-409"></div>
+                    <div id="sensor-409" class="sensor-tooltip sensor-circle"><span class="tooltiptext">X<br>X<br>x</span></div>
                   </div>
-                  <div id="sensor-407"></div>
+                  <div id="sensor-407" class="sensor-tooltip sensor-circle"><span class="tooltiptext">X<br>X<br>x</span></div>
                 </div>
               </div>
               
                 
                   <div class="arrows">
-                    <div id="sensor-410"></div>
+
+                    <div id="ArrowWrap_sensor-410" class="sensor-tooltip sensor-circle">
+                      <span class="tooltiptext">X<br>X<br>x</span>
+                      <div id="sensor-410"><span class="tooltiptext">X<br>X<br>x</span></div>
+                    </div>
+                    <div id="ArrowWrap_sensor-411" class="sensor-tooltip sensor-circle">
+                      <span class="tooltiptext">X<br>X<br>x</span>
                     <div id="sensor-411"></div>
+                  </div>
                   </div>
                 
                 
@@ -343,7 +353,7 @@
             </table>
           </div>
           <div class="input-container">
-            <label id="AGV-position">AGV Position: <br><span></span> mm</label>
+            <label id="AGV-position">AGV Position mm: <br><span></span></label>
             <input id="value-input">
             <button id="teachInButton">Teach In</button>
             <hr>
@@ -375,7 +385,12 @@
               <p>Task Number: <span id="plc_wms_task_number">-</span></p>
               <p>Coordinate: <span id="plc_wms_coordinate">-</span></p>
               <p>Result: <span id="plc_wms_result">-</span></p>
-              <p>Error Code: <span id="plc_wms_error_code">-</span><span id="ErrorInfoIcon">i</span><h6 id="ErrorDescription"></h6> </p>
+              <p>Error Code: <span id="plc_wms_error_code">-</span>
+                <!-- <div class="tooltip-container"> -->
+                  <span id="ErrorInfoIcon">i</span>
+                  <span id="ErrorDescription" class="tooltiptextError"></span>
+                <!-- </div> -->
+              </p>
               <p>Task Status: <span id="plc_wms_task_status">-</span></p>
               <hr>
               <p>Current Mode: <span id="plc_wms_current_mode">-</span></p>
@@ -490,7 +505,7 @@
     <!-- GLOBAL VARIABLE -->
     <script type="text/javascript" src="assets/js/global.js"></script>
     <!-- Test Object-->
-    <!-- <script type="text/javascript" src="assets/js/Comms/gData_test_object.js"></script> -->
+    <!-- <script type="text/javascript" src="assets/js/Comms/gData_test.js"></script> -->
     <!-- SCROLL -->
     <script type="text/javascript" src="assets/js/scroll.js"></script>
     <!-- Writing.js -->
@@ -500,11 +515,11 @@
     <!-- positions_obj -->
     <script type="text/javascript" src="assets/js/Comms/positions_obj.js"></script>
     <!-- HMI_PLC -->
-    <!-- <script type="text/javascript" src="assets/js/Comms/HMI_PLC_test_object.js.js"></script> -->
+    <!-- <script type="text/javascript" src="assets/js/Comms/HMIPLC_test.js.js"></script> -->
     <!-- ShuttleToWMS -->
-    <!-- <script type="text/javascript" src="assets/js/Comms/ShuttleToWMS_test_object.js.js"></script> -->
+    <!-- <script type="text/javascript" src="assets/js/Comms/STW_test.js.js"></script> -->
     <!-- WMSToShuttle -->
-    <!-- <script type="text/javascript" src="assets/js/Comms/WMSToShuttle_test_object.js.js"></script> -->
+    <!-- <script type="text/javascript" src="assets/js/Comms/WTS_test.js.js"></script> -->
      <!-- alarms_obj -->
      <script type="text/javascript" src="assets/js/Comms/alarms_obj.js"></script>
     <!-- header -->

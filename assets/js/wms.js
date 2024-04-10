@@ -93,6 +93,8 @@ function getTaskStatusDescription(statusCode) {
 const infoIcon = document.getElementById("ErrorInfoIcon");
 const errorCodeSpan = document.getElementById("plc_wms_error_code");
 const errorDescription = document.getElementById("ErrorDescription");
+const tooltipError = document.getElementById("ErrorDescription");
+tooltipError.innerHTML = `Error: ${getErrorDescription(gData.ShuttleToWMS_ErrorCode)}`;
 
 // Function to get error description
 function getErrorDescription(errorCode) {
@@ -115,16 +117,8 @@ function getErrorDescription(errorCode) {
   return errorDescriptions[errorCode] || "Unknown error";
 }
 
-// Show error description on hover
-infoIcon.addEventListener("mouseenter", function () {
-  const errorCode = parseInt(errorCodeSpan.textContent);
-  errorDescription.textContent = getErrorDescription(errorCode);
-  errorDescription.style.display = "flex";
-});
 
-infoIcon.addEventListener("mouseleave", function () {
-  errorDescription.style.display = "none";
-});
+
 
 // =============================================================================
 
