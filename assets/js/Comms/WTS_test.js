@@ -9,7 +9,7 @@ const WMSToShuttle = {
   Command: {
     SelManAuto: false, // Initial state assumed to be false 205
     Start: false, // Initial state assumed to be false 206
-    Stop: false, // Initial state assumed to be false 207 
+    Stop: false, // Initial state assumed to be false 207
     Reset: false, // Initial state assumed to be false 298
   },
 };
