@@ -205,9 +205,9 @@ btn_go.addEventListener("click", () => {
       `"HMI_PLC".FromHMI.Setting.Carrier.PositionToReach_logical`,
       createPositionString(rowSelect.value, positionSelect.value)
     );
-    if(gData.W)
-    // GoMessage.style.display = "flex";
-    btn_go.classList.remove("active");
+    if (gData.W)
+      // GoMessage.style.display = "flex";
+      btn_go.classList.remove("active");
   }
 
   // ShuttleToWMS.Status.Carrier.Position = HMI_PLC.FromHMI.Setting.Carrier.PositionToReach_logical; Only for Testing
@@ -227,6 +227,7 @@ function createPositionString(row, column) {
 
 // Assuming you have an array of steps like this
 const taskToStepsMapping = {
+  0: ["0: Init"],
   1: [
     "0: Init",
     "1: Lift Down",
