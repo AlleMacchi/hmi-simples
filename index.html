@@ -49,6 +49,22 @@
           <button id="btnDownBwdOff" type="button">DWN/BWD/OFF</button>
         </div>
       </div>
+      <!-- Speed controls for Carrier -->
+<div class="speed-control">
+  <label for="carrier-speed-input">Carrier Speed:</label>
+  <input type="number" id="carrier-speed-input" min="0" max="100" placeholder="0-100">
+  <button id="set-carrier-speed">Set Speed</button>
+  <span id="carrier-current-speed">Current: -</span>
+</div>
+
+<!-- Speed controls for Lifter -->
+<div class="speed-control">
+  <label for="lifter-speed-input">Lifter Speed:</label>
+  <input type="number" id="lifter-speed-input" min="0" max="100" placeholder="0-100">
+  <button id="set-lifter-speed">Set Speed</button>
+  <span id="lifter-current-speed">Current: -</span>
+</div>
+
     </div>
     <div id="contents">
       <div id="container-section">
@@ -508,10 +524,10 @@
     <!-- <script type="text/javascript" src="assets/js/Comms/gData_test.js"></script> -->
     <!-- SCROLL -->
     <script type="text/javascript" src="assets/js/scroll.js"></script>
-    <!-- Writing.js -->
-    <script type="text/javascript" src="assets/js/Comms/I0Write_Pure.js"></script>
     <!-- READ I/O -->
     <script type="text/javascript" src="assets/js/Comms/I0Read_Pure.js"></script>
+    <!-- Writing.js -->
+    <script type="text/javascript" src="assets/js/Comms/I0Write_Pure.js"></script>
     <!-- positions_obj -->
     <script type="text/javascript" src="assets/js/Comms/positions_obj.js"></script>
     <!-- HMI_PLC -->
