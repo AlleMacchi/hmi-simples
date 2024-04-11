@@ -4,14 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>HMI Simple</title>
-        <!-- JQuery  -->
-        <script type="text/javascript" src="jquery-3.7.1.min.js"></script>
+    <!-- JQuery  -->
+    <script type="text/javascript" src="jquery-3.7.1.min.js"></script>
     <!-- MY CSS  -->
     <link rel="stylesheet" href="assets/css/main.css" />
   </head>
   <body>
     <div id="warning">
-      Please rotate your device to landscape mode for the best experience or use a larger device.
+      Please rotate your device to landscape mode for the best experience or use
+      a larger device.
     </div>
     <div id="header">
       <div id="logo">Production Reality Group</div>
@@ -27,8 +28,6 @@
       <button type="button" id="btn_section1">HOME</button>
       <button type="button" id="btn_section2">MACHINE</button>
       <button type="button" id="btn_section3">POSITIONS</button>
-      <button type="button" id="btn_section4">WMS</button>
-      <!-- <button type="button" id="btn_section5">SETTINGS</button> -->
       <button type="button" id="btn_section6">ALARMS</button>
       <h3 id="alarmsCounter">3</h3>
     </div>
@@ -37,14 +36,14 @@
       <div class="switch">
         <button type="button">MANUAL</button>
         <button type="button">AUTO</button>
-      </div>  
+      </div>
       <div id="roundCommands">
         <button type="button" id="btnStart">START</button>
         <button type="button" id="btnStop">STOP</button>
         <button type="button" id="btnReset">RESET</button>
       </div>
       <h3>Manual Commands</h3>
-      
+
       <div class="commands">
         <div>
           <button id="btnUpFwdOn" type="button">UP/FWD/ON</button>
@@ -52,25 +51,36 @@
         </div>
       </div>
       <!-- Speed controls for Carrier -->
-<div class="speed-control">
-  <label for="carrier-speed-input">Carrier Speed</label>
-  <div id="input-div">
-  <input type="number" id="carrier-speed-input" min="0" max="100" placeholder="0-100">
-  <button id="set-carrier-speed">SET</button>
-  </div>
-  <span id="carrier-current-speed"></span>
-</div>
+      <div class="speed-control">
+        <h3 for="carrier-speed-input">Carrier Speed</h3>
+        <div id="input-div">
+          <input
+            type="number"
+            id="carrier-speed-input"
+            min="0"
+            max="100"
+            placeholder="0-100"
+          />
+          <button id="set-carrier-speed">SET</button>
+        </div>
+        <span id="carrier-current-speed"></span>
+      </div>
 
-<!-- Speed controls for Lifter -->
-<div class="speed-control">
-  <label for="lifter-speed-input">Lifter Speed</label>
-  <div id="input-div">
-  <input type="number" id="lifter-speed-input" min="0" max="100" placeholder="0-100">
-  <button id="set-lifter-speed">SET</button>
-</div>
-  <span id="lifter-current-speed"></span>
-</div>
-
+      <!-- Speed controls for Lifter -->
+      <div class="speed-control">
+        <h3 for="lifter-speed-input">Lifter Speed</h3>
+        <div id="input-div">
+          <input
+            type="number"
+            id="lifter-speed-input"
+            min="0"
+            max="100"
+            placeholder="0-100"
+          />
+          <button id="set-lifter-speed">SET</button>
+        </div>
+        <span id="lifter-current-speed"></span>
+      </div>
     </div>
     <div id="contents">
       <div id="container-section">
@@ -244,113 +254,143 @@
                   <label id="logical-position-label"></label>
                 </div>
               </div>
-            
+
               <!-- GO Button -->
               <div class="position-controls" id="go-section">
                 <button type="button" id="btn_go" class="go-button">GO</button>
                 <h3 id="GoMessage">AGV is going...</h3>
               </div>
-            
+
               <!-- Physical Section -->
               <div class="position-controls" id="physical-section">
                 <button type="button" id="btn_physical">Physical</button>
                 <div id="physical-controls">
-                  <input type="number" id="physical-position" placeholder="Enter position mm" disabled>
-                  <button type="button" id="confirm-position" disabled>Confirm</button>
+                  <input
+                    type="number"
+                    id="physical-position"
+                    placeholder="Enter position mm"
+                    disabled
+                  />
+                  <button type="button" id="confirm-position" disabled>
+                    Confirm
+                  </button>
                   <label id="dimension-label">0 mm</label>
                 </div>
               </div>
             </div>
             <div class="dropdown-container">
-              <label id="currentStepLabel">Current Step: <span id="currentStep">X</span></label>
+              <label id="currentStepLabel"
+                >Current Step: <span id="currentStep">X</span></label
+              >
               <label id="stepLabel"></label>
               <button id="stepChangeButton">Change</button>
-              <hr>
+              <hr />
               <button id="ChargeBatteryButton">Charge Battery</button>
             </div>
+          </div>
         </section>
-
         <section id="section2" class="page">
           <h1 id="machine-title">MACHINE</h1>
           <div id="machine-content">
-            
-          <div class="selection_container">
-          
+            <div class="selection_container">
               <label for="standard-select"
                 >Select what you want to move manually:</label
               >
-              
-                <select id="standard-select">
-                  <option value="Select">None</option>
-                  <option value="Wheels">Wheels</option>
-                  <option value="Lifter">Lifter</option>
-                </select>
-                <!-- <span class="focus"></span> -->
-            
-              
-          </div>
 
-          
-          <div class="agv-section">
-            <div class="a-wrapper">
-              A
+              <select id="standard-select">
+                <option value="Select">None</option>
+                <option value="Wheels">Wheels</option>
+                <option value="Lifter">Lifter</option>
+              </select>
+              <!-- <span class="focus"></span> -->
             </div>
-            <section class="agv-group">
-              <div class="agv-Baby">      
-                <div class="left-sensors-group">
-                  <div id="sensor-404" class="sensor-tooltip sensor-circle"><span class="tooltiptext">X<br>X<br>x</span></div>
-                  
-                  <div id="sensor-408-wrapper">
-                    <div id="sensor-408" class="sensor-tooltip sensor-circle"><span class="tooltiptext">X<br>X<br>x</span></div>
-                  </div>
-                  <div id="sensor-405" class="sensor-tooltip sensor-circle"><span class="tooltiptext">X<br>X<br>x</span></div>
-                </div>
-                <div class="central-sensors-group">
-                  <div id="ArrowWrap_sensor-423" class="sensor-tooltip sensor-circle">
-                    <span class="tooltiptext">X<br>X<br>x</span>
-                  <div id="sensor-423"></div>
-                  </div>
-                  <div id="sensor-432" class="sensor-tooltip sensor-circle">
-                    <span id="tooltiptextBattery" class="tooltiptext">X<br>X<br>x</span>
-                    <b id="battery-text">BATTERY</b>
-                  </div>
-                </div>
-                <div class="right-sensors-group">
-                  <div id="sensor-406" class="sensor-tooltip sensor-circle"><span class="tooltiptext">X<br>X<br>x</span></div>
-                  <div id="sensor-409-wrapper">
-                    <div id="sensor-409" class="sensor-tooltip sensor-circle"><span class="tooltiptext">X<br>X<br>x</span></div>
-                  </div>
-                  <div id="sensor-407" class="sensor-tooltip sensor-circle"><span class="tooltiptext">X<br>X<br>x</span></div>
-                </div>
-              </div>
-              
-                
-                  <div class="arrows">
 
-                    <div id="ArrowWrap_sensor-410" class="sensor-tooltip sensor-circle">
-                      <span class="tooltiptext">X<br>X<br>x</span>
-                      <div id="sensor-410"><span class="tooltiptext">X<br>X<br>x</span></div>
+            <div class="agv-section">
+              <div class="a-wrapper">A</div>
+              <section class="agv-group">
+                <div class="agv-Baby">
+                  <div class="left-sensors-group">
+                    <div id="sensor-404" class="sensor-tooltip sensor-circle">
+                      <span class="tooltiptext">X<br />X<br />x</span>
                     </div>
-                    <div id="ArrowWrap_sensor-411" class="sensor-tooltip sensor-circle">
-                      <span class="tooltiptext">X<br>X<br>x</span>
+
+                    <div id="sensor-408-wrapper">
+                      <div id="sensor-408" class="sensor-tooltip sensor-circle">
+                        <span class="tooltiptext">X<br />X<br />x</span>
+                      </div>
+                    </div>
+                    <div id="sensor-405" class="sensor-tooltip sensor-circle">
+                      <span class="tooltiptext">X<br />X<br />x</span>
+                    </div>
+                  </div>
+                  <div class="central-sensors-group">
+                    <div
+                      id="ArrowWrap_sensor-423"
+                      class="sensor-tooltip sensor-circle"
+                    >
+                      <span class="tooltiptext">X<br />X<br />x</span>
+                      <div id="sensor-423"></div>
+                    </div>
+                    <div id="sensor-432" class="sensor-tooltip sensor-circle">
+                      <span id="tooltiptextBattery" class="tooltiptext"
+                        >X<br />X<br />x</span
+                      >
+                      <b id="battery-text">BATTERY</b>
+                    </div>
+                  </div>
+                  <div class="right-sensors-group">
+                    <div id="sensor-406" class="sensor-tooltip sensor-circle">
+                      <span class="tooltiptext">X<br />X<br />x</span>
+                    </div>
+                    <div id="sensor-409-wrapper">
+                      <div id="sensor-409" class="sensor-tooltip sensor-circle">
+                        <span class="tooltiptext">X<br />X<br />x</span>
+                      </div>
+                    </div>
+                    <div id="sensor-407" class="sensor-tooltip sensor-circle">
+                      <span class="tooltiptext">X<br />X<br />x</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="arrows">
+                  <div
+                    id="ArrowWrap_sensor-410"
+                    class="sensor-tooltip sensor-circle"
+                  >
+                    <span class="tooltiptext">X<br />X<br />x</span>
+                    <div id="sensor-410">
+                      <span class="tooltiptext">X<br />X<br />x</span>
+                    </div>
+                  </div>
+                  <div
+                    id="ArrowWrap_sensor-411"
+                    class="sensor-tooltip sensor-circle"
+                  >
+                    <span class="tooltiptext">X<br />X<br />x</span>
                     <div id="sensor-411"></div>
                   </div>
-                  </div>
-                
-                
-              
-            </section>
-            <div class="b-wrapper">
-              B
+                </div>
+              </section>
+              <div class="b-wrapper">B</div>
+            </div>
+
+            <div id="position-label" style="margin-top: 20px; font-size: 24px">
+              <p style="font-weight: bold">
+                Position:
+                <span
+                  id="position-value"
+                  style="
+                    color: var(--light-blue);
+                    text-shadow: 2px 1px 10px rgba(195, 242, 245, 1);
+                  "
+                  >x</span
+                >
+              </p>
             </div>
           </div>
-          
-          <div id="position-label" style="margin-top: 20px; font-size: 24px; ">
-            <p style="font-weight: bold;"> Position: <span id="position-value" style=" color: var(--light-blue);
-              text-shadow: 2px 1px 10px rgba(195, 242, 245, 1);">x mm</span></p>
-        </div>  
-           <!-- Position Label -->
         </section>
+        <!-- Position Label -->
 
         <section id="section3" class="page">
           <h1 class="position-h1">POSITIONS</h1>
@@ -361,148 +401,30 @@
               placeholder="Search position..."
             />
             <div class="table-scroll">
-            <table id="positionsTable">
-              <thead>
-                <tr>
-                  <th id="positionTableth">Position</th>
-                  <th>Description</th>
-                  <!-- <th>Physical Location</th> -->
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Positions will be inserted here -->
-              </tbody>
-            </table>
-          </div>
-          <div class="input-container">
-            <label id="AGV-position">AGV Position mm: <br><span></span></label>
-            <input id="value-input">
-            <button id="teachInButton">Teach In</button>
-            <hr>
-            <button id="SetButton" disabled>Set</button>
-            <p id="outMessage"></p>
+              <table id="positionsTable">
+                <thead>
+                  <tr>
+                    <th id="positionTableth">Position</th>
+                    <th>Description</th>
+                    <!-- <th>Physical Location</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Positions will be inserted here -->
+                </tbody>
+              </table>
+            </div>
+            <div class="input-container">
+              <label id="AGV-position">AGV Position: <br /><span></span></label>
+              <input id="value-input" />
+              <button id="teachInButton">Teach In</button>
+              <hr />
+              <button id="SetButton" disabled>Set</button>
+              <p id="outMessage"></p>
+            </div>
           </div>
         </section>
-        <!-- SECTION 4 WMS -->
-        <section id="section4" class="page">
-          <h1 id="WMS_title">WMS INFO</h1>
-          <div class="WMS-container">
-            <div id="WMS-to-PLC">
-              <h2>WMS-to-PLC</h2>
-              <p>Id: <span id="wms_plc_id">-</span></p>
-              <p>Task number: <span id="wms_plc_task_number">-</span></p>
-              <p>Coordinate: <span id="wms_plc_coordinate">-</span></p>
-              <p>Echo Status: <span id="wms_plc_echo_status">-</span></p>
-              <p>Execute: <span id="wms_plc_execute">-</span></p>
-              <hr>
-              <p>Selection Man/Auto: <span id="wms_plc_selection">-</span></p>
-              <p>Start: <span id="wms_plc_start">-</span></p>
-              <p>Stop: <span id="wms_plc_stop">-</span></p>
-              <p>Reset: <span id="wms_plc_reset">-</span></p>
-            </div>
-            <hr id="hr-v">
-            <div id="PLC-to-WMS">
-              <h2>PLC-to-WMS</h2>
-              <p>Id: <span id="plc_wms_id">-</span></p>
-              <p>Task Number: <span id="plc_wms_task_number">-</span></p>
-              <p>Coordinate: <span id="plc_wms_coordinate">-</span></p>
-              <p>Result: <span id="plc_wms_result">-</span></p>
-              <p>Error Code: <span id="plc_wms_error_code">-</span>
-                <!-- <div class="tooltip-container"> -->
-                  <span id="ErrorInfoIcon">i</span>
-                  <span id="ErrorDescription" class="tooltiptextError"></span>
-                <!-- </div> -->
-              </p>
-              <p>Task Status: <span id="plc_wms_task_status">-</span></p>
-              <hr>
-              <p>Current Mode: <span id="plc_wms_current_mode">-</span></p>
-              <p>Current State: <span id="plc_wms_current_state">-</span></p>
-              <p>Carrier Status: <span id="plc_wms_carrier_status">-</span></p>
-              <p>Carrier Position: <span id="plc_wms_carrier_position">-</span></p>
-              <p>Lifter Status: <span id="plc_wms_lifter_status">-</span></p>
-              <p>Lifter Position: <span id="plc_wms_lifter_position">-</span></p>
-            </div>
-            
-            </div>
 
-        </section>
-
-      <!-- SECTION 5 SETTINGS -->
-        <!-- <section id="section5" class="page">
-          <div class="settings-container">
-            <h1>SETTINGS</h1>
-            <form id="settings-form">
-              <div class="setting-item">
-                <div>
-                  <span class="info">i</span>
-                  <p class="description">
-                    this is an example of what the info box shoudl explain a
-                    specific setting
-                  </p>
-                  <label for="setting1">Setting 1 </label>
-                </div>
-                <input type="text" id="setting1" name="setting1" />
-              </div>
-              <div class="setting-item">
-                <div>
-                  <span class="info">i</span>
-                  <p class="description">
-                    this is an example of what the info box shoudl explain a
-                    specific setting
-                  </p>
-                  <label for="setting1">Setting 2 </label>
-                </div>
-                <input type="text" id="setting1" name="setting1" />
-              </div>
-              <div class="setting-item">
-                <div>
-                  <span class="info">i</span>
-                  <p class="description">
-                    this is an example of what the info box shoudl explain a
-                    specific setting
-                  </p>
-                  <label for="setting1">Setting 3 </label>
-                </div>
-                <input type="text" id="setting1" name="setting1" />
-              </div>
-
-              <div class="setting-item">
-                <div>
-                  <span class="info">i</span>
-                  <p class="description">It's just a CheckBox.</p>
-                  <label for="setting2">CheckBox </label>
-                </div>
-                <input type="checkbox" id="setting2" name="setting2" />
-              </div>
-
-              <div class="setting-item">
-                <div>
-                  <span class="info">i</span>
-                  <p class="description">Select your Box.</p>
-
-                  <label>Radio Box </label>
-                </div>
-
-                <div>
-                  <input type="radio" id="role1" name="userRole" value="user" />
-                  <label for="role1">Box 1</label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="role2"
-                    name="userRole"
-                    value="admin"
-                  />
-                  <label for="role2">Box 2</label>
-                </div>
-              </div>
-              
-              <button type="button" id="save-button">Save</button>
-              <h3 class="saved">Settings Saved</h3>
-            </form>
-          </div>
-        </section> -->
         <section id="section6" class="page">
           <div class="Alarms">
             <h2>ALARMS</h2>
@@ -521,38 +443,45 @@
             </table>
           </div>
         </section>
+        <!-- GLOBAL VARIABLE -->
+        <script type="text/javascript" src="assets/js/global.js"></script>
+        <!-- Test Object-->
+        <!-- <script
+          type="text/javascript"
+          src="assets/js/Comms/Array_test.js"
+        ></script> -->
+        <!-- READ I/O -->
+        <script
+          type="text/javascript"
+          src="assets/js/Comms/I0Read_Pure.js"
+        ></script>
+        <!-- Writing.js -->
+        <script
+          type="text/javascript"
+          src="assets/js/Comms/I0Write_Pure.js"
+        ></script>
+        <!-- MODE -->
+        <script type="text/javascript" src="assets/js/sidebar.js"></script>
+
+        <!-- Update -->
+        <!-- <script type="text/javascript" src="assets/js/Comms/Update.Js"></script> -->
+
+        <!-- header -->
+        <script type="text/javascript" src="assets/js/header.js"></script>
+        <!-- ALARMS -->
+        <script type="text/javascript" src="assets/js/alarms.js"></script>
+        <!--Positions-->
+        <script type="text/javascript" src="assets/js/positions.js"></script>
+        <!-- SELECTION -->
+        <script type="text/javascript" src="assets/js/machine.js"></script>
+        <!-- WMS -->
+        <!-- <script type="text/javascript" src="assets/js/wms.js"></script> -->
+        <!-- HOME -->
+        <script type="text/javascript" src="assets/js/home.js"></script>
+
+        <!-- SCROLL -->
+        <script type="text/javascript" src="assets/js/scroll.js"></script>
       </div>
     </div>
-
-    <!-- GLOBAL VARIABLE -->
-    <script type="text/javascript" src="assets/js/global.js"></script>
-    <!-- Test Object-->
-    <!-- <script type="text/javascript" src="assets/js/Comms/Array_test.js"></script> -->
-    <!-- READ I/O -->
-    <script type="text/javascript" src="assets/js/Comms/I0Read_Pure.js"></script>
-    <!-- Writing.js -->
-    <script type="text/javascript" src="assets/js/Comms/I0Write_Pure.js"></script>
-    <!-- MODE -->
-    <script type="text/javascript" src="assets/js/sidebar.js"></script>
-
-    <!-- Update -->
-    <!-- <script type="text/javascript" src="assets/js/Comms/Update.Js"></script> -->
-    
-    <!-- header -->
-    <script type="text/javascript" src="assets/js/header.js"></script>
-    <!-- ALARMS -->
-    <!-- <script type="text/javascript" src="assets/js/alarms.js"></script> -->
-    <!--Positions-->
-    <!-- <script type="text/javascript" src="assets/js/positions.js"></script> -->
-      <!-- SELECTION -->
-      <!-- <script type="text/javascript" src="assets/js/machine.js"></script> -->
-     <!-- WMS -->
-     <!-- <script type="text/javascript" src="assets/js/wms.js"></script> -->
-     <!-- HOME -->
-     <!-- <script type="text/javascript" src="assets/js/home.js"></script> -->
-
-    <!-- SCROLL -->
-    <script type="text/javascript" src="assets/js/scroll.js"></script>
-  
   </body>
 </html>

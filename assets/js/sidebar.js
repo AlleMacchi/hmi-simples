@@ -29,18 +29,6 @@ var setLifterSpeedButton = document.getElementById("set-lifter-speed");
 var lifterCurrentSpeedLabel = document.getElementById("lifter-current-speed");
 
 // ===================================
-// Update Read
-// ===================================
-
-function updateSpeedLabels() {
-  carrierCurrentSpeedLabel.textContent = "Current Speed: " + Array_43;
-  // lifterCurrentSpeedLabel.textContent =
-  //   "Current Speed: " + gData.LifterActualSpeed;
-}
-
-setInterval(updateSpeedLabels, 1000);
-
-// ===================================
 // Toggle sidebar on mode button click
 // ===================================
 
@@ -98,32 +86,38 @@ btnAuto.addEventListener("click", function () {
 // Command buttons
 // ===================================
 
-btnStart.addEventListener("click", function () {
+btnStart.addEventListener("mousedown", function () {
+  console.log("Start button clicked");
   btnStart.classList.add("clicked");
   sendDataToUrl(`IOWriteStart.html`, `"HMI_PLC".FromHMI.Command.Start`, 1);
 });
 // Adding "mousedown" event to simulate button press
 btnStop.addEventListener("mousedown", function () {
+  console.log("Stop button clicked");
   btnStop.classList.add("clicked");
   sendDataToUrl(`IOWriteStop.html`, `"HMI_PLC".FromHMI.Command.Stop`, 1);
 });
 
 btnReset.addEventListener("mousedown", function () {
+  console.log("Reset button clicked");
   btnReset.classList.add("clicked");
   sendDataToUrl(`IOWriteRest.html`, `"HMI_PLC".FromHMI.Command.Rest`, 1);
 });
 
 btnStart.addEventListener("mouseup", function () {
+  console.log("Start button released");
   sendDataToUrl(`IOWriteStart.html`, `"HMI_PLC".FromHMI.Command.Start`, 0);
   setTimeout(() => btnStart.classList.remove("clicked"), 150);
 });
 
 btnStop.addEventListener("mouseup", function () {
+  console.log("Stop button released");
   sendDataToUrl(`IOWriteStop.html`, `"HMI_PLC".FromHMI.Command.Stop`, 0);
   setTimeout(() => btnStop.classList.remove("clicked"), 150);
 });
 
-btnReset.addEventListener("mouseup", function () {
+btnReset.addEventListener("mousedown", function () {
+  console.log("Reset button clicked");
   sendDataToUrl(`IOWriteReset.html`, `"HMI_PLC".FromHMI.Command.Reset`, 0);
   setTimeout(() => btnStart.classList.remove("clicked"), 150);
 });
@@ -222,3 +216,15 @@ setLifterSpeedButton.addEventListener("click", function () {
   //   console.log("Please enter a speed value between 0 and 100 for Lifter.");
   // }
 });
+
+// ===================================
+// Update Read
+// ===================================
+
+function updateSpeedLabels() {
+  carrierCurrentSpeedLabel.textContent = "Current Speed: " + Array_44;
+  // lifterCurrentSpeedLabel.textContent =
+  //   "Current Speed: " + gData.LifterActualSpeed;
+}
+
+setInterval(updateSpeedLabels, 1000);
