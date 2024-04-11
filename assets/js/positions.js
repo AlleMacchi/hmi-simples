@@ -1,4 +1,8 @@
 function createPositions() {
+  //=================================
+  // Initialise all positions
+  //==============================
+
   var positions = {};
   var rows = ["Row"];
   var columns = ["Column"];
@@ -24,8 +28,12 @@ function createPositions() {
 
   return { positions: positions, rows: rows, columns: columns }; // Return an object containing all three
 }
-var positionsData = createPositions();
+
 // console.log(positionsData);
+
+//=================================
+// Update position result on Search
+//=================================
 
 const searchInput = document.getElementById("searchInput");
 const positionsTable = document
@@ -37,6 +45,8 @@ const teachInButton = document.getElementById("teachInButton");
 const AGVposition = document
   .getElementById("AGV-position")
   .querySelector("span");
+const positionValue = document.getElementById("position-value");
+
 const outMessage = document.getElementById("outMessage");
 let selectedRow = null;
 
@@ -50,6 +60,10 @@ searchInput.addEventListener("keyup", function () {
     row.style.display = match ? "" : "none";
   });
 });
+
+//=================================
+// Create Table
+//=================================
 
 function fillPositionsTable(positionsData) {
   const tbody = document.querySelector("#positionsTable tbody");
@@ -92,7 +106,6 @@ function fillPositionsTable(positionsData) {
           );
           // TODO: possible problem delay on request
           if (updatePositionResult() == 1) {
-            valueInput.value = gData.Position_mm;
             sendDataToUrl(
               "IOWriteRequest.html",
               `"HMI_PLC".FromHMI.Position.request`,
@@ -118,12 +131,13 @@ function fillPositionsTable(positionsData) {
   });
 }
 
-// Call the function to fill the table
-fillPositionsTable(positionsData);
+//=================================
+// Update position result
+//=================================
 
 teachInButton.addEventListener("click", () => {
   // Copy actPosition_mm to the input
-  valueInput.value = gData.CarrierActualPosition_mm;
+  valueInput.value = updateAGVPositionMM();
 });
 
 setButton.addEventListener("click", () => {
@@ -170,3 +184,31 @@ setButton.addEventListener("click", () => {
   // selectedRow.value = newValue;
   // console.log(selectedRow.value, newValue);
 });
+
+//================================
+// Create Tabel
+//================================
+
+var positionsData = createPositions();
+// Call the function to fill the table
+fillPositionsTable(positionsData);
+
+//===========================
+// Update Data
+//===========================
+
+// console.log(updatePositionResult());
+// console.log(updateAGVPositionMM());
+
+function updatePositionResult() {
+  return Array_38;
+}
+
+function updateAGVPositionMM() {
+  AGVposition.textContent = `${Array_45} mm`
+  positionValue.textContent = `${Array_45} mm`
+  return Array_45;
+}
+
+setInterval(updateAGVPositionMM, 1000); // Repeat every 1000ms as an example
+// setInterval(updatePositionResult, 1000);

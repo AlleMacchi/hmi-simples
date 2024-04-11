@@ -1,3 +1,14 @@
+function readBits(integer) {
+  var bits = [];
+  var mask = 1;
+  for (var i = 0; i < 32; i++) {
+    // Assuming 32-bit integers
+    bits.push(integer & mask ? 1 : 0);
+    mask <<= 1;
+  }
+  return bits;
+}
+
 var Array_1;
 var Array_2;
 var Array_3;

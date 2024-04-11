@@ -1,26 +1,44 @@
-// Function to update the row title based on PLC data
-//row Title
+//===================
+// Update Data
+//===================
+
+function createPositionString() {
+  if (
+    Array_33 === undefined ||
+    Array_34 === undefined ||
+    Array_35 === undefined
+  ) {
+    return "No Data Available";
+  }
+  let row = Array_33.toString().padStart(3, "0");
+  let dir = Array_34 ? "A" : "B";
+  let col = Array_35.toString().padStart(2, "0");
+
+  return `A-L01R${row}${dir}${col}`;
+}
+
+function createPositionSelectionString(row, col) {
+  let dir = Array_34 ? "A" : "B";
+  return `A-L01R${row}${dir}${col}`;
+}
+
+const rowTitle = document.getElementById("row-title");
 const updaterowTitle = () => {
-  const rowTitle = document.getElementById("row-title");
-  rowTitle.textContent = decodeHTMLEntity(gData.ShuttleToWMS_Carrier_Position);
+  rowTitle.textContent = "";
+  rowTitle.textContent = createPositionString();
 };
 
-// Function to update the position of the AGV and highlight the corresponding Number
 const updateAGVPosition = () => {
-  var positionString = decodeHTMLEntity(gData.ShuttleToWMS_Carrier_Position);
-  // Extracting the column number from the position string using a regular expression.
-  // This will match the 'R' followed by any digit(s) and capture the digits only.
+  var positionString = createPositionString();
   var match = positionString.match(/A(\d+)/);
   var newPosition = match ? parseInt(match[1], 10) : null;
 
-  // First, remove the 'active' class from all squares and Numbers
   document
     .querySelectorAll(".square.active, .Number.active")
     .forEach((element) => {
       element.classList.remove("active");
     });
 
-  // Add the 'active' class to the target square and Number
   const targetSquare = document.querySelector(
     `.square[data-position="${newPosition}"]`
   );
@@ -34,10 +52,9 @@ const updateAGVPosition = () => {
   }
 };
 
-function updateAGVPositionHMI_mm(value) {
-  AGVposition.textContent = value;
-  document.getElementById("position-value").textContent = `${value} mm`;
-}
+// ======================================
+// Initialise
+// ======================================
 
 const btnLogical = document.getElementById("btn_logical");
 const btnPhysical = document.getElementById("btn_physical");
@@ -61,8 +78,11 @@ rowSelect.setAttribute("disabled", "true");
 logicalControls.appendChild(positionSelect);
 positionSelect.setAttribute("disabled", "true");
 
+//=============================================
+// Physical and Logical Button to write
+//=============================================
+
 btnLogical.addEventListener("click", function () {
-  // HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical = true;
   sendDataToUrl(
     "IOWriteCarrierMmOrLogical.html",
     `"HMI_PLC".FromHMI.Selection.Carrier.mm_or_logical`,
@@ -75,7 +95,6 @@ btnLogical.addEventListener("click", function () {
   btn_go.classList.remove("active");
   dimensionLabel.textContent = "0 mm";
   physicalPositionInput.value = 0;
-  // console.log(HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical);
 });
 
 btnPhysical.addEventListener("click", function () {
@@ -89,11 +108,13 @@ btnPhysical.addEventListener("click", function () {
   btnPhysical.classList.add("active");
   btnLogical.classList.remove("active");
   btn_go.classList.remove("active");
-  // console.log(HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical);
-  // Correct way to reset selects to their first option
   rowSelect.value = rowSelect.options[0].value;
   positionSelect.value = positionSelect.options[0].value;
 });
+
+//=============================================
+// Graphic changes on the screen
+//=============================================
 
 confirmPositionBtn.addEventListener("click", function () {
   dimensionLabel.textContent = physicalPositionInput.value + " mm";
@@ -123,6 +144,10 @@ function disableSection(section) {
     select.setAttribute("disabled", "true")
   );
 }
+
+//=============================================
+// Dropdowns and Inputs Creation
+//=============================================
 
 function createDropdown(id, options) {
   const select = document.createElement("select");
@@ -166,64 +191,50 @@ physicalPositionInput.addEventListener("input", () => {
   }
 });
 
-// Adding "mousedown" event to simulate button press
+//=============================================
+// Go Button
+//=============================================
+
 btn_go.addEventListener("mousedown", () => {
   btn_go.classList.add("clicked");
   btn_go.classList.remove("active");
 });
 
-// Removing "clicked" class shortly after "mouseup" to simulate the visual effect
 btn_go.addEventListener("mouseup", () => {
   setTimeout(() => btn_go.classList.remove("clicked"), 150);
 });
-
-// Also remove "clicked" class on "mouseleave" to ensure the effect is cleared if the mouse leaves the button before mouseup
 btn_go.addEventListener("mouseleave", () => {
   setTimeout(() => btn_go.classList.remove("clicked"), 150);
 });
 
 btn_go.addEventListener("click", () => {
   if (physicalPositionInput.value > 0) {
-    // HMI_PLC.FromHMI.Setting.Carrier.PositionToReach_mm = parseFloat(
-    //   physicalPositionInput.value
-    // );
-
     sendDataToUrl(
       "IOWritePosition.html",
       `"HMI_PLC".FromHMI.Setting.Carrier.PositionToReach_mm`,
       parseFloat(physicalPositionInput.value)
     );
 
-    // console.log(HMI_PLC.FromHMI.Setting.Carrier.PositionToReach_mm); // For testing
     GoMessage.style.display = "flex";
     btn_go.classList.remove("active");
   } else if (rowSelect.value !== "Row" && positionSelect.value !== "Column") {
-    // HMI_PLC.FromHMI.Setting.Carrier.PositionToReach_logical =
-    //   createPositionString(rowSelect.value, positionSelect.value);
     sendDataToUrl(
       "IOWritePositionLogical.html",
       `"HMI_PLC".FromHMI.Setting.Carrier.PositionToReach_logical`,
-      createPositionString(rowSelect.value, positionSelect.value)
+      createPositionSelectionString(rowSelect.value, positionSelect.value)
     );
 
-    // GoMessage.style.display = "flex";
+    GoMessage.style.display = "flex";
     btn_go.classList.remove("active");
   }
-
-  // ShuttleToWMS.Status.Carrier.Position = HMI_PLC.FromHMI.Setting.Carrier.PositionToReach_logical; Only for Testing
-  // HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical = false;  toggle?
-
-  // Hide the message after 10 seconds
   setTimeout(() => {
     GoMessage.style.display = "none";
   }, 3000);
 });
 
-function createPositionString(row, column) {
-  // Assuming row is like 'R019' and column is like 'A01'
-  // Construct the final string
-  return `A-L01${row}${column}`; // Using template literal
-}
+//=============================================
+// Step Controls
+// =============================================
 
 // Assuming you have an array of steps like this
 const taskToStepsMapping = {
@@ -247,31 +258,28 @@ const taskToStepsMapping = {
   3: ["0: Init", "1: Go to Position"],
 };
 
+updateStepDropdown();
 function updateStepDropdown() {
-  const steps = taskToStepsMapping[gData.WMStoShuttle_TaskNumber] || [
-    "0: Init",
-  ];
-  const stepDropdown = createDropdown("stepSelect", steps);
-  // console.log(steps);
-  // console.log(stepDropdown.options);
-
-  // Check if the dropdown has any options
-  if (document.getElementById("stepLabel").childElementCount > 0) {
-    // If it has options, remove the dropdown from its parent
-    stepSelect.parentNode.removeChild(stepSelect);
+  let steps;
+  if (Array_9 >= 0 && Array_9 <= 3) {
+    steps = taskToStepsMapping[Array_9];
+  } else {
+    steps = ["0: Init"];
   }
-  document.getElementById("stepLabel").appendChild(stepDropdown);
+  let stepDropdown = createDropdown("stepSelect", steps);
 
-  // Clear existing options
+  let stepLabel = document.getElementById("stepLabel");
+  if (stepLabel.childElementCount > 0) {
+    stepLabel.removeChild(stepLabel.firstChild);
+  }
+  stepLabel.appendChild(stepDropdown);
 }
 
-// updateStepDropdown();
+// Event listener for dropdown click
+document.getElementById("stepSelect").addEventListener("click", function () {
+  updateStepDropdown();
+});
 
-function updatePositionResult() {
-  return gData.Position_result;
-}
-
-// Adding an event listener to the button (assuming the button has an id 'stepChangeButton')
 document
   .getElementById("stepChangeButton")
   .addEventListener("click", function () {
@@ -280,14 +288,12 @@ document
       `"HMI_PLC".FromHMI.Setting.Machine.newStep`,
       document.getElementById("stepSelect").value[0].split(":")[0]
     );
-
-    console.log(document.getElementById("stepSelect").value[0].split(":")[0]);
     sendDataToUrl(
       "IOWriteUpdateStep.html",
       `"HMI_PLC".FromHMI.Command.updateStep`,
       true
     );
-
+    // TODO: possible problem delay on request
     if (updatePositionResult() == 1) {
       sendDataToUrl(
         "IOWriteUpdateStep.html",
@@ -297,11 +303,6 @@ document
     } else {
       console.log("Position request not set");
     }
-
-    // HMI_PLC.FromHMI.Setting.Machine.newStep =
-    //   document.getElementById("stepSelect").value[0];
-    // // console.log(HMI_PLC.FromHMI.Setting.Machine.newStep);
-    // HMI_PLC.FromHMI.Command.updateStep = true; // ? and then?
   });
 
 const stepControlsContainer =
@@ -309,13 +310,16 @@ const stepControlsContainer =
 const currentStep = document.getElementById("currentStep");
 
 function updateCurrentStep() {
-  // console.log(currentStep.textContent);
-
-  currentStep.textContent = taskToStepsMapping[gData.WMStoShuttle_TaskNumber][
-    gData.Step
-  ] || ["No Step"];
-  console.log(currentStep.textContent);
+  if ((Array_9 >= 0) & (Array_3 <= 5)) {
+    currentStep.textContent = taskToStepsMapping[Array_9][Array_3];
+  } else {
+    currentStep.textContent = "No Step";
+  }
 }
+
+//=============================================
+// Step Controls MAnual and Auto Mode Removed
+//=============================================
 
 // function checkStepsControls() {
 //   if (decodeHTMLEntity(gData.StatusMode) == "Auto") {
@@ -346,3 +350,13 @@ function updateCurrentStep() {
 // }
 
 // checkStepsControls();
+
+//=============================================
+// Update Data
+//=============================================
+
+setInterval(() => {
+  updaterowTitle();
+  updateAGVPosition();
+  updateCurrentStep();
+}, 1000);
