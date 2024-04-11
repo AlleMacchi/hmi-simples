@@ -1,13 +1,13 @@
 // Function to update the row title based on PLC data
-
+//row Title
 const updaterowTitle = () => {
   const rowTitle = document.getElementById("row-title");
   rowTitle.textContent = decodeHTMLEntity(gData.ShuttleToWMS_Carrier_Position);
 };
 
 // Function to update the position of the AGV and highlight the corresponding Number
-const updateAGVPosition = (newPosition) => {
-  var positionString = decodeHTMLEntity(newPosition);
+const updateAGVPosition = () => {
+  var positionString = decodeHTMLEntity(gData.ShuttleToWMS_Carrier_Position);
   // Extracting the column number from the position string using a regular expression.
   // This will match the 'R' followed by any digit(s) and capture the digits only.
   var match = positionString.match(/A(\d+)/);
@@ -64,7 +64,7 @@ positionSelect.setAttribute("disabled", "true");
 btnLogical.addEventListener("click", function () {
   // HMI_PLC.FromHMI.Selection.Carrier.mm_or_logical = true;
   sendDataToUrl(
-    "IOWrite.html",
+    "IOWriteCarrierMmOrLogical.html",
     `"HMI_PLC".FromHMI.Selection.Carrier.mm_or_logical`,
     true
   );
@@ -80,7 +80,7 @@ btnLogical.addEventListener("click", function () {
 
 btnPhysical.addEventListener("click", function () {
   sendDataToUrl(
-    "IOWrite.html",
+    "IOWriteCarrierMmOrLogical.html",
     `"HMI_PLC".FromHMI.Selection.Carrier.mm_or_logical`,
     false
   );
@@ -189,7 +189,7 @@ btn_go.addEventListener("click", () => {
     // );
 
     sendDataToUrl(
-      "IOWrite.html",
+      "IOWritePosition.html",
       `"HMI_PLC".FromHMI.Setting.Carrier.PositionToReach_mm`,
       parseFloat(physicalPositionInput.value)
     );
@@ -201,13 +201,13 @@ btn_go.addEventListener("click", () => {
     // HMI_PLC.FromHMI.Setting.Carrier.PositionToReach_logical =
     //   createPositionString(rowSelect.value, positionSelect.value);
     sendDataToUrl(
-      "IOWrite.html",
+      "IOWritePositionLogical.html",
       `"HMI_PLC".FromHMI.Setting.Carrier.PositionToReach_logical`,
       createPositionString(rowSelect.value, positionSelect.value)
     );
-    if (gData.W)
-      // GoMessage.style.display = "flex";
-      btn_go.classList.remove("active");
+
+    // GoMessage.style.display = "flex";
+    btn_go.classList.remove("active");
   }
 
   // ShuttleToWMS.Status.Carrier.Position = HMI_PLC.FromHMI.Setting.Carrier.PositionToReach_logical; Only for Testing
@@ -247,8 +247,10 @@ const taskToStepsMapping = {
   3: ["0: Init", "1: Go to Position"],
 };
 
-function updateStepDropdown(taskNumber) {
-  const steps = taskToStepsMapping[taskNumber] || ["0: Init"];
+function updateStepDropdown() {
+  const steps = taskToStepsMapping[gData.WMStoShuttle_TaskNumber] || [
+    "0: Init",
+  ];
   const stepDropdown = createDropdown("stepSelect", steps);
   // console.log(steps);
   // console.log(stepDropdown.options);
@@ -263,24 +265,32 @@ function updateStepDropdown(taskNumber) {
   // Clear existing options
 }
 
-updateStepDropdown(gData.WMStoShuttle_TaskNumber);
+// updateStepDropdown();
+
+function updatePositionResult() {
+  return gData.Position_result;
+}
 
 // Adding an event listener to the button (assuming the button has an id 'stepChangeButton')
 document
   .getElementById("stepChangeButton")
   .addEventListener("click", function () {
     sendDataToUrl(
-      "IOWrite.html",
+      "IOWriteNewStep.html",
       `"HMI_PLC".FromHMI.Setting.Machine.newStep`,
       document.getElementById("stepSelect").value[0].split(":")[0]
     );
 
     console.log(document.getElementById("stepSelect").value[0].split(":")[0]);
-    sendDataToUrl("IOWrite.html", `"HMI_PLC".FromHMI.Command.updateStep`, true);
+    sendDataToUrl(
+      "IOWriteUpdateStep.html",
+      `"HMI_PLC".FromHMI.Command.updateStep`,
+      true
+    );
 
-    if (gData.Position_result == 1) {
+    if (updatePositionResult() == 1) {
       sendDataToUrl(
-        "IOWrite.html",
+        "IOWriteUpdateStep.html",
         `"HMI_PLC".FromHMI.Command.updateStep`,
         false
       );
@@ -300,38 +310,39 @@ const currentStep = document.getElementById("currentStep");
 
 function updateCurrentStep() {
   // console.log(currentStep.textContent);
+
   currentStep.textContent = taskToStepsMapping[gData.WMStoShuttle_TaskNumber][
     gData.Step
   ] || ["No Step"];
   console.log(currentStep.textContent);
 }
 
-function checkStepsControls() {
-  if (decodeHTMLEntity(gData.StatusMode) == "Auto") {
-    // if (decodeHTMLEntity(gData.StatusMode) == "AUTO") {
-    stepControlsContainer.classList.add("ControlsDisabled");
-    document
-      .getElementsByClassName("position-controls")[0]
-      .classList.add("ControlsDisabled");
-    document
-      .getElementsByClassName("position-controls")[1]
-      .classList.add("ControlsDisabled");
-    document
-      .getElementsByClassName("position-controls")[2]
-      .classList.add("ControlsDisabled");
-  } else {
-    updateStepDropdown(gData.WMStoShuttle_TaskNumber);
-    stepControlsContainer.classList.remove("ControlsDisabled");
-    document
-      .getElementsByClassName("position-controls")[0]
-      .classList.remove("ControlsDisabled");
-    document
-      .getElementsByClassName("position-controls")[1]
-      .classList.remove("ControlsDisabled");
-    document
-      .getElementsByClassName("position-controls")[2]
-      .classList.remove("ControlsDisabled");
-  }
-}
+// function checkStepsControls() {
+//   if (decodeHTMLEntity(gData.StatusMode) == "Auto") {
+//     // if (decodeHTMLEntity(gData.StatusMode) == "AUTO") {
+//     stepControlsContainer.classList.add("ControlsDisabled");
+//     document
+//       .getElementsByClassName("position-controls")[0]
+//       .classList.add("ControlsDisabled");
+//     document
+//       .getElementsByClassName("position-controls")[1]
+//       .classList.add("ControlsDisabled");
+//     document
+//       .getElementsByClassName("position-controls")[2]
+//       .classList.add("ControlsDisabled");
+//   } else {
+//     updateStepDropdown(gData.WMStoShuttle_TaskNumber);
+//     stepControlsContainer.classList.remove("ControlsDisabled");
+//     document
+//       .getElementsByClassName("position-controls")[0]
+//       .classList.remove("ControlsDisabled");
+//     document
+//       .getElementsByClassName("position-controls")[1]
+//       .classList.remove("ControlsDisabled");
+//     document
+//       .getElementsByClassName("position-controls")[2]
+//       .classList.remove("ControlsDisabled");
+//   }
+// }
 
 // checkStepsControls();

@@ -163,6 +163,8 @@
   text-align: center;
   z-index: 2;
   color: black;
+  background-color: var(--light-blue);
+  border-radius: var(--br-8xs);
 }
 
 .central-sensors-group {
@@ -177,7 +179,7 @@
 /* battery */
 #sensor-432 {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   border: 0;
   /* padding: 10%; */
@@ -336,10 +338,16 @@
   box-shadow: 0 0 15px 3px var(--light-blue) !important;
 }
 
+#sensor-432.activeSensor {
+  background-color: transparent !important;
+  box-shadow: 0 0 15px 3px red !important;
+}
+
 .low-batterySensor {
   background-color: #ff0000 !important; /* Red background for low battery */
   box-shadow: 0 0 15px 3px red !important;
 }
+
 
 /* Tooltip container */
 .sensor-tooltip {

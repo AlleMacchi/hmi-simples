@@ -187,6 +187,45 @@
 /* Base styles for .sidebarMode remain unchanged */
 /* Base styles for .sidebarMode remain unchanged */
 
+/* Speed Control Styling */
+.speed-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.speed-control label {
+  color: white;
+  margin-bottom: 5px;
+}
+
+#input-div{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+  width: 100%;
+}
+
+.speed-control input {
+  width: 70%;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.speed-control button {
+  padding: 5px 10px;
+  margin-bottom: 5px;
+}
+
+.speed-control span {
+  color: white;
+}
+
+
 @media screen and (max-width: 1650px) {
   .sidebarMode {
     width: 27%; /* Adjust width for medium-sized screens */
