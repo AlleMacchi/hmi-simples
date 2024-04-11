@@ -19,9 +19,9 @@ document.addEventListener("DOMContentLoaded", function () {
     //machine
     updateSensorsFromBits();
     //sidebar
-    updateSpeedLabels();
+ //   updateSpeedLabels();
     // updateStatusModeFromstring();
-    console.log(decodeHTMLEntity(newGData.Array_1));
+  //  console.log(decodeHTMLEntity(newGData.Array_1));
     //Test
     // setInterval(() => {
     //   Test();
