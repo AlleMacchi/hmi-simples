@@ -39,9 +39,9 @@
         <button type="button">AUTO</button>
       </div>  
       <div id="roundCommands">
-        <button type="button">START</button>
-        <button type="button">STOP</button>
-        <button type="button">RESET</button>
+        <button type="button" id="btnStart">START</button>
+        <button type="button" id="btnStop">STOP</button>
+        <button type="button" id="btnReset">RESET</button>
       </div>
       <h3>Manual Commands</h3>
       
@@ -58,7 +58,7 @@
   <input type="number" id="carrier-speed-input" min="0" max="100" placeholder="0-100">
   <button id="set-carrier-speed">SET</button>
   </div>
-  <span id="carrier-current-speed">Current: -</span>
+  <span id="carrier-current-speed"></span>
 </div>
 
 <!-- Speed controls for Lifter -->
@@ -68,7 +68,7 @@
   <input type="number" id="lifter-speed-input" min="0" max="100" placeholder="0-100">
   <button id="set-lifter-speed">SET</button>
 </div>
-  <span id="lifter-current-speed">Current: -</span>
+  <span id="lifter-current-speed"></span>
 </div>
 
     </div>
@@ -527,16 +527,17 @@
     <!-- GLOBAL VARIABLE -->
     <script type="text/javascript" src="assets/js/global.js"></script>
     <!-- Test Object-->
-    <!-- <script type="text/javascript" src="assets/js/Comms/gData_test.js"></script> -->
+    <!-- <script type="text/javascript" src="assets/js/Comms/Array_test.js"></script> -->
     <!-- READ I/O -->
     <script type="text/javascript" src="assets/js/Comms/I0Read_Pure.js"></script>
-    <!-- Update -->
-    <!-- <script type="text/javascript" src="assets/js/Comms/Update.Js"></script> -->
-
-    
-
+    <!-- Writing.js -->
+    <script type="text/javascript" src="assets/js/Comms/I0Write_Pure.js"></script>
     <!-- MODE -->
     <script type="text/javascript" src="assets/js/sidebar.js"></script>
+
+    <!-- Update -->
+    <!-- <script type="text/javascript" src="assets/js/Comms/Update.Js"></script> -->
+    
     <!-- header -->
     <script type="text/javascript" src="assets/js/header.js"></script>
     <!-- ALARMS -->
@@ -551,12 +552,7 @@
      <!-- <script type="text/javascript" src="assets/js/home.js"></script> -->
 
     <!-- SCROLL -->
-    <!-- <script type="text/javascript" src="assets/js/scroll.js"></script> -->
+    <script type="text/javascript" src="assets/js/scroll.js"></script>
   
-      <!-- Writing.js -->
-      <!-- <script type="text/javascript" src="assets/js/Comms/I0Write_Pure.js"></script> -->
-
-          <!-- READ I/O -->
-    <script type="text/javascript" src="assets/js/Comms/I0Read_Pure.js"></script>
   </body>
 </html>
