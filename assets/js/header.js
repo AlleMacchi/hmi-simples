@@ -4,7 +4,6 @@ const labelState = document.getElementById("labelState").querySelector("span");
 // =====================================================================
 
 function updateHeaderStatus() {
-  
   // var htmlString = gData.StatusMachine;
   // var decodedString = decodeHTMLEntity(htmlString);
   // var result = removeFirstAndLastChar(decodedString);
@@ -15,4 +14,7 @@ function updateHeaderStatus() {
   labelMode.textContent = Array_2;
 }
 
-setInterval(updateHeaderStatus,1000);
+
+
+setInterval(updateHeaderStatus, 1000);
+
