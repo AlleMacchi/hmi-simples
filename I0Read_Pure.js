@@ -61,29 +61,33 @@
 
 var JsonObject = {};
 setInterval(function () {
-$(document).ready(function () {
-  $.ajax({
-    url: "IORead_Array.html", // The path to your HTML file
-    dataType: "text", // Treat the response as text
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      Accept: "application/json, text/javascript, */*; q=0.01",
-    },
-    success: function (data) {
-      string = cleanData(data);
-      console.log("Received data string:", string);
+  $(document).ready(function () {
+    $.ajax({
+      url: "IORead_Array.html", // The path to your HTML file
+      dataType: "text", // Treat the response as text
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        Accept: "application/json, text/javascript, */*; q=0.01",
+      },
+      success: function (data) {
+        try {
+          string = cleanData(data);
+          console.log("Received data string:", string);
 
-      JsonObject = JSON.parse(string);
-      console.log("Received data object:", JsonObject);
+          JsonObject = JSON.parse(string);
+          console.log("Received data object:", JsonObject);
 
-      Array_1 = JsonObject.Array_1;
-      Array_2 = JsonObject.Array_2;
-      console.log("Array_1:", Array_1);
-      console.log("Array_1:", Array_2);
-    },
+          Array_1 = JsonObject.Array_1;
+          Array_2 = JsonObject.Array_2;
+          console.log("Array_1:", Array_1);
+          console.log("Array_1:", Array_2);
+        } catch (e) {
+          console.error("Error parsing JSON!", e);
+        }
+      },
+    });
   });
-});
-},1500);
+}, 1500);
 
 function cleanData(data) {
   return data.replace(/(:=)(.*?)(:)/g, (match, p1, p2, p3) => {
