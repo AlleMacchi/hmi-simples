@@ -13,6 +13,7 @@ $(document).ready(function(){
   $.ajaxSetup({ cache: false });
   setInterval(function() {
       $.getJSON("IORead_Array.html", function(data){
+        console.log(JSONparse(data));
         $('#Array_1').text(data.Array_1);  
         $('#Array_2').text(data.Array_2);
         $('#Array_3').text(data.Array_3);
